@@ -1,0 +1,11 @@
+{
+  "id": "IN-PAT-SEC-064-REV",
+  "jurisdiction": "India",
+  "statute": "The Patents Act, 1970 (as amended)",
+  "section_rule": "Section 64(1)(p) & 64(1)(q)",
+  "authority": "High Court / Intellectual Property Division (IPD)",
+  "official_url": "https://ipindia.gov.in/acts/patent-act-1970",
+  "title": "Revocation of Patent on Grounds of Traditional Knowledge and Biological Material Non-Disclosure",
+  "category": "patents",
+  "content": "Under Section 64(1), a patent may be revoked on petition of any interested person or Central Government on grounds:\n(p) that the complete specification does not disclose or wrongly mentions the source or geographical origin of biological material used for the invention;\n(q) that the invention so far as claimed in any claim of the complete specification was anticipated having regard to the knowledge, oral or otherwise, available within any local or indigenous community in India or elsewhere.\n\nLegal Effect: Revocation renders the patent void ab initio. Absolute compliance with botanical identification and NBA approval is critical."
+}

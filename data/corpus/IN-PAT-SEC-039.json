@@ -1,0 +1,14 @@
+{
+  "id": "IN-PAT-SEC-039",
+  "jurisdiction": "India",
+  "statute": "The Patents Act, 1970 (as amended)",
+  "section_rule": "Section 39",
+  "authority": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM / IP India)",
+  "official_url": "https://ipindia.gov.in/acts/patent-act-1970",
+  "title": "Residents Not to Apply for Patents Outside India Without Prior Permission",
+  "category": "patents",
+  "source_type": "statute",
+  "effective_date": "1972-04-20 (amended 2005)",
+  "last_verified": "2026-09-29",
+  "content": "Section 39 of the Patents Act, 1970 mandates that no person resident in India shall apply for the grant of a patent outside India for an invention without either: (a) obtaining written permission (Foreign Filing License - FFL) from the Controller; or (b) having filed a patent application for the same invention in India not less than six weeks before the foreign application, provided no secrecy direction under Section 35 has been given.\n\nKey Legal Implications for Ayurvedic Inventions:\n1. Indian researchers, institutes, and enterprises developing Ayurvedic drug formulations or isolation methods must observe Section 39 before filing PCT or direct foreign patent applications abroad.\n2. Non-compliance is a criminal offense under Section 118 (imprisonment up to two years, fine, or both) and constitutes ground for patent revocation in India under Section 64(1)(n).\n3. Section 39 applies conditionally based on residency in India at the time the invention was made."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "IN-PAT-GUI-AYU-001",
+  "jurisdiction": "India",
+  "statute": "CGPDTM Guidelines for Examination of Patent Applications relating to TK and Biological Material",
+  "section_rule": "Guidelines Paragraph 5.1 - 5.5",
+  "authority": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM)",
+  "official_url": "https://ipindia.gov.in/storage/uploads/docs-operator/220f0e1c-1301-4f0f-84a0-6709fa66c592.pdf",
+  "title": "Official Examination Guidelines for Traditional Knowledge Inventions",
+  "category": "patents",
+  "content": "The Indian Patent Office guidelines establish standard examination tests for Ayurvedic inventions:\n1. Novelty Assessment: Search in TKDL and public databases. If an ingredient or combination is cited in classical texts for the same or similar therapeutic indication, lack of novelty is raised under Section 2(1)(j) read with Section 3(p).\n2. Inventive Step Assessment: The examiner evaluates whether adding an excipient, standardizing an extract, or choosing a specific fraction is obvious to a person skilled in the art (an Ayurvedic vaidya or pharmacognosist).\n3. Synergistic Data Obligation: If combination claims are filed, the applicant must file bioassay results showing that the combination index is less than 1.0 or efficacy is significantly non-additive.\n4. NBA Permission Verification: The patent office will mark the patent application as defective unless National Biodiversity Authority (NBA) permission under Section 6 of the Biological Diversity Act is submitted before the grant."
+}

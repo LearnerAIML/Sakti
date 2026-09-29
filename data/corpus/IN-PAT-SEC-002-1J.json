@@ -1,0 +1,14 @@
+{
+  "id": "IN-PAT-SEC-002-1J",
+  "jurisdiction": "India",
+  "statute": "The Patents Act, 1970 (as amended)",
+  "section_rule": "Section 2(1)(j) & Section 2(1)(ja)",
+  "authority": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM / IP India)",
+  "official_url": "https://ipindia.gov.in/acts/patent-act-1970",
+  "title": "Definitions of Invention and Inventive Step",
+  "category": "patents",
+  "source_type": "statute",
+  "effective_date": "2003-05-20 (amended 2005)",
+  "last_verified": "2026-09-29",
+  "content": "Section 2(1)(j) defines an 'invention' as a new product or process involving an inventive step and capable of industrial application. Section 2(1)(ja) defines 'inventive step' as a feature of an invention that involves technical advance as compared to the existing knowledge or having economic significance or both and that makes the invention not obvious to a person skilled in the art.\n\nKey Legal Implications for Ayurvedic Formulations:\n1. Novelty test: An Ayurvedic preparation is anticipated and lacks novelty if its formula, therapeutic usage, or method of preparation is disclosed in classical Ayurvedic treatises or indexed in the Traditional Knowledge Digital Library (TKDL).\n2. Inventive step test: Mere isolation of known phytochemicals or simple combinations of herbs disclosed in the Ayurvedic Pharmacopoeia fails the non-obviousness test unless significant, non-obvious technical synergy or unexpected biological activity is established by comparative data."
+}

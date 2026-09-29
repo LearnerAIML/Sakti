@@ -1,0 +1,11 @@
+{
+  "id": "IN-DCA-RUL-158B",
+  "jurisdiction": "India",
+  "statute": "The Drugs and Cosmetics Rules, 1945",
+  "section_rule": "Rule 158B",
+  "authority": "Ministry of AYUSH / State AYUSH Licensing Authorities",
+  "official_url": "https://cdsco.gov.in/opencms/opencms/en/Acts-and-rules/Drugs-Rules/",
+  "title": "Licensing Requirements and Proof of Effectiveness for ASU Drugs",
+  "category": "drug_regulatory",
+  "content": "Rule 158B categorizes Ayurvedic drugs for licensing purposes and sets evidentiary standards:\nCategory A: Classical Ayurvedic formulations (First Schedule texts) — No safety or efficacy trial data required; textual reference sufficient.\nCategory B: Patent or Proprietary (P&P) medicines containing ingredients cited in classical texts with identical indications — Safety data based on published textual authority.\nCategory C: Modified dosage forms of classical medicines (e.g., tablet/capsule replacing kwath/asava) — Stability study and bioequivalence/safety evaluation required.\nCategory D: Formulations with new indications, combinations, or altered ingredients — Evidence of safety and efficacy via pilot clinical trials as per AYUSH GCP guidelines required before State Licensing Authority issues manufacturing license."
+}

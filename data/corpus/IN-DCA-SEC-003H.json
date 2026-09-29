@@ -1,0 +1,11 @@
+{
+  "id": "IN-DCA-SEC-003H",
+  "jurisdiction": "India",
+  "statute": "The Drugs and Cosmetics Act, 1940",
+  "section_rule": "Section 3(h)",
+  "authority": "Ministry of AYUSH / State AYUSH Licensing Authorities",
+  "official_url": "https://cdsco.gov.in/opencms/opencms/en/Acts-and-rules/Drugs-and-Cosmetics-Act/",
+  "title": "Definition of Patent or Proprietary (P&P) Medicine in ASU Systems",
+  "category": "drug_regulatory",
+  "content": "Section 3(h)(i) defines 'patent or proprietary medicine' in relation to Ayurvedic systems as:\n'a drug which is a remedy or prescription presented in any form ready for use, internally or externally, for the treatment, mitigation or prevention of disease in human beings or animals, but which is not a medicine which is specified in the authoritative books of the First Schedule, yet manufactured using ingredients mentioned in the authoritative Ayurvedic texts.'\n\nKey Distinctions:\n1. Ingredients MUST still be recognized in the First Schedule texts, but the exact combination, ratio, or dosage form is proprietary.\n2. Regulatory Rule: Regulated under Rule 158B of Drugs & Cosmetics Rules 1945.\n3. IP Posture: Can be protected via Trademarks and Trade Secrets. Only eligible for a patent if non-obvious synergy is experimentally proven under Patents Act Section 3(e) and 3(p)."
+}

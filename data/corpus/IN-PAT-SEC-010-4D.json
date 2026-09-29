@@ -1,0 +1,11 @@
+{
+  "id": "IN-PAT-SEC-010-4D",
+  "jurisdiction": "India",
+  "statute": "The Patents Act, 1970 (as amended)",
+  "section_rule": "Section 10(4)(d) & Proviso",
+  "authority": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM / IP India)",
+  "official_url": "https://ipindia.gov.in/acts/patent-act-1970",
+  "title": "Mandatory Disclosure of Biological Material and Source / Geographical Origin",
+  "category": "patents",
+  "content": "Section 10(4)(d) mandates that the complete specification must fully and particularly describe the invention. The second proviso to Section 10(4) explicitly dictates:\n'Provided further that the specification shall disclose the source and geographical origin of the biological material in the specification, when that invention involves the use of biological material in the invention.'\n\nCompliance Requirements:\n1. Every patent application in India utilizing Ayurvedic herbs, animal derivatives, or microbial agents must declare the precise geographical origin (e.g., specific district, state, forest reserve in India) where the specimen was collected.\n2. Non-disclosure or wrongful disclosure of source/origin is an independent statutory ground for pre-grant opposition, post-grant opposition (Sec 25), and total revocation of the patent (Sec 64(1)(p))."
+}

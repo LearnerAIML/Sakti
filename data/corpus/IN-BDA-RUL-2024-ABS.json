@@ -1,0 +1,11 @@
+{
+  "id": "IN-BDA-RUL-2024-ABS",
+  "jurisdiction": "India",
+  "statute": "Biological Diversity Rules, 2024 / ABS Regulations",
+  "section_rule": "Rules on Benefit Sharing (Form I, Regulation 3-4)",
+  "authority": "National Biodiversity Authority (NBA)",
+  "official_url": "https://nbaindia.org/content/19/16/1/guidelines.html",
+  "title": "Calculation of Access and Benefit Sharing (ABS) Percentages",
+  "category": "biodiversity_abs",
+  "content": "The official ABS regulations lay down the monetary benefit-sharing formula for commercial utilization of biological resources:\n1. Annual Gross Ex-Factory Sale Percentage:\n   - Up to INR 1 Crore: 0.1%\n   - INR 1 Crore to 3 Crores: 0.2%\n   - Above INR 3 Crores: 0.5%\n2. IPR Commercialization Royalty: When an applicant obtains an IPR (patent) based on biological resources and commercializes it:\n   - If the applicant licenses the IPR to a third party: 3.0% to 5.0% of the royalty received.\n   - If the applicant commercializes it themselves: 0.2% to 1.0% of gross ex-factory sale.\n3. Benefit Sharing proceeds are deposited in the National Biodiversity Fund and shared with local Biodiversity Management Committees (BMCs)."
+}

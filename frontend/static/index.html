@@ -1,0 +1,2692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAKTI — Ayurveda Patent, Licensing & ABS Intelligence</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter (Sans) + Source Serif 4 (Serif) + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    // Early theme initialization (Light mode is default)
+    if (localStorage.theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Source Serif 4"', 'Newsreader', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, h3, .font-serif-title { font-family: 'Source Serif 4', Georgia, serif; }
+    code, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    /* Smooth transitions */
+    * { transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.4); }
+
+    /* ============================================================== */
+    /* LIGHT MODE COMPREHENSIVE SYSTEM THEME (ALL 3 TABS & MODALS)   */
+    /* Applies automatically whenever 'dark' class is absent from html */
+    /* ============================================================== */
+    html:not(.dark) {
+      color-scheme: light;
+    }
+
+    html:not(.dark) body {
+      background-color: #f8fafc !important; /* slate-50 */
+      color: #0f172a !important; /* slate-900 */
+    }
+
+    /* Top App Bar Header & Brand */
+    html:not(.dark) header {
+      background-color: rgba(255, 255, 255, 0.92) !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) header span.text-white {
+      color: #0f172a !important;
+    }
+    html:not(.dark) header #statusBadge {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+      color: #334155 !important;
+    }
+    html:not(.dark) header #btnSettings {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    html:not(.dark) header #btnSettings:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    /* Navigation Tabs */
+    html:not(.dark) nav > div {
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) nav button.text-slate-400 {
+      color: #64748b !important;
+    }
+    html:not(.dark) nav button.text-slate-400:hover {
+      color: #0f172a !important;
+    }
+    html:not(.dark) nav button.text-brand-400 {
+      color: #047857 !important;
+      border-color: #059669 !important;
+    }
+
+    /* Primary Container & Section Backgrounds */
+    html:not(.dark) .bg-slate-900,
+    html:not(.dark) .bg-slate-900\/60 {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) .bg-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    html:not(.dark) .bg-slate-950\/90,
+    html:not(.dark) .bg-slate-950\/80,
+    html:not(.dark) .bg-slate-950\/60 {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) .bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+
+    /* Universal Border Color Overrides in Light Mode */
+    html:not(.dark) .border-slate-800,
+    html:not(.dark) .border-slate-800\/80,
+    html:not(.dark) .border-slate-800\/60,
+    html:not(.dark) .border-slate-700,
+    html:not(.dark) .border-slate-700\/50 {
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Headings & Typography */
+    html:not(.dark) h1,
+    html:not(.dark) h2,
+    html:not(.dark) h3,
+    html:not(.dark) h4,
+    html:not(.dark) h5,
+    html:not(.dark) h6,
+    html:not(.dark) .font-serif-title {
+      color: #0f172a !important;
+    }
+
+    html:not(.dark) .text-white {
+      color: #0f172a !important;
+    }
+
+    /* Buttons with solid backgrounds: preserve white text */
+    html:not(.dark) button.bg-brand-500,
+    html:not(.dark) button.bg-brand-600,
+    html:not(.dark) button#btnClassifySubmit,
+    html:not(.dark) button#btnClassifySubmit *,
+    html:not(.dark) button#btnQuerySubmit,
+    html:not(.dark) button#btnQuerySubmit *,
+    html:not(.dark) button#btnEscSubmit,
+    html:not(.dark) #btnJurIndia.bg-brand-600,
+    html:not(.dark) #btnJurIntl.bg-brand-600,
+    html:not(.dark) #btnLangEn.bg-brand-600,
+    html:not(.dark) #btnLangHi.bg-brand-600,
+    html:not(.dark) #sourceCategoryFilters button.bg-brand-500,
+    html:not(.dark) #modalSettings .pt-2 button {
+      color: #ffffff !important;
+    }
+
+    /* Text shades */
+    html:not(.dark) .text-slate-100,
+    html:not(.dark) .text-slate-200 {
+      color: #1e293b !important;
+    }
+    html:not(.dark) .text-slate-300 {
+      color: #334155 !important;
+    }
+    html:not(.dark) .text-slate-400 {
+      color: #64748b !important;
+    }
+    html:not(.dark) .text-slate-500 {
+      color: #64748b !important;
+    }
+
+    html:not(.dark) .hover\:text-white:hover {
+      color: #0f172a !important;
+    }
+    html:not(.dark) .hover\:bg-slate-800:hover {
+      background-color: #f1f5f9 !important;
+    }
+    html:not(.dark) .hover\:bg-slate-700:hover {
+      background-color: #e2e8f0 !important;
+    }
+
+    /* Brand Green Color Tuning for Light Mode Contrast */
+    html:not(.dark) .text-brand-400 {
+      color: #047857 !important; /* emerald-700 */
+    }
+    html:not(.dark) .hover\:text-brand-300:hover,
+    html:not(.dark) .group-hover\:text-brand-300:hover {
+      color: #065f46 !important;
+    }
+    html:not(.dark) .bg-brand-500\/10 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+    }
+    html:not(.dark) .bg-brand-950 {
+      background-color: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #047857 !important;
+    }
+    html:not(.dark) .bg-emerald-950 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #047857 !important;
+    }
+    html:not(.dark) .border-emerald-800 {
+      border-color: #a7f3d0 !important;
+    }
+
+    /* Form Fields (Inputs, Selects, Textareas) */
+    html:not(.dark) input[type="text"],
+    html:not(.dark) input[type="email"],
+    html:not(.dark) select,
+    html:not(.dark) textarea {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) select option {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) input::placeholder,
+    html:not(.dark) textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+    html:not(.dark) input:focus,
+    html:not(.dark) textarea:focus,
+    html:not(.dark) select:focus {
+      border-color: #10b981 !important;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
+    }
+
+    /* Tab 1: Primary Action Button */
+    html:not(.dark) #btnClassifySubmit {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #btnClassifySubmit:hover {
+      background-color: #047857 !important;
+    }
+
+    /* Tab 1 & Tab 2: Preset / Sample query buttons */
+    html:not(.dark) button.bg-slate-900 {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #334155 !important;
+    }
+    html:not(.dark) button.bg-slate-900:hover {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    /* Tab 1: Classifier Result & IP Router */
+    html:not(.dark) #classifierResultCard {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #ipRouterGrid > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #ipRouterGrid > div:hover {
+      border-color: #cbd5e1 !important;
+    }
+
+    /* Tab 2: Query Form & Result Card */
+    html:not(.dark) #ragQueryForm > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #btnQuerySubmit {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #btnQuerySubmit:hover {
+      background-color: #047857 !important;
+    }
+    html:not(.dark) #queryJurBadge,
+    html:not(.dark) #queryLangBadge {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    html:not(.dark) #queryResultCard {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #citationsGrid > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #queryAnswerBody h3,
+    html:not(.dark) #queryAnswerBody h4 {
+      color: #0f172a !important;
+    }
+    html:not(.dark) #queryAnswerBody p,
+    html:not(.dark) #queryAnswerBody li {
+      color: #1e293b !important;
+    }
+    html:not(.dark) #queryAnswerBody strong {
+      color: #0f172a !important;
+    }
+    html:not(.dark) #queryAnswerBody code {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+      color: #047857 !important;
+    }
+
+    /* Tab 3: Knowledge Base Cards & Details */
+    html:not(.dark) #sourcesSearchInput {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #sourceCategoryFilters button.bg-brand-500 {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #sourceCategoryFilters button.bg-slate-900 {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    html:not(.dark) #sourcesGrid > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) #sourcesGrid > div:hover {
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) #highlights2024Grid > div,
+    html:not(.dark) #officialRegistriesGrid > a {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Accents & Status Alerts */
+    html:not(.dark) .text-amber-300,
+    html:not(.dark) .text-amber-400 {
+      color: #b45309 !important; /* amber-700 */
+    }
+    html:not(.dark) .hover\:text-amber-300:hover {
+      color: #92400e !important;
+    }
+    html:not(.dark) .bg-amber-500\/10 {
+      background-color: #fef3c7 !important;
+      border-color: #fde68a !important;
+      color: #92400e !important;
+    }
+    html:not(.dark) .bg-rose-950 {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #be123c !important;
+    }
+    html:not(.dark) .text-rose-300 {
+      color: #be123c !important;
+    }
+    html:not(.dark) .border-rose-800 {
+      border-color: #fecdd3 !important;
+    }
+    html:not(.dark) .bg-amber-950 {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+      color: #b45309 !important;
+    }
+    html:not(.dark) .border-amber-800 {
+      border-color: #fde68a !important;
+    }
+    html:not(.dark) .text-blue-400 {
+      color: #1d4ed8 !important;
+    }
+    html:not(.dark) .bg-blue-500\/10 {
+      background-color: #eff6ff !important;
+      border-color: #bfdbfe !important;
+    }
+
+    /* Settings Segmented Theme Buttons */
+    html:not(.dark) #btnThemeLight.bg-white {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) #btnThemeDark.text-slate-400 {
+      background-color: transparent !important;
+      color: #64748b !important;
+    }
+
+    /* Modals in Light Mode */
+    html:not(.dark) #modalSettings > div,
+    html:not(.dark) #modalEscalation > div,
+    html:not(.dark) #modalPrivacy > div,
+    html:not(.dark) #modalDocDetail > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    }
+    html:not(.dark) .bg-black\/60,
+    html:not(.dark) .bg-black\/70 {
+      background-color: rgba(15, 23, 42, 0.45) !important;
+    }
+    html:not(.dark) #modalSettings .pt-2 button {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+    }
+    html:not(.dark) #modalSettings .pt-2 button:hover {
+      background-color: #1e293b !important;
+    }
+
+    /* Footer */
+    html:not(.dark) footer {
+      border-color: #e2e8f0 !important;
+      color: #64748b !important;
+    }
+  </style>
+
+  <!-- Dynamic Custom Theme Color Stylesheet -->
+  <style id="sakti-custom-theme-style"></style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white antialiased transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- ============================================================== -->
+  <!-- 1. SIMPLIFIED TOP APP BAR -->
+  <!-- ============================================================== -->
+  <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Clickable Logo & Brand (Always returns to Home tab) -->
+      <a href="javascript:void(0)" onclick="navigateToHome()" class="flex items-center gap-3 group select-none cursor-pointer" title="Go to Home">
+        <div class="w-9 h-9 rounded-xl bg-white p-1 flex items-center justify-center shadow-md shrink-0 ring-1 ring-slate-700/50 group-hover:ring-brand-500 transition-all">
+          <img src="logo.png" alt="SAKTI Logo" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors font-serif-title">
+            SAKTI
+          </span>
+          <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+            SIH MVP
+          </span>
+        </div>
+      </a>
+
+      <!-- Right Header: Clean Settings Gear Icon Button -->
+      <div class="flex items-center gap-3">
+        <!-- Settings Gear Icon Button (Just the gear icon) -->
+        <button id="btnSettings" onclick="toggleSettingsModal()"
+                class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all"
+                title="Settings" aria-label="Settings" data-i18n-title="settingsTitle">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. NAVIGATION TABS (NO NUMERIC PREFIXES) -->
+  <!-- ============================================================== -->
+  <nav class="max-w-5xl mx-auto px-4 sm:px-6 mt-4 w-full">
+    <div class="flex items-center gap-6 border-b border-slate-800/80 pb-2 flex-wrap">
+      
+      <!-- Tab 1: Check Product Rules -->
+      <button id="tabBtnClassifier" onclick="switchTab('classifier')"
+              class="pb-2 text-xs sm:text-sm font-semibold transition-all text-brand-400 border-b-2 border-brand-500 -mb-[9px] flex items-center gap-1.5">
+        <span data-i18n="tabClassifier">Check Product Rules</span>
+      </button>
+
+      <!-- Tab 2: Ask Legal Assistant -->
+      <button id="tabBtnQuery" onclick="switchTab('query')"
+              class="pb-2 text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white -mb-[9px] border-b-2 border-transparent flex items-center gap-1.5">
+        <span data-i18n="tabQuery">Ask Legal Assistant</span>
+      </button>
+
+      <!-- Tab 3: Knowledge Base -->
+      <button id="tabBtnSources" onclick="switchTab('sources')"
+              class="pb-2 text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white -mb-[9px] border-b-2 border-transparent flex items-center gap-1.5">
+        <span id="tabSourcesLabel" data-i18n="tabSources">Knowledge Base</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ============================================================== -->
+  <!-- 3. MAIN CONTENT CONTAINER -->
+  <!-- ============================================================== -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 space-y-6">
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: CHECK PRODUCT RULES (HOME) -->
+    <!-- ============================================================== -->
+    <section id="sectionClassifier" class="space-y-6">
+
+      <!-- Friendly Intro / Philosophy Banner -->
+      <div class="space-y-1">
+        <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight font-serif-title" data-i18n="clsTitle">
+          Check Product Rules & Patentability
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed" data-i18n="clsSubtitle">
+          Tell us about your Ayurvedic formulation to understand its regulatory category, Section 3(p) patent eligibility, and mandatory biological diversity compliance.
+        </p>
+      </div>
+
+      <!-- 1-Click Example Chips (Subtle, Clean) -->
+      <div class="flex items-center gap-2 flex-wrap text-xs pt-1">
+        <span class="text-slate-500 font-medium" data-i18n="clsExamples">Examples:</span>
+        <button onclick="applyPreset('turmeric_pepper')" data-i18n="presetTurmeric"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Turmeric + Pepper (Classical)
+        </button>
+        <button onclick="applyPreset('phyto')" data-i18n="presetPhyto"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Phyto Bacopa (Extract)
+        </button>
+        <button onclick="applyPreset('syrup')" data-i18n="presetSyrup"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Proprietary Syrup
+        </button>
+        <button onclick="applyPreset('aahar')" data-i18n="presetAahar"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Ayurveda Aahar
+        </button>
+        <button onclick="applyPreset('cosmetic')" data-i18n="presetCosmetic"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Kumkumadi Serum
+        </button>
+        <button onclick="applyPreset('triphala')" data-i18n="presetTriphala"
+                class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors">
+          Triphala Churna
+        </button>
+      </div>
+
+      <!-- Main Form Card (Calm & Spacious) -->
+      <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 sm:p-7 shadow-sm space-y-5">
+        <form id="classifierForm" onsubmit="handleClassifierSubmit(event)" class="space-y-4">
+          
+          <!-- Product Name -->
+          <div>
+            <label for="clsProductName" class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="clsProdNameLabel">
+              Product Name & Composition
+            </label>
+            <input type="text" id="clsProductName" required
+                   placeholder="e.g., Standardized Bacopa Neuro-Extract (4 Markers)"
+                   data-i18n-placeholder="clsProdNamePlaceholder"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-brand-500 transition-all font-medium">
+          </div>
+
+          <!-- Question 1: Intended Use -->
+          <div>
+            <label for="clsIntendedUse" class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="clsQ1Label">
+              1. What is this product used for?
+            </label>
+            <div class="relative">
+              <select id="clsIntendedUse"
+                      class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-500 transition-all appearance-none cursor-pointer">
+                <option value="therapeutic" selected data-i18n="clsQ1Opt1">Medicine / Health Treatment (Curing or treating illness)</option>
+                <option value="dietary" data-i18n="clsQ1Opt2">Dietary / Nutrition (Ayurveda Aahar under FSSAI 2022)</option>
+                <option value="cosmetic" data-i18n="clsQ1Opt3">Cosmetic / Beauty (Topical skincare / haircare)</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 2: Ancient Classical Texts -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-semibold text-slate-300" data-i18n="clsQ2Label">
+              2. Is this recipe from ancient classical books?
+            </label>
+            <p class="text-[11px] text-slate-500" data-i18n="clsQ2Desc">
+              (Cited in First Schedule authoritative Ayurvedic texts such as Charaka Samhita, Sushruta Samhita, etc.)
+            </p>
+            <div class="grid grid-cols-2 gap-3 pt-0.5">
+              <button type="button" id="btnAuthYes" onclick="setInAuthTexts(true)" data-i18n="clsBtnYes"
+                      class="px-4 py-2.5 rounded-xl text-xs font-semibold border bg-slate-950 border-slate-800 text-slate-400 hover:text-white transition-all text-center">
+                Yes (Traditional formula)
+              </button>
+              <button type="button" id="btnAuthNo" onclick="setInAuthTexts(false)" data-i18n="clsBtnNo"
+                      class="px-4 py-2.5 rounded-xl text-xs font-semibold border bg-brand-950 border-brand-500 text-brand-400 transition-all text-center shadow-sm">
+                No (Novel or modified)
+              </button>
+            </div>
+          </div>
+
+          <!-- Question 3: Processing Nature -->
+          <div>
+            <label for="clsProcessingNature" class="block text-xs font-semibold text-slate-300 mb-1.5" data-i18n="clsQ3Label">
+              3. How is the product extracted or made?
+            </label>
+            <div class="relative">
+              <select id="clsProcessingNature"
+                      class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-500 transition-all appearance-none cursor-pointer">
+                <option value="purified_fraction_with_markers" selected data-i18n="clsQ3Opt1">Purified Extract with 4+ Markers (Phytopharmaceutical)</option>
+                <option value="classical" data-i18n="clsQ3Opt2">Classical ASU Methods (Churna, Kwath, Bhasma, Taila, Asava)</option>
+                <option value="aqueous_alcoholic_extract" data-i18n="clsQ3Opt3">Aqueous or Hydro-Alcoholic Extract / Syrup</option>
+                <option value="synthetic_derivative" data-i18n="clsQ3Opt4">Synthetic Derivative of Plant Constituent</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Synthetic Chemical Checkbox -->
+          <div class="flex items-center gap-2 pt-1">
+            <input type="checkbox" id="clsSynthetic"
+                   class="w-4 h-4 rounded border-slate-800 bg-slate-950 text-brand-500 focus:ring-0 cursor-pointer">
+            <label for="clsSynthetic" class="text-xs text-slate-400 cursor-pointer select-none" data-i18n="clsSyntheticLabel">
+              Contains synthetic chemicals or modern APIs
+            </label>
+          </div>
+
+          <!-- Clear Primary Action Button -->
+          <div class="pt-2">
+            <button type="submit" id="btnClassifySubmit"
+                    class="w-full py-3 px-5 rounded-xl text-sm font-semibold bg-brand-500 hover:bg-brand-400 text-slate-950 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <span data-i18n="clsSubmitBtn">Evaluate Product & Patentability ➔</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- RESULT VIEW (PROMINENT VERDICT & PROGRESSIVE DISCLOSURE) -->
+      <!-- ============================================================== -->
+      <div id="classifierResultCard" class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 sm:p-7 shadow-sm space-y-6">
+        
+        <!-- Header: Verdict -->
+        <div class="space-y-1 border-b border-slate-800 pb-4">
+          <span class="text-xs text-slate-400 uppercase tracking-wider font-medium" data-i18n="resClassifiedAs">Your product is classified as:</span>
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <h3 id="resCategory" class="text-2xl sm:text-3xl font-bold text-white tracking-tight font-serif-title">
+              Phytopharmaceutical Drug
+            </h3>
+            <span id="resCategoryCode" class="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-slate-950 text-slate-400 border border-slate-800 self-start">
+              PHYTOPHARMACEUTICAL
+            </span>
+          </div>
+          <p id="resProductName" class="text-xs text-slate-400 italic font-medium">
+            Standardized Bacopa Neuro-Extract (4 Markers)
+          </p>
+        </div>
+
+        <!-- 3 High-Level Summary Items (Clean, uncluttered) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          
+          <!-- Item 1: Patentability -->
+          <div class="bg-slate-950/80 border border-slate-800/80 rounded-xl p-4 space-y-1.5">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block" data-i18n="resPatentHeading">Patentability</span>
+            <div>
+              <span id="resPatentStatus" class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-950 text-brand-400 border border-emerald-800">
+                High Potential (Patentable)
+              </span>
+            </div>
+            <p id="resPatentSummaryShort" class="text-xs text-slate-300 leading-snug">
+              Process and composition of purified marker fractions may be patentable if novel extraction is established.
+            </p>
+          </div>
+
+          <!-- Item 2: Regulatory Requirement -->
+          <div class="bg-slate-950/80 border border-slate-800/80 rounded-xl p-4 space-y-1.5">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block" data-i18n="resRegHeading">Regulatory Requirement</span>
+            <div id="resLicensingAuth" class="text-xs font-semibold text-white truncate">
+              CDSCO / DCGI
+            </div>
+            <p id="resGoverningLaw" class="text-xs text-slate-300 leading-snug">
+              DCA 1940 — Rule 122E & Schedule Y (Clinical trial data required)
+            </p>
+          </div>
+
+          <!-- Item 3: Biodiversity / ABS -->
+          <div class="bg-slate-950/80 border border-slate-800/80 rounded-xl p-4 space-y-1.5">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block" data-i18n="resAbsHeading">Biodiversity / ABS</span>
+            <div id="resAbsForm" class="text-xs font-semibold text-brand-400">
+              NBA Form I Required
+            </div>
+            <p id="resAbsShort" class="text-xs text-slate-300 leading-snug">
+              Prior approval required under Section 6 of Biological Diversity Act before patent grant.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Key Actionable Takeaway Box -->
+        <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 text-xs leading-relaxed text-slate-300 space-y-1">
+          <span class="text-slate-400 font-semibold block" data-i18n="resKeySummaryHeading">Key Summary:</span>
+          <p id="resKeySummary">
+            File patent applications for both (1) Novel composition of standardized fraction and (2) Novel process of purification/isolation. Must disclose botanical source origin under <code class="font-mono text-[11px] bg-slate-900 border border-slate-700 px-1 py-0.5 rounded text-brand-400">Sec 10(4)(d)</code>.
+          </p>
+        </div>
+
+        <!-- Warnings Box (if any) -->
+        <div id="resWarningsContainer" class="hidden bg-rose-950/40 border border-rose-600/30 p-3 rounded-xl text-xs text-rose-300 space-y-1"></div>
+
+        <!-- Detailed Legal Breakdown (Expandable Accordion) -->
+        <details class="group bg-slate-950/60 border border-slate-800/80 rounded-xl p-4">
+          <summary class="flex items-center justify-between cursor-pointer select-none text-xs font-semibold text-slate-300">
+            <span data-i18n="resSec3pAccordion">Detailed Section 3(p) Patent Analysis & Evidentiary Grounds</span>
+            <span class="text-xs text-brand-400 font-medium group-open:hidden" data-i18n="resExpand">Expand ▼</span>
+            <span class="text-xs text-brand-400 font-medium hidden group-open:inline" data-i18n="resCollapse">Collapse ▲</span>
+          </summary>
+          <div class="mt-4 pt-3 border-t border-slate-800 space-y-3 text-xs leading-relaxed text-slate-300">
+            <div>
+              <h5 class="font-semibold text-white mb-1" data-i18n="resPatentSectionTitle">Patentability & Section 3(p) Analysis:</h5>
+              <p id="resPatentAssessment">Evaluating assessment...</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-white mb-1" data-i18n="resStrategySectionTitle">Recommended IP Prosecution Strategy:</h5>
+              <p id="resPatentStrategy">Evaluating strategy...</p>
+            </div>
+            <div>
+              <h5 class="font-semibold text-white mb-1" data-i18n="resAbsSectionTitle">ABS & Biodiversity Compliance:</h5>
+              <p id="resAbsGuidance">Evaluating guidance...</p>
+              <p id="resAbsProvisions" class="text-brand-400 font-mono text-[11px] mt-1"></p>
+            </div>
+          </div>
+        </details>
+
+        <!-- ============================================================== -->
+        <!-- RECOMMENDED IP PROTECTION (IP PATH ROUTER) -->
+        <!-- ============================================================== -->
+        <div class="pt-2 border-t border-slate-800/80 space-y-3">
+          <div>
+            <h4 class="text-sm font-bold text-white font-serif-title" data-i18n="resIpRouterTitle">
+              Recommended IP Protection
+            </h4>
+            <p class="text-xs text-slate-400" data-i18n="resIpRouterSubtitle">
+              Applicable statutory protection regimes based on your formulation characteristics:
+            </p>
+          </div>
+
+          <!-- Dynamic IP Path Cards (Clean & Focused) -->
+          <div id="ipRouterGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Secondary Human Escalation Callout (Unobtrusive) -->
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+          <span data-i18n="expertPrompt">Need human help with your formulation?</span>
+          <button type="button" onclick="openEscalationModal()" class="text-amber-400 hover:text-amber-300 font-medium underline underline-offset-2" data-i18n="expertRequestBtn">
+            Request Expert Assistance →
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: ASK LEGAL ASSISTANT (DUCKDUCKGO-INSPIRED SIMPLICITY) -->
+    <!-- ============================================================== -->
+    <section id="sectionQuery" class="space-y-6 hidden">
+      
+      <!-- Minimal Central Hero Area -->
+      <div class="py-6 text-center space-y-2 max-w-xl mx-auto">
+        <div class="w-12 h-12 rounded-2xl bg-white p-1.5 flex items-center justify-center mx-auto shadow-md ring-1 ring-slate-700/50 mb-3">
+          <img src="logo.png" alt="SAKTI Logo" class="w-full h-full object-contain">
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight font-serif-title" data-i18n="queryHeroTitle">
+          Ask your Ayurveda IPR question
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400" data-i18n="queryHeroSubtitle">
+          Get evidence-grounded statutory analysis for Indian and international drug regulations.
+        </p>
+      </div>
+
+      <!-- Large, Clean Chat Input Container -->
+      <div class="max-w-2xl mx-auto">
+        <form id="ragQueryForm" onsubmit="handleQuerySubmit(event)" class="space-y-3">
+          
+          <div class="bg-slate-900 border border-slate-800 focus-within:border-brand-500 rounded-2xl p-4 shadow-sm transition-all space-y-3">
+            <textarea id="ragQueryInput" rows="3" required
+                      placeholder="e.g., Can I patent a classical formulation of turmeric and black pepper for inflammation?"
+                      data-i18n-placeholder="queryPlaceholder"
+                      class="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none resize-none leading-relaxed"></textarea>
+            
+            <!-- Controls bar inside input box -->
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 flex-wrap gap-2">
+              <div class="flex items-center gap-2 text-xs">
+                <span id="queryJurBadge" class="px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-slate-400 text-[11px]">
+                  India Law
+                </span>
+                <span id="queryLangBadge" class="px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-slate-400 text-[11px]">
+                  English
+                </span>
+              </div>
+
+              <button type="submit" id="btnQuerySubmit"
+                      class="py-2 px-4 rounded-xl text-xs font-semibold bg-brand-500 hover:bg-brand-400 text-slate-950 transition-all flex items-center gap-1.5 shadow-sm">
+                <span data-i18n="querySubmitBtn">Get Grounded Answer ➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Small Example Chips -->
+          <div id="sampleChipsContainer" class="flex items-center gap-1.5 flex-wrap text-xs pt-1 justify-center text-slate-400">
+            <!-- Rendered by JS -->
+          </div>
+        </form>
+      </div>
+
+      <!-- Synthesized Result Card (Clean & Readable) -->
+      <div id="queryResultCard" class="hidden max-w-2xl mx-auto bg-slate-900/60 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4">
+        
+        <!-- Header: Echo & Confidence -->
+        <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+          <p id="queryEcho" class="text-xs sm:text-sm font-medium text-slate-300 italic"></p>
+          <div id="confidenceBadgeContainer" class="shrink-0"></div>
+        </div>
+
+        <!-- Answer Body -->
+        <div id="queryAnswerBody" class="text-xs sm:text-sm text-slate-200 leading-relaxed space-y-3"></div>
+
+        <!-- Expandable Verified Sources -->
+        <div id="citationsSection" class="pt-2">
+          <details class="group bg-slate-950 border border-slate-800/80 rounded-xl p-3.5" open>
+            <summary class="flex items-center justify-between cursor-pointer select-none text-xs font-semibold text-slate-300">
+              <span id="citationsHeader" data-i18n="sourcesHeader">Verified Sources</span>
+              <span class="text-xs text-brand-400 font-medium group-open:hidden" data-i18n="showLabel">Show ▼</span>
+              <span class="text-xs text-brand-400 font-medium hidden group-open:inline" data-i18n="hideLabel">Hide ▲</span>
+            </summary>
+            <div id="citationsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3 pt-3 border-t border-slate-800"></div>
+          </details>
+        </div>
+
+        <!-- Secondary Facilitation Link -->
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+          <span data-i18n="formalOpinionPrompt">Need a formal legal opinion?</span>
+          <button type="button" onclick="openEscalationModal()" class="text-amber-400 hover:text-amber-300 font-medium underline underline-offset-2" data-i18n="expertRequestBtn">
+            Request Expert Assistance →
+          </button>
+        </div>
+
+        <!-- Mandatory Legal Disclaimer -->
+        <div class="border-t border-slate-800 pt-3 text-[11px] text-slate-500 leading-relaxed">
+          <span id="queryDisclaimerText">LEGAL DISCLAIMER: Grounded in Indian Patents Act 1970...</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: KNOWLEDGE BASE (SEARCHABLE LIBRARY) -->
+    <!-- ============================================================== -->
+    <section id="sectionSources" class="space-y-6 hidden">
+      
+      <!-- Header -->
+      <div class="space-y-1">
+        <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight font-serif-title" data-i18n="sourcesTitle">
+          Knowledge Base
+        </h2>
+        <p id="sourcesSubhead" class="text-xs sm:text-sm text-slate-400">
+          62 verified legal and regulatory sources
+        </p>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="space-y-3">
+        <!-- Search Input -->
+        <input type="text" id="sourcesSearchInput" oninput="handleSourcesSearch(event)"
+               placeholder="Search statute, section, or keyword..."
+               data-i18n-placeholder="searchPlaceholder"
+               class="w-full bg-slate-900 border border-slate-800 focus:border-brand-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-brand-500 transition-all">
+
+        <!-- Category Filter Pills -->
+        <div id="sourceCategoryFilters" class="flex items-center gap-1.5 flex-wrap"></div>
+      </div>
+
+      <!-- Compact Provisions Grid -->
+      <div id="sourcesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+
+      <!-- 2024 Regulatory Updates (Concise & Expandable) -->
+      <div class="pt-4 border-t border-slate-800/80 space-y-3">
+        <details class="group bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+          <summary class="flex items-center justify-between cursor-pointer select-none">
+            <div>
+              <h3 class="text-sm font-bold text-white font-serif-title" data-i18n="updates2024Title">2024 Regulatory Updates</h3>
+              <p class="text-xs text-slate-400" data-i18n="updates2024Subtitle">Recent amendments and treaty updates impacting Ayurvedic IPR</p>
+            </div>
+            <span class="text-xs text-brand-400 font-medium group-open:hidden" data-i18n="showLabel">Show ▼</span>
+            <span class="text-xs text-brand-400 font-medium hidden group-open:inline" data-i18n="hideLabel">Hide ▲</span>
+          </summary>
+          <div id="highlights2024Grid" class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-3 border-t border-slate-800"></div>
+        </details>
+      </div>
+
+      <!-- Official Registries (Secondary Section) -->
+      <div class="pt-2 border-t border-slate-800/80 space-y-3">
+        <details class="group bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+          <summary class="flex items-center justify-between cursor-pointer select-none">
+            <div>
+              <h3 class="text-sm font-bold text-white font-serif-title" data-i18n="registriesTitle">Official Statutory Portals & Registries</h3>
+              <p class="text-xs text-slate-400" data-i18n="registriesSubtitle">Verified links to official government search databases and filing portals</p>
+            </div>
+            <span class="text-xs text-brand-400 font-medium group-open:hidden" data-i18n="showLabel">Show ▼</span>
+            <span class="text-xs text-brand-400 font-medium hidden group-open:inline" data-i18n="hideLabel">Hide ▲</span>
+          </summary>
+          <div id="officialRegistriesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mt-4 pt-3 border-t border-slate-800"></div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 4. SETTINGS MODAL / PANEL (GEAR ICON POPUP) -->
+  <!-- ============================================================== -->
+  <div id="modalSettings" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto text-xs">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white" data-i18n="settingsTitle">Settings</h3>
+        <button type="button" onclick="toggleSettingsModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <!-- Setting 1: Appearance (Dark / Light) -->
+      <div class="space-y-1.5">
+        <label class="block font-semibold text-slate-300" data-i18n="appearance">Appearance</label>
+        <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button type="button" id="btnThemeDark" onclick="setTheme('dark')" data-i18n="darkMode"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 shadow-sm transition-all text-center">
+            Dark Mode
+          </button>
+          <button type="button" id="btnThemeLight" onclick="setTheme('light')" data-i18n="lightMode"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center">
+            Light Mode
+          </button>
+        </div>
+      </div>
+
+      <!-- Setting 2: Jurisdiction (India / International) -->
+      <div class="space-y-1.5">
+        <label class="block font-semibold text-slate-300" data-i18n="jurisdiction">Jurisdiction</label>
+        <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button type="button" id="btnJurIndia" onclick="setJurisdiction('India')" data-i18n="jurIndia"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center">
+            India Law
+          </button>
+          <button type="button" id="btnJurIntl" onclick="setJurisdiction('International')" data-i18n="jurIntl"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center">
+            International
+          </button>
+        </div>
+      </div>
+
+      <!-- Setting 3: Language (English / Hindi) -->
+      <div class="space-y-1.5">
+        <label class="block font-semibold text-slate-300" data-i18n="language">Language</label>
+        <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button type="button" id="btnLangEn" onclick="setQueryLanguage('en')"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center">
+            English
+          </button>
+          <button type="button" id="btnLangHi" onclick="setQueryLanguage('hi')"
+                  class="py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center">
+            हिंदी
+          </button>
+        </div>
+      </div>
+
+      <!-- Setting 4: Theme Accent Color (Custom Color Picker) -->
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+          <label class="block font-semibold text-slate-300" data-i18n="themeColorLabel">Accent Color</label>
+          <button type="button" onclick="resetAllSettingsToDefault()" data-i18n="resetColor"
+                  class="text-[11px] text-slate-400 hover:text-white underline underline-offset-2">
+            Reset to Default
+          </button>
+        </div>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 space-y-2">
+          <!-- Picker Row -->
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <label for="themeColorPicker" class="relative cursor-pointer" data-i18n-title="customColorPickerTitle" title="Click swatch to pick color">
+                <input type="color" id="themeColorPicker" value="#10b981" oninput="setThemeColor(this.value)"
+                       class="sr-only">
+                <span id="themeColorSwatch" class="w-7 h-7 rounded-lg border border-slate-700 block shadow-sm transition-transform hover:scale-110"
+                      style="background-color: #10b981;"></span>
+              </label>
+              <div>
+                <span id="themeColorHex" class="font-mono text-xs font-bold text-white block">#10b981</span>
+                <span class="text-[10px] text-slate-500" data-i18n="customColorPickerTitle">Click swatch to pick color</span>
+              </div>
+            </div>
+            <!-- Quick preset swatches -->
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="setThemeColor('#10b981')" title="Default Emerald" class="w-4 h-4 rounded-full bg-[#10b981] border border-white/20 hover:scale-125 transition-transform"></button>
+              <button type="button" onclick="setThemeColor('#3b82f6')" title="Ocean Blue" class="w-4 h-4 rounded-full bg-[#3b82f6] border border-white/20 hover:scale-125 transition-transform"></button>
+              <button type="button" onclick="setThemeColor('#8b5cf6')" title="Royal Purple" class="w-4 h-4 rounded-full bg-[#8b5cf6] border border-white/20 hover:scale-125 transition-transform"></button>
+              <button type="button" onclick="setThemeColor('#f59e0b')" title="Ayur Amber" class="w-4 h-4 rounded-full bg-[#f59e0b] border border-white/20 hover:scale-125 transition-transform"></button>
+              <button type="button" onclick="setThemeColor('#06b6d4')" title="Veda Cyan" class="w-4 h-4 rounded-full bg-[#06b6d4] border border-white/20 hover:scale-125 transition-transform"></button>
+              <button type="button" onclick="setThemeColor('#ec4899')" title="Lotus Rose" class="w-4 h-4 rounded-full bg-[#ec4899] border border-white/20 hover:scale-125 transition-transform"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2 flex items-center justify-between gap-2 border-t border-slate-800">
+        <button type="button" onclick="resetAllSettingsToDefault()" data-i18n="resetColor" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium text-xs transition-colors">
+          Reset to Default
+        </button>
+        <button type="button" onclick="toggleSettingsModal()" data-i18n="done" class="py-2 px-5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition-colors">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 5. EXPERT ESCALATION MODAL -->
+  <!-- ============================================================== -->
+  <div id="modalEscalation" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto text-xs">
+      
+      <div class="flex items-start justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 class="text-sm sm:text-base font-bold text-white font-serif-title" data-i18n="escTitle">
+            Request Expert Assistance
+          </h3>
+          <p class="text-[11px] text-slate-400 mt-0.5" data-i18n="escSubtitle">
+            Connect with a patent facilitator or AYUSH regulatory specialist.
+          </p>
+        </div>
+        <button type="button" onclick="closeEscalationModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <form id="escalationForm" onsubmit="handleEscalationSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" data-i18n="escNameLabel">Your Name (Optional):</label>
+          <input type="text" id="escName" placeholder="Dr. / Innovator Name" data-i18n-placeholder="escNamePlaceholder"
+                 class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" data-i18n="escContactLabel">Contact Email / Phone (Optional):</label>
+          <input type="text" id="escContact" placeholder="email@startup.in or phone number" data-i18n-placeholder="escContactPlaceholder"
+                 class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" data-i18n="escProdLabel">Product Name:</label>
+          <input type="text" id="escProductName" required
+                 class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1" data-i18n="escQueryLabel">Your Question:</label>
+          <textarea id="escQuery" rows="3" required
+                    placeholder="e.g., We need guidance on whether our standardized extract requires prior approval under NBA Form I or if cultivated plant exemption applies..."
+                    data-i18n-placeholder="escQueryPlaceholder"
+                    class="w-full bg-slate-950 border border-slate-800 focus:border-brand-500 rounded-xl p-3 text-white placeholder-slate-500 focus:outline-none resize-none"></textarea>
+        </div>
+
+        <div class="text-[11px] text-amber-300/90 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 leading-relaxed" data-i18n="escNotice">
+          This sends a facilitation request. SAKTI does not provide binding legal advice.
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-1">
+          <button type="button" onclick="closeEscalationModal()" data-i18n="escCancel" class="px-3 py-2 rounded-xl text-slate-400 hover:text-white">Cancel</button>
+          <button type="submit" id="btnEscSubmit" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-all shadow-sm">
+            <span data-i18n="escSubmit">Submit Request ➔</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Confirmation State -->
+      <div id="escalationSuccessState" class="hidden space-y-3 py-2 text-center">
+        <div class="w-10 h-10 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-lg mx-auto">✓</div>
+        <h4 class="text-sm font-bold text-white" data-i18n="escSuccessTitle">Facilitation Request Submitted</h4>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-xs font-mono text-brand-400 select-all">
+          <strong id="escResultId">ESC-20260929-XXXXXX</strong>
+        </div>
+        <p class="text-[11px] text-slate-400" data-i18n="escSuccessDesc">A structured dossier has been logged for facilitator review.</p>
+        <button type="button" onclick="closeEscalationModal()" data-i18n="escClose" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 6. PRIVACY MODAL -->
+  <!-- ============================================================== -->
+  <div id="modalPrivacy" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-5 shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto text-xs">
+      <div class="flex items-start justify-between border-b border-slate-800 pb-2.5">
+        <h3 class="text-sm font-bold text-white font-serif-title" data-i18n="privacyTitle">Privacy & Data Use</h3>
+        <button type="button" onclick="closePrivacyModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+      <div class="space-y-2.5 leading-relaxed text-slate-300">
+        <p data-i18n-html="privacyPara1"><strong>Local Processing:</strong> All queries, formulation checks, and router evaluations are processed locally on runtime storage. No user inquiries or contact details are harvested or shared with third parties.</p>
+        <p data-i18n-html="privacyPara2"><strong>API Security:</strong> Synthesis queries are transmitted to Google Gemini API using enterprise API endpoints configured server-side. Zero API keys are exposed to client browsers.</p>
+        <p data-i18n-html="privacyPara3"><strong>Prototype Notice:</strong> SAKTI is an academic and Smart India Hackathon research prototype. This privacy statement reflects basic data minimization safeguards under DPDP principles.</p>
+      </div>
+      <div class="pt-1 text-right">
+        <button type="button" onclick="closePrivacyModal()" data-i18n="docClose" class="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 7. STATUTORY DOCUMENT DETAIL MODAL -->
+  <!-- ============================================================== -->
+  <div id="modalDocDetail" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-5 shadow-2xl space-y-3.5 max-h-[85vh] overflow-y-auto text-xs">
+      <div class="flex items-start justify-between border-b border-slate-800 pb-2.5">
+        <div>
+          <span id="docDetailId" class="text-[11px] font-mono font-bold text-brand-400">IN-PAT-SEC-003P</span>
+          <h4 id="docDetailTitle" class="text-sm font-bold text-white font-serif-title mt-0.5">Section Title</h4>
+          <p id="docDetailStatute" class="text-xs text-amber-300 font-mono">Statute & Section</p>
+        </div>
+        <button type="button" onclick="closeDocDetailModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+        <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-1" data-i18n="docOfficialTextLabel">Official Statutory Text:</span>
+        <div id="docDetailContent" class="text-slate-300 leading-relaxed max-h-56 overflow-y-auto whitespace-pre-wrap font-sans text-xs"></div>
+      </div>
+
+      <div class="flex items-center justify-between pt-1">
+        <a id="docDetailUrl" href="#" target="_blank" rel="noopener noreferrer"
+           class="text-brand-400 hover:text-brand-300 font-semibold inline-flex items-center gap-1">
+          <span data-i18n="docViewOfficial">View Official Record →</span>
+        </a>
+        <button type="button" onclick="closeDocDetailModal()" data-i18n="docClose" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 8. MINIMAL FOOTER -->
+  <!-- ============================================================== -->
+  <footer class="border-t border-slate-800/80 py-4 text-center text-xs text-slate-500 w-full mt-6">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
+      <span data-i18n="footerText">SAKTI — SIH Prototype</span>
+      <span>•</span>
+      <button onclick="openPrivacyModal()" data-i18n="footerPrivacy" class="hover:text-slate-300 underline underline-offset-2">
+        Privacy
+      </button>
+      <span>•</span>
+      <a href="/docs" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300">
+        API Docs
+      </a>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- 9. JAVASCRIPT LOGIC ENGINE -->
+  <!-- ============================================================== -->
+  <script>
+    const API_BASE = window.location.port === "8000" ? "" : "http://127.0.0.1:8000";
+    let currentJurisdiction = "India";
+    let currentLanguage = "en";
+    let currentTheme = localStorage.theme === 'dark' ? 'dark' : 'light';
+    let isInAuthTexts = false;
+    let allCorpusSources = [];
+    let selectedCategory = "all";
+    let latestClassificationResult = null;
+    let latestIPRouterResult = null;
+
+    function renderMarkdown(md) {
+      if (!md) return "";
+      let html = md
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/^### (.*$)/gim, '<h4 class="text-sm font-bold text-brand-400 mt-3 mb-1 font-serif-title">$1</h4>')
+        .replace(/^## (.*$)/gim, '<h3 class="text-base font-bold text-white mt-4 mb-1.5 font-serif-title">$1</h3>')
+        .replace(/^# (.*$)/gim, '<h2 class="text-lg font-bold text-white mt-5 mb-2 font-serif-title">$1</h2>')
+        .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-white">$1</strong>')
+        .replace(/\*(.*?)\*/gim, '<em class="italic text-slate-300">$1</em>')
+        .replace(/^\* (.*$)/gim, '<li class="ml-4 list-disc text-slate-300 my-0.5">$1</li>')
+        .replace(/\[(IN-[A-Z0-9-]+|INT-[A-Z0-9-]+)\]/gim, '<span class="inline-block font-mono text-[11px] font-bold px-1.5 py-0.5 rounded bg-emerald-950 text-brand-400 border border-emerald-800">[$1]</span>')
+        .replace(/\n\n/gim, '<div class="h-2"></div>')
+        .replace(/\n/gim, '<br/>');
+      return html;
+    }
+
+    const I18N = {
+      en: {
+        // Top Bar & Nav
+        appSubtitle: "Ayurveda IPR & Regulatory Compliance Engine",
+        settingsTitle: "Settings",
+        tabClassifier: "Check Product Rules",
+        tabQuery: "Ask Legal Assistant",
+        tabSources: "Knowledge Base",
+        statusCuratedStatutes: "Curated Statutes Active",
+        statusApiOffline: "API Offline",
+
+        // Presets & Form Labels
+        clsTitle: "Product Classification & Patentability",
+        clsSubtitle: "Instant statutory analysis for Ayurvedic formulations, phytopharmaceuticals, and IP protection under Indian and international laws.",
+        clsExamples: "Example products:",
+        presetTurmeric: "Turmeric & Pepper Classical",
+        presetPhyto: "Standardized Bacopa Phyto",
+        presetSyrup: "Polyherbal Cough Syrup",
+        presetAahar: "Ayurveda Aahar Infusion",
+        presetCosmetic: "Kumkumadi Beauty Serum",
+        presetTriphala: "Triphala Classical",
+        clsProdNameLabel: "Product Name or Active Botanical Ingredients:",
+        clsProdNamePlaceholder: "e.g., Standardized Ashwagandha extract or classical powder...",
+        clsQ1Label: "1. What is the intended use of this product?",
+        clsQ1Opt1: "Medicine / Health Treatment (Curing or treating illness)",
+        clsQ1Opt2: "Dietary / Nutrition (Ayurveda Aahar under FSSAI 2022)",
+        clsQ1Opt3: "Cosmetic / Beauty (Topical skincare / haircare)",
+        clsQ2Label: "2. Is this recipe from ancient classical books?",
+        clsQ2Desc: "(Cited in First Schedule authoritative Ayurvedic texts such as Charaka Samhita, Sushruta Samhita, etc.)",
+        clsBtnYes: "Yes (Traditional formula)",
+        clsBtnNo: "No (Novel or modified)",
+        clsQ3Label: "3. How is the product extracted or made?",
+        clsQ3Opt1: "Purified Extract with 4+ Markers (Phytopharmaceutical)",
+        clsQ3Opt2: "Classical ASU Methods (Churna, Kwath, Bhasma, Taila, Asava)",
+        clsQ3Opt3: "Aqueous or Hydro-Alcoholic Extract / Syrup",
+        clsQ3Opt4: "Synthetic Derivative of Plant Constituent",
+        clsSyntheticLabel: "Contains synthetic chemicals or modern APIs",
+        clsSubmitBtn: "Evaluate Product & Patentability ➔",
+        clsEvaluating: "Evaluating...",
+
+        // Verdict & Results
+        resClassifiedAs: "Your product is classified as:",
+        resPatentHeading: "Patentability",
+        resRegHeading: "Regulatory Requirement",
+        resAbsHeading: "Biodiversity / ABS",
+        resKeySummaryHeading: "Key Summary:",
+        resSec3pAccordion: "Detailed Section 3(p) Patent Analysis & Evidentiary Grounds",
+        resExpand: "Expand ▼",
+        resCollapse: "Collapse ▲",
+        resPatentSectionTitle: "Patentability & Section 3(p) Analysis:",
+        resStrategySectionTitle: "Recommended IP Prosecution Strategy:",
+        resAbsSectionTitle: "ABS & Biodiversity Compliance:",
+        resIpRouterTitle: "Recommended IP Protection",
+        resIpRouterSubtitle: "Applicable statutory protection regimes based on your formulation characteristics:",
+        expertPrompt: "Need human help with your formulation?",
+        expertRequestBtn: "Request Expert Assistance →",
+        statusBarred: "Completely Barred (Section 3(p))",
+        statusHighPotential: "High Potential (Patentable)",
+        statusConditional: "Conditional Patentability",
+        routerRecommended: "Recommended",
+        routerOtherRegimes: "Other Evaluated Regimes",
+        routerViewRegistry: "View Official Registry →",
+        routerRegistryShort: "Registry →",
+
+        // Tab 2: Ask Legal Assistant
+        queryHeroTitle: "Ask your Ayurveda IPR question",
+        queryHeroSubtitle: "Get evidence-grounded statutory analysis for Indian and international drug regulations.",
+        queryPlaceholder: "e.g., Can I patent a classical formulation of turmeric and black pepper for inflammation?",
+        querySubmitBtn: "Get Grounded Answer ➔",
+        queryRetrieving: "Retrieving...",
+        querySynthesizing: "Synthesizing authoritative legal analysis...",
+        sourcesHeader: "Verified Sources",
+        showLabel: "Show ▼",
+        hideLabel: "Hide ▲",
+        formalOpinionPrompt: "Need a formal legal opinion?",
+        confidencePrefix: "Confidence: ",
+        confidenceSafeAbstention: "Safe Abstention",
+
+        // Tab 3: Knowledge Base
+        sourcesTitle: "Knowledge Base",
+        sourcesSubhead: "verified legal and regulatory sources",
+        searchPlaceholder: "Search statute, section, or keyword...",
+        updates2024Title: "2024 Regulatory Updates",
+        updates2024Subtitle: "Recent amendments and treaty updates impacting Ayurvedic IPR",
+        registriesTitle: "Official Statutory Portals & Registries",
+        registriesSubtitle: "Verified links to official government search databases and filing portals",
+        filterAll: "all",
+        fullText: "Full Text",
+        officialRecord: "Official Record →",
+        viewGazette: "View Gazette →",
+        noSourcesFound: "No matching statutory provisions found.",
+
+        // Settings Modal
+        appearance: "Appearance",
+        darkMode: "Dark Mode",
+        lightMode: "Light Mode",
+        jurisdiction: "Jurisdiction",
+        jurIndia: "India Law",
+        jurIntl: "International",
+        language: "Language",
+        themeColorLabel: "Accent Color",
+        resetColor: "Reset to Default",
+        customColorPickerTitle: "Click swatch to pick color",
+        done: "Done",
+
+        // Expert Escalation Modal
+        escTitle: "Request Expert Assistance",
+        escSubtitle: "Connect with a patent facilitator or AYUSH regulatory specialist.",
+        escNameLabel: "Your Name (Optional):",
+        escNamePlaceholder: "Dr. / Innovator Name",
+        escContactLabel: "Contact Email / Phone (Optional):",
+        escContactPlaceholder: "email@startup.in or phone number",
+        escProdLabel: "Product Name:",
+        escQueryLabel: "Your Question:",
+        escQueryPlaceholder: "e.g., We need guidance on whether our standardized extract requires prior approval under NBA Form I or if cultivated plant exemption applies...",
+        escNotice: "This sends a facilitation request. SAKTI does not provide binding legal advice.",
+        escCancel: "Cancel",
+        escSubmit: "Submit Request ➔",
+        escSubmitting: "Submitting...",
+        escSuccessTitle: "Facilitation Request Submitted",
+        escSuccessDesc: "A structured dossier has been logged for facilitator review.",
+        escClose: "Close",
+
+        // Privacy & Doc Detail & Footer
+        privacyTitle: "Privacy & Data Use",
+        privacyPara1: "<strong>Local Processing:</strong> All queries, formulation checks, and router evaluations are processed locally on runtime storage. No user inquiries or contact details are harvested or shared with third parties.",
+        privacyPara2: "<strong>API Security:</strong> Synthesis queries are transmitted to Google Gemini API using enterprise API endpoints configured server-side. Zero API keys are exposed to client browsers.",
+        privacyPara3: "<strong>Prototype Notice:</strong> SAKTI is an academic and Smart India Hackathon research prototype. This privacy statement reflects basic data minimization safeguards under DPDP principles.",
+        docOfficialTextLabel: "Official Statutory Text:",
+        docViewOfficial: "View Official Record →",
+        docClose: "Close",
+        footerText: "SAKTI — SIH Prototype",
+        footerPrivacy: "Privacy"
+      },
+      hi: {
+        // Top Bar & Nav
+        appSubtitle: "आयुर्वेद आईपीआर एवं विनियामक अनुपालन प्रणाली",
+        settingsTitle: "सेटिंग्स",
+        tabClassifier: "उत्पाद नियम जांचें",
+        tabQuery: "विधिक सहायक से पूछें",
+        tabSources: "ज्ञान कोष",
+        statusCuratedStatutes: "वैधानिक प्रावधान सक्रिय",
+        statusApiOffline: "एपीआई ऑफलाइन",
+
+        // Presets & Form Labels
+        clsTitle: "उत्पाद वर्गीकरण एवं पेटेंट पात्रता",
+        clsSubtitle: "भारतीय एवं अंतरराष्ट्रीय कानूनों के तहत आयुर्वेदिक फॉर्मूलेशन, फाइटोफार्मास्युटिकल और बौद्धिक संपदा सुरक्षा का तात्कालिक वैधानिक विश्लेषण।",
+        clsExamples: "उदाहरण उत्पाद:",
+        presetTurmeric: "हल्दी व काली मिर्च शास्त्रीय चूर्ण",
+        presetPhyto: "मानकीकृत ब्राह्मी फाइटो-अर्क",
+        presetSyrup: "कास (खांसी) हर्बल सिरप",
+        presetAahar: "आयुर्वेद आहार पेय",
+        presetCosmetic: "कुंकुमादि सौंदर्य सीरम",
+        presetTriphala: "त्रिफला शास्त्रीय चूर्ण",
+        clsProdNameLabel: "उत्पाद का नाम या सक्रिय वानस्पतिक घटक:",
+        clsProdNamePlaceholder: "उदा. मानकीकृत अश्वगंधा अर्क या शास्त्रीय चूर्ण...",
+        clsQ1Label: "1. उत्पाद का प्राथमिक उपयोग क्या है?",
+        clsQ1Opt1: "औषधि / स्वास्थ्य उपचार (रोग निवारण या चिकित्सा)",
+        clsQ1Opt2: "आहार / पोषण (FSSAI 2022 के तहत आयुर्वेद आहार)",
+        clsQ1Opt3: "सौंदर्य प्रसाधन / प्रसाधन (त्वचा / बालों की बाह्य देखभाल)",
+        clsQ2Label: "2. क्या यह योग प्राचीन शास्त्रीय ग्रंथों में वर्णित है?",
+        clsQ2Desc: "(प्रथम अनुसूची के प्रामाणिक आयुर्वेदिक ग्रंथों जैसे चरक संहिता, सुश्रुत संहिता आदि में उद्धृत)",
+        clsBtnYes: "हाँ (पारंपरिक शास्त्रीय योग)",
+        clsBtnNo: "नहीं (नवीन या संशोधित योग)",
+        clsQ3Label: "3. उत्पाद का निष्कर्षण या निर्माण कैसे किया गया है?",
+        clsQ3Opt1: "4+ मार्कर युक्त शोधित अर्क (फाइटोफार्मास्युटिकल)",
+        clsQ3Opt2: "शास्त्रीय आसव-अरिष्ट/चूर्ण/क्वाथ/भस्म/तैल विधियाँ",
+        clsQ3Opt3: "जलीय या हाइड्रो-अल्कोहलिक अर्क / सिरप",
+        clsQ3Opt4: "पादप घटक का सिंथेटिक व्युत्पन्न (सिंथेटिक डेरिवेटिव)",
+        clsSyntheticLabel: "सिंथेटिक रसायन या आधुनिक सक्रिय घटक (APIs) शामिल हैं",
+        clsSubmitBtn: "उत्पाद एवं पेटेंट पात्रता का मूल्यांकन करें ➔",
+        clsEvaluating: "मूल्यांकन किया जा रहा है...",
+
+        // Verdict & Results
+        resClassifiedAs: "आपके उत्पाद का वर्गीकरण:",
+        resPatentHeading: "पेटेंट पात्रता",
+        resRegHeading: "विनियामक आवश्यकता",
+        resAbsHeading: "जैव विविधता / ABS",
+        resKeySummaryHeading: "मुख्य निष्कर्ष:",
+        resSec3pAccordion: "विस्तृत धारा 3(p) पेटेंट विश्लेषण एवं साक्ष्य आधार",
+        resExpand: "विस्तार करें ▼",
+        resCollapse: "संक्षिप्त करें ▲",
+        resPatentSectionTitle: "पेटेंट पात्रता एवं धारा 3(p) विश्लेषण:",
+        resStrategySectionTitle: "अनुशंसित आईपी अभियोजन रणनीति:",
+        resAbsSectionTitle: "ABS एवं जैव विविधता अनुपालन:",
+        resIpRouterTitle: "अनुशंसित बौद्धिक संपदा (आईपी) सुरक्षा",
+        resIpRouterSubtitle: "आपके फॉर्मूलेशन की विशेषताओं पर आधारित लागू वैधानिक सुरक्षा व्यवस्था:",
+        expertPrompt: "क्या अपने फॉर्मूलेशन के लिए विशेषज्ञ सहायता चाहिए?",
+        expertRequestBtn: "विशेषज्ञ सहायता का अनुरोध करें →",
+        statusBarred: "पूर्णतः वर्जित (धारा 3(p))",
+        statusHighPotential: "उच्च संभावना (पेटेंट योग्य)",
+        statusConditional: "सशर्त पेटेंट पात्रता",
+        routerRecommended: "अनुशंसित",
+        routerOtherRegimes: "अन्य मूल्यांकित व्यवस्थाएं",
+        routerViewRegistry: "आधिकारिक पंजीयन देखें →",
+        routerRegistryShort: "पंजीकरण →",
+
+        // Tab 2: Ask Legal Assistant
+        queryHeroTitle: "आयुर्वेद आईपीआर संबंधी अपना प्रश्न पूछें",
+        queryHeroSubtitle: "भारतीय एवं अंतरराष्ट्रीय औषधि विनियमों का साक्ष्य-आधारित वैधानिक विश्लेषण प्राप्त करें।",
+        queryPlaceholder: "आयुर्वेदिक पेटेंट, धारा 3(p), जैव विविधता (NBA) या औषधि नियमों पर अपना प्रश्न पूछें...",
+        querySubmitBtn: "आधारित विधिक उत्तर प्राप्त करें ➔",
+        queryRetrieving: "पुनर्प्राप्त किया जा रहा है...",
+        querySynthesizing: "प्रामाणिक विधिक विश्लेषण तैयार किया जा रहा है...",
+        sourcesHeader: "सत्यापित स्रोत",
+        showLabel: "देखें ▼",
+        hideLabel: "छिपाएं ▲",
+        formalOpinionPrompt: "क्या औपचारिक विधिक राय की आवश्यकता है?",
+        confidencePrefix: "विश्वसनीयता: ",
+        confidenceSafeAbstention: "सुरक्षित संयम (Safe Abstention)",
+
+        // Tab 3: Knowledge Base
+        sourcesTitle: "ज्ञान कोष",
+        sourcesSubhead: "सत्यापित विधिक एवं विनियामक स्रोत",
+        searchPlaceholder: "अधिनियम, धारा, नियम या कीवर्ड खोजें...",
+        updates2024Title: "2024 विनियामक संशोधन एवं अद्यतन",
+        updates2024Subtitle: "आयुर्वेदिक बौद्धिक संपदा को प्रभावित करने वाले हालिया संशोधन एवं संधि अद्यतन",
+        registriesTitle: "आधिकारिक वैधानिक पोर्टल एवं पंजीयन",
+        registriesSubtitle: "आधिकारिक सरकारी खोज डेटाबेस एवं फाइलिंग पोर्टलों के सत्यापित लिंक",
+        filterAll: "सभी",
+        fullText: "पूर्ण पाठ",
+        officialRecord: "आधिकारिक रिकॉर्ड →",
+        viewGazette: "राजपत्र देखें →",
+        noSourcesFound: "कोई मेल खाने वाला वैधानिक प्रावधान नहीं मिला।",
+
+        // Settings Modal
+        appearance: "दिखावट",
+        darkMode: "डार्क मोड",
+        lightMode: "लाइट मोड",
+        jurisdiction: "अधिकार क्षेत्र",
+        jurIndia: "भारतीय विधि",
+        jurIntl: "अंतरराष्ट्रीय",
+        language: "भाषा",
+        themeColorLabel: "एक्सेंट रंग (थीम कलर)",
+        resetColor: "डिफ़ॉल्ट रीसेट करें",
+        customColorPickerTitle: "कस्टम रंग चुनने के लिए क्लिक करें",
+        done: "पूर्ण",
+
+        // Expert Escalation Modal
+        escTitle: "विशेषज्ञ सहायता का अनुरोध करें",
+        escSubtitle: "पेटेंट सुगमकर्ता या आयुष विनियामक विशेषज्ञ से संपर्क करें।",
+        escNameLabel: "आपका नाम (वैकल्पिक):",
+        escNamePlaceholder: "डॉ. / नवोन्मेषक का नाम",
+        escContactLabel: "संपर्क ईमेल / फोन (वैकल्पिक):",
+        escContactPlaceholder: "email@startup.in या फोन नंबर",
+        escProdLabel: "उत्पाद का नाम:",
+        escQueryLabel: "आपका प्रश्न:",
+        escQueryPlaceholder: "उदा. क्या हमारे मानकीकृत अर्क को NBA प्रपत्र I के तहत पूर्व अनुमोदन की आवश्यकता है या कृषि उत्पाद छूट लागू होती है...",
+        escNotice: "यह एक सुगमीकरण अनुरोध भेजता है। शक्ति (SAKTI) बाध्यकारी विधिक परामर्श प्रदान नहीं करता है।",
+        escCancel: "रद्द करें",
+        escSubmit: "अनुरोध सबमिट करें ➔",
+        escSubmitting: "सबमिट किया जा रहा है...",
+        escSuccessTitle: "सुगमीकरण अनुरोध सबमिट किया गया",
+        escSuccessDesc: "विशेषज्ञ समीक्षा हेतु एक संरचित डोजियर दर्ज कर लिया गया है।",
+        escClose: "बंद करें",
+
+        // Privacy & Doc Detail & Footer
+        privacyTitle: "गोपनीयता एवं डेटा उपयोग",
+        privacyPara1: "<strong>स्थानीय प्रसंस्करण:</strong> सभी प्रश्न, फॉर्मूलेशन जांच और राउटर मूल्यांकन स्थानीय रनटाइम स्टोरेज पर संसाधित होते हैं। किसी भी उपयोगकर्ता पूछताछ या संपर्क विवरण को तीसरे पक्ष के साथ साझा या एकत्र नहीं किया जाता है।",
+        privacyPara2: "<strong>एपीआई सुरक्षा:</strong> विश्लेषण संबंधी प्रश्न सर्वर-साइड कॉन्फ़िगर किए गए कॉर्पोरेट एंडपॉइंट्स का उपयोग करके Google Gemini API को भेजे जाते हैं। क्लाइंट ब्राउज़र में कोई भी API कुंजी प्रदर्शित नहीं की जाती है।",
+        privacyPara3: "<strong>प्रोटोटाइप सूचना:</strong> SAKTI एक अकादमिक और स्मार्ट इंडिया हैकाथॉन (SIH) अनुसंधान प्रोटोटाइप है। यह गोपनीयता कथन DPDP सिद्धांतों के तहत बुनियादी डेटा न्यूनीकरण सुरक्षा उपायों को दर्शाता है।",
+        docOfficialTextLabel: "आधिकारिक वैधानिक पाठ:",
+        docViewOfficial: "आधिकारिक रिकॉर्ड देखें →",
+        docClose: "बंद करें",
+        footerText: "SAKTI — SIH प्रोटोटाइप",
+        footerPrivacy: "गोपनीयता"
+      }
+    };
+
+    const SAMPLE_QUERIES = {
+      India: {
+        en: [
+          "Can I patent a classical formulation of turmeric and black pepper for inflammation?",
+          "What are the regulatory approval and ABS requirements for a novel standardized phytopharmaceutical extract?",
+          "Can I patent a herbal cough formulation made from ginger and honey in India?",
+          "Does an Indian vaidya or AYUSH practitioner need NBA approval under the 2023 amendment?"
+        ],
+        hi: [
+          "हल्दी और काली मिर्च के मिश्रण का पेटेंट क्या भारत में संभव है?",
+          "क्या मानकीकृत पादप अर्क (Phytopharmaceutical) के लिए पेटेंट मिल सकता है?",
+          "पारंपरिक ज्ञान पर आधारित औषधि के लिए धारा 3(p) के नियम क्या हैं?",
+          "क्या 2023 संशोधन के तहत भारतीय वैद्य या आयुष चिकित्सक को NBA की अनुमति चाहिए?"
+        ]
+      },
+      International: {
+        en: [
+          "What mandatory disclosure requirements exist under the WIPO GRATK Treaty 2024 for patent applications based on Indian traditional knowledge?",
+          "How does the Nagoya Protocol affect commercial export of Indian Ayurvedic medicinal plants?",
+          "What are the patent search rules for traditional knowledge under the PCT (Patent Cooperation Treaty)?"
+        ],
+        hi: [
+          "WIPO GRATK संधि 2024 के तहत अनिवार्य प्रकटीकरण (mandatory disclosure) के क्या नियम हैं?",
+          "नागोया प्रोटोकॉल का भारतीय औषधीय पौधों के अंतरराष्ट्रीय निर्यात पर क्या प्रभाव है?",
+          "पीसीटी (PCT) के तहत पारंपरिक ज्ञान के लिए पेटेंट खोज नियम क्या हैं?"
+        ]
+      }
+    };
+
+    const PRESETS = {
+      turmeric_pepper: {
+        product_name: "Classical Haridra & Maricha (Turmeric & Black Pepper) Churna",
+        intended_use: "therapeutic",
+        is_in_authoritative_texts: true,
+        processing_nature: "classical",
+        has_synthetic_additives: false
+      },
+      triphala: {
+        product_name: "Triphala Churna",
+        intended_use: "therapeutic",
+        is_in_authoritative_texts: true,
+        processing_nature: "classical",
+        has_synthetic_additives: false
+      },
+      phyto: {
+        product_name: "Standardized Bacopa Neuro-Extract (4 Markers)",
+        intended_use: "therapeutic",
+        is_in_authoritative_texts: false,
+        processing_nature: "purified_fraction_with_markers",
+        has_synthetic_additives: false
+      },
+      syrup: {
+        product_name: "Polyherbal Cough Relief Formula",
+        intended_use: "therapeutic",
+        is_in_authoritative_texts: false,
+        processing_nature: "aqueous_alcoholic_extract",
+        has_synthetic_additives: false
+      },
+      aahar: {
+        product_name: "Ayur-Digestive Botanical Infusion",
+        intended_use: "dietary",
+        is_in_authoritative_texts: true,
+        processing_nature: "classical",
+        has_synthetic_additives: false
+      },
+      cosmetic: {
+        product_name: "Kumkumadi Facial Glow Serum",
+        intended_use: "cosmetic",
+        is_in_authoritative_texts: false,
+        processing_nature: "aqueous_alcoholic_extract",
+        has_synthetic_additives: false
+      }
+    };
+
+    const PRESET_NAMES = {
+      turmeric_pepper: {
+        en: "Classical Haridra & Maricha (Turmeric & Black Pepper) Churna",
+        hi: "शास्त्रीय हरिद्रा एवं मरिच (हल्दी व काली मिर्च) चूर्ण"
+      },
+      triphala: {
+        en: "Triphala Churna",
+        hi: "त्रिफला चूर्ण"
+      },
+      phyto: {
+        en: "Standardized Bacopa Neuro-Extract (4 Markers)",
+        hi: "मानकीकृत ब्राह्मी न्यूरो-अर्क (4 मार्कर)"
+      },
+      syrup: {
+        en: "Polyherbal Cough Relief Formula",
+        hi: "कास (खांसी) निवारक हर्बल सिरप"
+      },
+      aahar: {
+        en: "Ayur-Digestive Botanical Infusion",
+        hi: "आयुर्वेद पाचक वनस्पति काढ़ा"
+      },
+      cosmetic: {
+        en: "Kumkumadi Facial Glow Serum",
+        hi: "कुंकुमादि सौंदर्य सीरम"
+      }
+    };
+
+    const CATEGORY_TRANSLATIONS = {
+      PHYTOPHARMACEUTICAL: {
+        en: "Phytopharmaceutical Drug",
+        hi: "फाइटोफार्मास्युटिकल औषधि"
+      },
+      CLASSICAL_ASU: {
+        en: "Classical ASU Medicine",
+        hi: "शास्त्रीय आयुर्वेद, सिद्ध एवं यूनानी (ASU) औषधि"
+      },
+      PATENT_PROPRIETARY_ASU: {
+        en: "Patent or Proprietary ASU Medicine",
+        hi: "पेटेंट या प्रोप्राइटरी ASU औषधि"
+      },
+      AYURVEDIC_COSMETIC: {
+        en: "Ayurvedic Cosmetic / Cosmeceutical",
+        hi: "आयुर्वेदिक सौंदर्य प्रसाधन"
+      },
+      AYURVEDA_AAHAR: {
+        en: "Ayurveda Aahar (Dietary / Food)",
+        hi: "आयुर्वेद आहार (खाद्य एवं पोषण)"
+      }
+    };
+
+    const IP_REGIME_TRANSLATIONS = {
+      "Trade Marks": "व्यापार चिह्न (Trade Marks)",
+      "Patents": "पेटेंट (Patents)",
+      "Geographical Indications (GI)": "भौगोलिक उपदर्शन (GI)",
+      "Designs": "औद्योगिक डिज़ाइन (Designs)",
+      "Plant Variety Protection (PPVFR)": "पादप किस्म संरक्षण (PPVFR)"
+    };
+
+    const STATUS_LABELS = {
+      "Primary Route": "प्राथमिक मार्ग",
+      "High Potential": "उच्च संभावना",
+      "Conditional": "सशर्त",
+      "Secondary Route": "द्वितीयक मार्ग",
+      "Not Applicable": "लागू नहीं"
+    };
+
+    // System Init
+    window.addEventListener('DOMContentLoaded', async () => {
+      initTheme();
+      initThemeColor();
+      const savedLang = localStorage.language || 'en';
+      applyLanguage(savedLang);
+      await checkSystemHealth();
+      await loadCorpusSources();
+      await loadHighlightsAndRegistries();
+      applyPreset('phyto');
+    });
+
+    function navigateToHome() {
+      switchTab('classifier');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function initTheme() {
+      if (currentTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        updateThemeButtons('light');
+      } else {
+        document.documentElement.classList.add('dark');
+        updateThemeButtons('dark');
+      }
+    }
+
+    function setTheme(theme) {
+      currentTheme = theme;
+      localStorage.theme = theme;
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+      updateThemeButtons(theme);
+    }
+
+    function updateThemeButtons(theme) {
+      const bDark = document.getElementById('btnThemeDark');
+      const bLight = document.getElementById('btnThemeLight');
+      if (!bDark || !bLight) return;
+      if (theme === 'light') {
+        bLight.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-900 bg-white shadow-sm transition-all text-center";
+        bDark.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+      } else {
+        bDark.className = "py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 shadow-sm transition-all text-center";
+        bLight.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+      }
+    }
+
+    function hexToRgb(hex) {
+      let c = hex.replace('#', '');
+      if (c.length === 3) c = c.split('').map(x => x + x).join('');
+      const num = parseInt(c, 16);
+      return {
+        r: (num >> 16) & 255,
+        g: (num >> 8) & 255,
+        b: num & 255
+      };
+    }
+
+    function getLuminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    }
+
+    function rgbToHex(r, g, b) {
+      const toHex = x => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2, '0');
+      return '#' + toHex(r) + toHex(g) + toHex(b);
+    }
+
+    function generateThemeCss(hex) {
+      const rgb = hexToRgb(hex);
+      const lum = getLuminance(rgb.r, rgb.g, rgb.b);
+
+      // Button text contrast: white or dark charcoal
+      const btnText = lum > 0.45 ? '#0f172a' : '#ffffff';
+
+      // Hover shade
+      let hoverHex;
+      if (lum > 0.2) {
+        hoverHex = rgbToHex(rgb.r * 0.88, rgb.g * 0.88, rgb.b * 0.88);
+      } else {
+        hoverHex = rgbToHex(rgb.r + (255 - rgb.r) * 0.25, rgb.g + (255 - rgb.g) * 0.25, rgb.b + (255 - rgb.b) * 0.25);
+      }
+
+      // Dark mode text (ensure bright enough on dark backgrounds, lum >= 0.42)
+      let dR = rgb.r, dG = rgb.g, dB = rgb.b;
+      let dLum = lum;
+      let dStep = 0;
+      while (dLum < 0.42 && dStep < 10) {
+        dR = Math.round(dR + (255 - dR) * 0.25);
+        dG = Math.round(dG + (255 - dG) * 0.25);
+        dB = Math.round(dB + (255 - dB) * 0.25);
+        dLum = getLuminance(dR, dG, dB);
+        dStep++;
+      }
+      const textDark = rgbToHex(dR, dG, dB);
+
+      // Light mode text (ensure dark enough on white backgrounds, lum <= 0.20)
+      let lR = rgb.r, lG = rgb.g, lB = rgb.b;
+      let lLum = lum;
+      let lStep = 0;
+      while (lLum > 0.20 && lStep < 10) {
+        lR = Math.round(lR * 0.75);
+        lG = Math.round(lG * 0.75);
+        lB = Math.round(lB * 0.75);
+        lLum = getLuminance(lR, lG, lB);
+        lStep++;
+      }
+      const textLight = rgbToHex(lR, lG, lB);
+
+      return `
+        :root {
+          --theme-accent: ${hex};
+          --theme-accent-btn-text: ${btnText};
+          --theme-accent-hover: ${hoverHex};
+          --theme-accent-text: ${textDark};
+          --theme-accent-bg: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.15);
+          --theme-accent-border: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.35);
+        }
+
+        html:not(.dark) {
+          --theme-accent-text: ${textLight};
+          --theme-accent-bg: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);
+          --theme-accent-border: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25);
+        }
+
+        /* Primary Buttons */
+        .bg-brand-500,
+        .bg-brand-600,
+        button#btnClassifySubmit,
+        button#btnQuerySubmit,
+        #sourceCategoryFilters button.bg-brand-500,
+        #btnJurIndia.bg-brand-600,
+        #btnJurIntl.bg-brand-600,
+        #btnLangEn.bg-brand-600,
+        #btnLangHi.bg-brand-600 {
+          background-color: var(--theme-accent) !important;
+          color: var(--theme-accent-btn-text) !important;
+        }
+
+        html:not(.dark) button#btnClassifySubmit,
+        html:not(.dark) button#btnQuerySubmit,
+        html:not(.dark) #sourceCategoryFilters button.bg-brand-500,
+        html:not(.dark) #btnJurIndia.bg-brand-600,
+        html:not(.dark) #btnJurIntl.bg-brand-600,
+        html:not(.dark) #btnLangEn.bg-brand-600,
+        html:not(.dark) #btnLangHi.bg-brand-600 {
+          background-color: var(--theme-accent) !important;
+          color: var(--theme-accent-btn-text) !important;
+        }
+
+        button#btnClassifySubmit *,
+        button#btnQuerySubmit *,
+        html:not(.dark) button#btnClassifySubmit *,
+        html:not(.dark) button#btnQuerySubmit * {
+          color: var(--theme-accent-btn-text) !important;
+        }
+
+        .hover\\:bg-brand-400:hover,
+        button#btnClassifySubmit:hover,
+        button#btnQuerySubmit:hover,
+        html:not(.dark) button#btnClassifySubmit:hover,
+        html:not(.dark) button#btnQuerySubmit:hover {
+          background-color: var(--theme-accent-hover) !important;
+        }
+
+        /* Navigation Tabs */
+        nav button.text-brand-400 {
+          color: var(--theme-accent-text) !important;
+          border-bottom-color: var(--theme-accent) !important;
+        }
+        html:not(.dark) nav button.text-brand-400 {
+          color: var(--theme-accent-text) !important;
+          border-bottom-color: var(--theme-accent) !important;
+        }
+
+        /* Text Highlights, Status, Links */
+        .text-brand-400,
+        #statusText,
+        #resCategoryCode,
+        #resAbsForm,
+        #docDetailId {
+          color: var(--theme-accent-text) !important;
+        }
+        html:not(.dark) .text-brand-400,
+        html:not(.dark) #statusText,
+        html:not(.dark) #resCategoryCode,
+        html:not(.dark) #resAbsForm,
+        html:not(.dark) #docDetailId {
+          color: var(--theme-accent-text) !important;
+        }
+
+        .hover\\:text-brand-300:hover,
+        .group-hover\\:text-brand-300:hover {
+          filter: brightness(1.2) !important;
+        }
+
+        /* Badges & Chips */
+        .bg-brand-500\\/10,
+        .bg-emerald-950,
+        .bg-brand-950 {
+          background-color: var(--theme-accent-bg) !important;
+          border-color: var(--theme-accent-border) !important;
+          color: var(--theme-accent-text) !important;
+        }
+
+        html:not(.dark) .bg-brand-500\\/10,
+        html:not(.dark) .bg-emerald-950,
+        html:not(.dark) .bg-brand-950 {
+          background-color: var(--theme-accent-bg) !important;
+          border-color: var(--theme-accent-border) !important;
+          color: var(--theme-accent-text) !important;
+        }
+
+        .border-emerald-800,
+        .border-brand-500,
+        .border-brand-500\\/30 {
+          border-color: var(--theme-accent-border) !important;
+        }
+
+        html:not(.dark) .border-emerald-800,
+        html:not(.dark) .border-brand-500,
+        html:not(.dark) .border-brand-500\\/30 {
+          border-color: var(--theme-accent-border) !important;
+        }
+
+        /* Focus States */
+        input:focus,
+        textarea:focus,
+        select:focus,
+        .focus\\:border-brand-500:focus,
+        .focus-within\\:border-brand-500:focus-within {
+          border-color: var(--theme-accent) !important;
+          --tw-ring-color: var(--theme-accent) !important;
+          box-shadow: 0 0 0 2px var(--theme-accent-bg) !important;
+        }
+
+        /* Animation and Dots */
+        #statusDot {
+          background-color: var(--theme-accent) !important;
+        }
+        .border-t-brand-400 {
+          border-top-color: var(--theme-accent) !important;
+        }
+      `;
+    }
+
+    function setThemeColor(hex) {
+      if (!hex) return;
+      localStorage.themeColor = hex;
+
+      let styleEl = document.getElementById('sakti-custom-theme-style');
+      if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'sakti-custom-theme-style';
+        document.head.appendChild(styleEl);
+      }
+      styleEl.innerHTML = generateThemeCss(hex);
+
+      const picker = document.getElementById('themeColorPicker');
+      const swatch = document.getElementById('themeColorSwatch');
+      const hexLabel = document.getElementById('themeColorHex');
+      if (picker) picker.value = hex;
+      if (swatch) swatch.style.backgroundColor = hex;
+      if (hexLabel) hexLabel.innerText = hex.toLowerCase();
+    }
+
+    function resetThemeColor() {
+      localStorage.removeItem('themeColor');
+      const defaultHex = '#10b981';
+
+      const styleEl = document.getElementById('sakti-custom-theme-style');
+      if (styleEl) {
+        styleEl.innerHTML = '';
+      }
+
+      const picker = document.getElementById('themeColorPicker');
+      const swatch = document.getElementById('themeColorSwatch');
+      const hexLabel = document.getElementById('themeColorHex');
+      if (picker) picker.value = defaultHex;
+      if (swatch) swatch.style.backgroundColor = defaultHex;
+      if (hexLabel) hexLabel.innerText = defaultHex;
+    }
+
+    function resetAllSettingsToDefault() {
+      setTheme('light');
+      setJurisdiction('India');
+      setQueryLanguage('en');
+      resetThemeColor();
+    }
+
+    function initThemeColor() {
+      const saved = localStorage.themeColor;
+      if (saved && saved !== '#10b981') {
+        setThemeColor(saved);
+      } else {
+        resetThemeColor();
+      }
+    }
+
+    function toggleSettingsModal() {
+      const modal = document.getElementById('modalSettings');
+      modal.classList.toggle('hidden');
+    }
+
+    function applyLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.language = lang;
+
+      // 1. Static text elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[lang] && I18N[lang][key] !== undefined) {
+          el.innerText = I18N[lang][key];
+        } else if (I18N['en'] && I18N['en'][key] !== undefined) {
+          el.innerText = I18N['en'][key];
+        }
+      });
+
+      // 2. Placeholders with data-i18n-placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (I18N[lang] && I18N[lang][key] !== undefined) {
+          el.placeholder = I18N[lang][key];
+        } else if (I18N['en'] && I18N['en'][key] !== undefined) {
+          el.placeholder = I18N['en'][key];
+        }
+      });
+
+      // 3. HTML content with data-i18n-html
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (I18N[lang] && I18N[lang][key] !== undefined) {
+          el.innerHTML = I18N[lang][key];
+        } else if (I18N['en'] && I18N['en'][key] !== undefined) {
+          el.innerHTML = I18N['en'][key];
+        }
+      });
+
+      // 4. Titles with data-i18n-title
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (I18N[lang] && I18N[lang][key] !== undefined) {
+          el.title = I18N[lang][key];
+        } else if (I18N['en'] && I18N['en'][key] !== undefined) {
+          el.title = I18N['en'][key];
+        }
+      });
+
+      // 5. Update settings language buttons & badge
+      const btnEn = document.getElementById('btnLangEn');
+      const btnHi = document.getElementById('btnLangHi');
+      const langBadge = document.getElementById('queryLangBadge');
+      if (btnEn && btnHi) {
+        if (lang === 'hi') {
+          btnHi.className = "py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center";
+          btnEn.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+          if (langBadge) langBadge.innerText = "हिंदी";
+        } else {
+          btnEn.className = "py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center";
+          btnHi.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+          if (langBadge) langBadge.innerText = "English";
+        }
+      }
+
+      // 6. Classical Texts Yes/No buttons
+      const bYes = document.getElementById('btnAuthYes');
+      const bNo = document.getElementById('btnAuthNo');
+      if (bYes && bNo) {
+        bYes.innerText = I18N[lang]?.clsBtnYes || I18N.en.clsBtnYes;
+        bNo.innerText = I18N[lang]?.clsBtnNo || I18N.en.clsBtnNo;
+      }
+
+      // 7. Dynamic counts in subhead & safe status handling
+      const count = allCorpusSources.length > 0 ? allCorpusSources.length : 62;
+      const statusEl = document.getElementById('statusText');
+      if (statusEl && statusEl.innerText !== "API Offline" && statusEl.innerText !== "एपीआई ऑफलाइन") {
+        statusEl.innerText = lang === 'hi' ? `${count} वैधानिक प्रावधान सक्रिय` : `${count} Curated Statutes Active`;
+      }
+      const tabLabel = document.getElementById('tabSourcesLabel');
+      if (tabLabel) {
+        tabLabel.innerText = lang === 'hi' ? "ज्ञान कोष" : "Knowledge Base";
+      }
+      const subhead = document.getElementById('sourcesSubhead');
+      if (subhead) {
+        subhead.innerText = lang === 'hi' ? `${count} सत्यापित विधिक एवं विनियामक स्रोत` : `${count} verified legal and regulatory sources`;
+      }
+
+      // 8. Re-render dynamic elements
+      renderSampleChips();
+      renderCategoryFilters();
+      if (latestClassificationResult) {
+        renderClassifierResult(latestClassificationResult);
+      }
+      if (latestIPRouterResult) {
+        renderIPRouterResult(latestIPRouterResult);
+      }
+      if (allCorpusSources.length > 0) {
+        renderSourcesGrid();
+      }
+    }
+
+    async function checkSystemHealth() {
+      try {
+        const res = await fetch(`${API_BASE}/health`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data.status === 'healthy') {
+          const count = data.corpus_documents_loaded || 62;
+          const statusEl = document.getElementById('statusText');
+          if (statusEl) {
+            statusEl.innerText = currentLanguage === 'hi'
+              ? `${count} वैधानिक प्रावधान सक्रिय`
+              : `${count} Curated Statutes Active`;
+          }
+          const tabLabel = document.getElementById('tabSourcesLabel');
+          if (tabLabel) {
+            tabLabel.innerText = currentLanguage === 'hi' ? "ज्ञान कोष" : "Knowledge Base";
+          }
+          const subhead = document.getElementById('sourcesSubhead');
+          if (subhead) {
+            subhead.innerText = currentLanguage === 'hi'
+              ? `${count} सत्यापित विधिक एवं विनियामक स्रोत`
+              : `${count} verified legal and regulatory sources`;
+          }
+        }
+      } catch (e) {
+        const statusEl = document.getElementById('statusText');
+        if (statusEl) {
+          statusEl.innerText = currentLanguage === 'hi' ? "एपीआई ऑफलाइन" : "API Offline";
+        }
+      }
+    }
+
+    function setJurisdiction(jur) {
+      currentJurisdiction = jur;
+      const btnIn = document.getElementById('btnJurIndia');
+      const btnIntl = document.getElementById('btnJurIntl');
+      const jurBadge = document.getElementById('queryJurBadge');
+
+      if (jur === 'India') {
+        btnIn.className = "py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center";
+        btnIntl.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+        if (jurBadge) jurBadge.innerText = currentLanguage === 'hi' ? "भारतीय विधि" : "India Law";
+      } else {
+        btnIntl.className = "py-1.5 rounded-lg text-xs font-semibold text-white bg-brand-600 shadow-sm transition-all text-center";
+        btnIn.className = "py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all text-center";
+        if (jurBadge) jurBadge.innerText = currentLanguage === 'hi' ? "अंतरराष्ट्रीय" : "International";
+      }
+
+      renderSampleChips();
+      loadCorpusSources();
+    }
+
+    function setQueryLanguage(lang) {
+      applyLanguage(lang);
+    }
+
+    function switchTab(tabId) {
+      const tabs = ['classifier', 'query', 'sources'];
+      tabs.forEach(t => {
+        document.getElementById(`section${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('hidden');
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        btn.className = "pb-2 text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white -mb-[9px] border-b-2 border-transparent flex items-center gap-1.5";
+      });
+
+      document.getElementById(`section${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tabBtn${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`);
+      activeBtn.className = "pb-2 text-xs sm:text-sm font-semibold transition-all text-brand-400 border-b-2 border-brand-500 -mb-[9px] flex items-center gap-1.5";
+    }
+
+    function setInAuthTexts(val) {
+      isInAuthTexts = val;
+      const bYes = document.getElementById('btnAuthYes');
+      const bNo = document.getElementById('btnAuthNo');
+      if (val) {
+        bYes.className = "px-4 py-2.5 rounded-xl text-xs font-semibold border bg-brand-950 border-brand-500 text-brand-400 transition-all text-center shadow-sm";
+        bNo.className = "px-4 py-2.5 rounded-xl text-xs font-semibold border bg-slate-950 border-slate-800 text-slate-400 hover:text-white transition-all text-center";
+      } else {
+        bNo.className = "px-4 py-2.5 rounded-xl text-xs font-semibold border bg-brand-950 border-brand-500 text-brand-400 transition-all text-center shadow-sm";
+        bYes.className = "px-4 py-2.5 rounded-xl text-xs font-semibold border bg-slate-950 border-slate-800 text-slate-400 hover:text-white transition-all text-center";
+      }
+    }
+
+    function applyPreset(presetKey) {
+      const p = PRESETS[presetKey];
+      if (!p) return;
+      const prodName = (PRESET_NAMES[presetKey] && PRESET_NAMES[presetKey][currentLanguage]) || p.product_name;
+      document.getElementById('clsProductName').value = prodName;
+      document.getElementById('clsIntendedUse').value = p.intended_use;
+      document.getElementById('clsProcessingNature').value = p.processing_nature;
+      document.getElementById('clsSynthetic').checked = p.has_synthetic_additives;
+      setInAuthTexts(p.is_in_authoritative_texts);
+      executeClassification(p);
+    }
+
+    async function handleClassifierSubmit(e) {
+      if (e) e.preventDefault();
+      const payload = {
+        product_name: document.getElementById('clsProductName').value,
+        intended_use: document.getElementById('clsIntendedUse').value,
+        is_in_authoritative_texts: isInAuthTexts,
+        processing_nature: document.getElementById('clsProcessingNature').value,
+        has_synthetic_additives: document.getElementById('clsSynthetic').checked
+      };
+      await executeClassification(payload);
+    }
+
+    async function executeClassification(payload) {
+      const btn = document.getElementById('btnClassifySubmit');
+      const evaluatingText = currentLanguage === 'hi' ? 'मूल्यांकन किया जा रहा है...' : 'Evaluating...';
+      btn.innerHTML = `<span class="w-3.5 h-3.5 border-2 border-slate-950/30 border-t-slate-950 rounded-full animate-spin"></span> ${evaluatingText}`;
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/classify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || `Classification server error (HTTP ${res.status})`);
+        }
+        const data = await res.json();
+        latestClassificationResult = data;
+        renderClassifierResult(data);
+
+        await executeIPRouter(data);
+
+      } catch (err) {
+        console.error("Classification error:", err);
+        alert(currentLanguage === 'hi' ? `वर्गीकरण त्रुटि: ${err.message}` : `Classification error: ${err.message}`);
+      } finally {
+        const defaultBtnText = currentLanguage === 'hi' ? 'उत्पाद एवं पेटेंट पात्रता का मूल्यांकन करें ➔' : 'Evaluate Product & Patentability ➔';
+        btn.innerHTML = `<span>${defaultBtnText}</span>`;
+        btn.disabled = false;
+      }
+    }
+
+    async function executeIPRouter(classifyData) {
+      try {
+        const isPhyto = classifyData.category_code === 'PHYTOPHARMACEUTICAL';
+        const isClassical = classifyData.category_code === 'CLASSICAL_ASU';
+        const isCosmetic = classifyData.category_code === 'AYURVEDIC_COSMETIC';
+
+        const routerInput = {
+          category: classifyData.category,
+          product_name: classifyData.product_name,
+          has_novel_technical_feature: isPhyto,
+          has_brand_identity: true,
+          has_novel_packaging: isCosmetic || isClassical,
+          is_geography_specific: false,
+          involves_plant_cultivar: false
+        };
+
+        const res = await fetch(`${API_BASE}/api/ip-router`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(routerInput)
+        });
+
+        if (res.ok) {
+          const routerData = await res.json();
+          latestIPRouterResult = routerData;
+          renderIPRouterResult(routerData);
+        }
+      } catch (e) {
+        console.error("IP Router error:", e);
+      }
+    }
+
+    function renderClassifierResult(data) {
+      document.getElementById('resProductName').innerText = data.product_name;
+      
+      const catName = (CATEGORY_TRANSLATIONS[data.category_code] && CATEGORY_TRANSLATIONS[data.category_code][currentLanguage]) || data.category;
+      document.getElementById('resCategory').innerText = catName;
+      document.getElementById('resCategoryCode').innerText = data.category_code;
+      document.getElementById('resGoverningLaw').innerText = data.governing_law;
+      document.getElementById('resLicensingAuth').innerText = data.licensing_authority;
+
+      // Patent status badge
+      const statusEl = document.getElementById('resPatentStatus');
+      const status = data.patentability?.status || 'N/A';
+
+      if (status.includes("Barred")) {
+        statusEl.className = "inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-800";
+        statusEl.innerText = currentLanguage === 'hi' ? "पूर्णतः वर्जित (धारा 3(p))" : "Completely Barred (Section 3(p))";
+      } else if (status.includes("High Potential")) {
+        statusEl.className = "inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-950 text-brand-400 border border-emerald-800";
+        statusEl.innerText = currentLanguage === 'hi' ? "उच्च संभावना (पेटेंट योग्य)" : "High Potential (Patentable)";
+      } else {
+        statusEl.className = "inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-800";
+        statusEl.innerText = currentLanguage === 'hi' ? "सशर्त पेटेंट पात्रता" : "Conditional Patentability";
+      }
+
+      document.getElementById('resPatentSummaryShort').innerText = data.patentability?.assessment?.slice(0, 110) + '...' || '';
+      document.getElementById('resPatentAssessment').innerText = data.patentability?.assessment || '';
+      document.getElementById('resPatentStrategy').innerText = data.patentability?.recommended_ip_strategy || '';
+
+      // ABS form localized display
+      let absFormText = data.abs_compliance?.form_type || 'N/A';
+      if (currentLanguage === 'hi') {
+        if (absFormText.includes('NBA Form I')) absFormText = 'NBA प्रपत्र I (Form I) आवश्यक';
+        else if (absFormText.includes('Exempt')) absFormText = '2023 संशोधन के तहत छूट प्राप्त (Exempt)';
+        else if (absFormText.includes('NBA Form III')) absFormText = 'NBA प्रपत्र III (Form III) आवश्यक';
+      }
+      document.getElementById('resAbsForm').innerText = absFormText;
+      document.getElementById('resAbsShort').innerText = data.abs_compliance?.guidance?.slice(0, 95) + '...' || '';
+      document.getElementById('resAbsGuidance').innerText = data.abs_compliance?.guidance || '';
+      document.getElementById('resAbsProvisions').innerText = data.abs_compliance?.statutory_provisions?.join(', ') || '';
+
+      // Key Summary Text
+      const summaryEl = document.getElementById('resKeySummary');
+      if (data.category_code === 'PHYTOPHARMACEUTICAL') {
+        summaryEl.innerHTML = currentLanguage === 'hi'
+          ? `मानकीकृत अंश की <strong>(1) नवीन संरचना</strong> और <strong>(2) नवीन शोधन/पृथक्करण प्रक्रिया</strong> दोनों के लिए पेटेंट आवेदन दाखिल करें। <code class="font-mono text-[11px] bg-slate-900 border border-slate-700 px-1 py-0.5 rounded text-brand-400">Sec 10(4)(d)</code> के तहत वानस्पतिक स्रोत की उत्पत्ति का प्रकटीकरण अनिवार्य है।`
+          : `File patent applications for both <strong>(1) Novel composition of standardized fraction</strong> and <strong>(2) Novel process of purification/isolation</strong>. Must disclose botanical source origin under <code class="font-mono text-[11px] bg-slate-900 border border-slate-700 px-1 py-0.5 rounded text-brand-400">Sec 10(4)(d)</code>.`;
+      } else if (data.category_code === 'CLASSICAL_ASU') {
+        summaryEl.innerHTML = currentLanguage === 'hi'
+          ? `पारंपरिक ज्ञान होने के कारण <strong>धारा 3(p)</strong> के तहत सीधे उत्पाद पेटेंट प्रतिबंधित है। <strong>ट्रेड मार्क्स (Class 5)</strong>, मालिकाना निर्माण प्रक्रिया (यदि नवीन हो), या डिज़ाइन पैकेजिंग के माध्यम से वाणिज्यिक ब्रांड की रक्षा करें।`
+          : `Direct product patenting is barred under <strong>Section 3(p)</strong> as traditional knowledge. Protect commercial brand identity through <strong>Trade Marks (Class 5)</strong>, proprietary processing (if novel), or design packaging.`;
+      } else {
+        summaryEl.innerHTML = currentLanguage === 'hi'
+          ? `${data.patentability?.assessment || ''} CDSCO लाइसेंसिंग और राज्य जैव विविधता बोर्ड / NBA अनुपालन आवश्यक है।`
+          : `${data.patentability?.assessment || ''} Must satisfy CDSCO licensing and State Biodiversity Board / NBA compliance.`;
+      }
+
+      const warnContainer = document.getElementById('resWarningsContainer');
+      if (data.warnings && data.warnings.length > 0) {
+        warnContainer.innerHTML = data.warnings.map(w => `<div class="flex items-start gap-2"><span>⚠️</span><span>${w}</span></div>`).join('');
+        warnContainer.classList.remove('hidden');
+      } else {
+        warnContainer.classList.add('hidden');
+      }
+    }
+
+    function renderIPRouterResult(routerData) {
+      const grid = document.getElementById('ipRouterGrid');
+      if (!routerData || !routerData.paths) return;
+
+      const isHi = currentLanguage === 'hi';
+      const relevantPaths = routerData.paths.filter(p => p.is_recommended);
+      const otherPaths = routerData.paths.filter(p => !p.is_recommended);
+
+      grid.innerHTML = relevantPaths.map(p => {
+        const regimeName = (isHi && IP_REGIME_TRANSLATIONS[p.ip_regime]) ? IP_REGIME_TRANSLATIONS[p.ip_regime] : p.ip_regime;
+        const recLabel = isHi ? 'अनुशंसित' : 'Recommended';
+        const regLinkText = isHi ? 'आधिकारिक पंजीयन देखें →' : 'View Official Registry →';
+        return `
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-white flex items-center gap-1.5 font-serif-title">
+                  ${regimeName}
+                </span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-950 text-brand-400 border border-emerald-800">
+                  ${recLabel}
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed mb-2">${p.relevance_reason}</p>
+              <p class="text-[10px] text-slate-400 font-mono mb-2">${p.governing_law}</p>
+            </div>
+            <a href="${p.official_portal_url}" target="_blank" rel="noopener noreferrer"
+               class="text-xs text-brand-400 hover:text-brand-300 font-semibold inline-flex items-center gap-1 pt-1.5 border-t border-slate-800 w-full justify-between">
+              <span>${regLinkText}</span>
+            </a>
+          </div>
+        `;
+      }).join('');
+
+      if (otherPaths.length > 0) {
+        const otherTitle = isHi ? `अन्य मूल्यांकित व्यवस्थाएं (${otherPaths.length}) ▼` : `Other Evaluated Regimes (${otherPaths.length}) ▼`;
+        const shortReg = isHi ? 'पंजीकरण →' : 'Registry →';
+        grid.innerHTML += `
+          <div class="col-span-full pt-1">
+            <details class="text-xs text-slate-400">
+              <summary class="cursor-pointer hover:text-slate-300 font-medium">
+                ${otherTitle}
+              </summary>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-2.5">
+                ${otherPaths.map(p => {
+                  const regimeName = (isHi && IP_REGIME_TRANSLATIONS[p.ip_regime]) ? IP_REGIME_TRANSLATIONS[p.ip_regime] : p.ip_regime;
+                  const statLabel = (isHi && STATUS_LABELS[p.status_label]) ? STATUS_LABELS[p.status_label] : p.status_label;
+                  return `
+                    <div class="bg-slate-950/60 border border-slate-800/60 rounded-xl p-3 text-xs">
+                      <div class="flex items-center justify-between mb-1">
+                        <span class="font-bold text-slate-300">${regimeName}</span>
+                        <span class="text-[10px] text-slate-500">${statLabel}</span>
+                      </div>
+                      <p class="text-[11px] text-slate-400 mb-1">${p.relevance_reason}</p>
+                      <a href="${p.official_portal_url}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-slate-500 hover:text-brand-400 underline">${shortReg}</a>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </details>
+          </div>
+        `;
+      }
+    }
+
+    function renderSampleChips() {
+      const container = document.getElementById('sampleChipsContainer');
+      const langQueries = SAMPLE_QUERIES[currentJurisdiction] || SAMPLE_QUERIES.India;
+      const list = langQueries[currentLanguage] || langQueries.en;
+      container.innerHTML = list.map(q => `
+        <button type="button" onclick="selectSampleQuery('${q.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-colors text-xs truncate max-w-xs">
+          ${q}
+        </button>
+      `).join('');
+    }
+
+    function selectSampleQuery(q) {
+      document.getElementById('ragQueryInput').value = q;
+      handleQuerySubmit(new Event('submit'));
+    }
+
+    async function handleQuerySubmit(e) {
+      if (e) e.preventDefault();
+      const q = document.getElementById('ragQueryInput').value.trim();
+      if (!q) return;
+
+      const isHi = currentLanguage === 'hi';
+      const btn = document.getElementById('btnQuerySubmit');
+      const retText = isHi ? 'पुनर्प्राप्त किया जा रहा है...' : 'Retrieving...';
+      btn.innerHTML = `<span class="w-3.5 h-3.5 border-2 border-slate-950/30 border-t-slate-950 rounded-full animate-spin"></span> ${retText}`;
+      btn.disabled = true;
+
+      const card = document.getElementById('queryResultCard');
+      card.classList.remove('hidden');
+      document.getElementById('queryEcho').innerText = `"${q}"`;
+      const synthText = isHi ? 'प्रामाणिक विधिक विश्लेषण तैयार किया जा रहा है...' : 'Synthesizing authoritative legal analysis...';
+      document.getElementById('queryAnswerBody').innerHTML = `
+        <div class="flex items-center gap-3 py-4 text-brand-400">
+          <span class="w-4 h-4 border-2 border-brand-400/30 border-t-brand-400 rounded-full animate-spin"></span>
+          <span class="text-xs">${synthText}</span>
+        </div>
+      `;
+      document.getElementById('citationsSection').classList.add('hidden');
+      document.getElementById('confidenceBadgeContainer').innerHTML = ``;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: q,
+            jurisdiction: currentJurisdiction,
+            top_k: 4,
+            language: currentLanguage
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || `Query failed with HTTP ${res.status}`);
+        }
+        const data = await res.json();
+        renderQueryResult(data);
+      } catch (err) {
+        console.error("Query error:", err);
+        const errPrefix = isHi ? 'त्रुटि:' : 'Error:';
+        const failText = isHi ? 'उत्तर तैयार करने में विफल' : 'Failed to synthesize response';
+        document.getElementById('queryAnswerBody').innerHTML = `
+          <div class="bg-rose-950/40 border border-rose-600/30 p-3 rounded-lg text-rose-300 text-xs">
+            <strong>${errPrefix}</strong> ${failText} (${err.message}).
+          </div>
+        `;
+      } finally {
+        const getAnswerText = isHi ? 'आधारित विधिक उत्तर प्राप्त करें ➔' : 'Get Grounded Answer ➔';
+        btn.innerHTML = `<span>${getAnswerText}</span>`;
+        btn.disabled = false;
+      }
+    }
+
+    function renderQueryResult(data) {
+      const card = document.getElementById('queryResultCard');
+      card.classList.remove('hidden');
+
+      const isHi = currentLanguage === 'hi';
+      document.getElementById('queryEcho').innerText = `"${data.query}"`;
+      document.getElementById('queryAnswerBody').innerHTML = renderMarkdown(data.answer);
+      document.getElementById('queryDisclaimerText').innerText = data.disclaimer;
+
+      const badgeContainer = document.getElementById('confidenceBadgeContainer');
+      if (data.is_abstained) {
+        const safeText = isHi ? 'सुरक्षित संयम (Safe Abstention)' : 'Safe Abstention';
+        badgeContainer.innerHTML = `<span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">${safeText}</span>`;
+      } else {
+        const color = data.confidence === 'High' ? 'text-brand-400 bg-brand-500/10 border-brand-500/30' : 'text-blue-400 bg-blue-500/10 border-blue-500/30';
+        const confLabel = isHi ? `विश्वसनीयता: ${data.confidence === 'High' ? 'उच्च' : 'मध्यम'}` : `Confidence: ${data.confidence}`;
+        badgeContainer.innerHTML = `<span class="text-xs font-semibold px-2.5 py-0.5 rounded-full border ${color}">${confLabel}</span>`;
+      }
+
+      const citationsGrid = document.getElementById('citationsGrid');
+      const citationsHeader = document.getElementById('citationsHeader');
+      if (data.citations && data.citations.length > 0) {
+        citationsHeader.innerText = isHi ? `सत्यापित स्रोत (${data.citations.length})` : `Verified Sources (${data.citations.length})`;
+        const recText = isHi ? 'आधिकारिक रिकॉर्ड देखें →' : 'View Official Record →';
+        citationsGrid.innerHTML = data.citations.map(c => `
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex flex-col justify-between hover:border-slate-700 transition-colors">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-brand-400 block mb-0.5">${c.id}</span>
+              <h5 class="text-xs font-bold text-white mb-0.5">${c.statute} — ${c.section_rule}</h5>
+              <p class="text-[11px] text-slate-400 mb-2">${c.title || c.authority}</p>
+            </div>
+            <a href="${c.official_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-brand-400 hover:text-brand-300 font-semibold inline-flex items-center gap-1 self-start underline underline-offset-2">
+              <span>${recText}</span>
+            </a>
+          </div>
+        `).join('');
+        document.getElementById('citationsSection').classList.remove('hidden');
+      } else {
+        document.getElementById('citationsSection').classList.add('hidden');
+      }
+
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function loadCorpusSources() {
+      try {
+        const res = await fetch(`${API_BASE}/api/sources?jurisdiction=${currentJurisdiction}`);
+        const data = await res.json();
+        allCorpusSources = data.documents || [];
+        renderCategoryFilters();
+        renderSourcesGrid();
+      } catch (e) {
+        console.error("Error loading sources:", e);
+      }
+    }
+
+    function renderCategoryFilters() {
+      const isHi = currentLanguage === 'hi';
+      const cats = ["all", ...new Set(allCorpusSources.map(s => s.category).filter(Boolean))];
+      const container = document.getElementById('sourceCategoryFilters');
+      container.innerHTML = cats.map(c => {
+        let label = c;
+        if (c === 'all') label = isHi ? 'सभी' : 'all';
+        return `
+          <button onclick="setCategoryFilter('${c}')" class="text-xs px-2.5 py-1 rounded-lg capitalize font-medium transition-all ${
+            selectedCategory === c ? 'bg-brand-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+          }">
+            ${label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setCategoryFilter(c) {
+      selectedCategory = c;
+      renderCategoryFilters();
+      renderSourcesGrid();
+    }
+
+    function handleSourcesSearch(e) {
+      const q = e.target.value.toLowerCase().trim();
+      renderSourcesGrid(q);
+    }
+
+    function renderSourcesGrid(searchQuery = '') {
+      const isHi = currentLanguage === 'hi';
+      let filtered = selectedCategory === "all"
+        ? allCorpusSources
+        : allCorpusSources.filter(s => s.category?.toLowerCase() === selectedCategory.toLowerCase());
+
+      if (searchQuery) {
+        filtered = filtered.filter(s => 
+          (s.id && s.id.toLowerCase().includes(searchQuery)) ||
+          (s.statute && s.statute.toLowerCase().includes(searchQuery)) ||
+          (s.section_rule && s.section_rule.toLowerCase().includes(searchQuery)) ||
+          (s.title && s.title.toLowerCase().includes(searchQuery)) ||
+          (s.authority && s.authority.toLowerCase().includes(searchQuery))
+        );
+      }
+
+      const grid = document.getElementById('sourcesGrid');
+      if (filtered.length === 0) {
+        const noFound = isHi ? 'कोई मेल खाने वाला वैधानिक प्रावधान नहीं मिला।' : 'No matching statutory provisions found.';
+        grid.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-500">${noFound}</div>`;
+        return;
+      }
+
+      const fullTextText = isHi ? 'पूर्ण पाठ' : 'Full Text';
+      const offRecText = isHi ? 'आधिकारिक रिकॉर्ड →' : 'Official Record →';
+
+      grid.innerHTML = filtered.map(d => `
+        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between hover:border-slate-700 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-mono font-bold text-brand-400">${d.id}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-950 text-slate-400 uppercase font-mono">${d.category || d.jurisdiction}</span>
+            </div>
+            <h4 class="text-xs font-bold text-white mb-0.5">${d.statute}</h4>
+            <p class="text-xs text-amber-300 font-medium mb-1 font-mono">${d.section_rule}</p>
+            <p class="text-[11px] text-slate-400 mb-2 line-clamp-2">${d.title || ''}</p>
+          </div>
+          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+            <button onclick="openDocDetailModal('${d.id}')" class="text-[11px] text-slate-400 hover:text-white underline underline-offset-2">
+              ${fullTextText}
+            </button>
+            <a href="${d.official_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-brand-400 hover:text-brand-300 font-semibold inline-flex items-center gap-1">
+              <span>${offRecText}</span>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadHighlightsAndRegistries() {
+      try {
+        const resH = await fetch(`${API_BASE}/api/highlights-2024`);
+        if (resH.ok) {
+          const highlights = await resH.json();
+          renderHighlights(highlights);
+        }
+      } catch (e) {
+        console.error("Highlights error:", e);
+      }
+
+      try {
+        const resR = await fetch(`${API_BASE}/api/registries`);
+        if (resR.ok) {
+          const registries = await resR.json();
+          renderRegistries(registries);
+        }
+      } catch (e) {
+        console.error("Registries error:", e);
+      }
+    }
+
+    function renderHighlights(highlights) {
+      const container = document.getElementById('highlights2024Grid');
+      if (!container || !highlights) return;
+
+      const isHi = currentLanguage === 'hi';
+      const gazetteLinkText = isHi ? 'राजपत्र देखें →' : 'View Gazette →';
+
+      container.innerHTML = highlights.map(h => `
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono text-brand-400 font-bold block mb-1">${h.id}</span>
+            <h4 class="text-xs font-bold text-white mb-1">${h.title}</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed mb-2">${h.what_changed.slice(0, 140)}...</p>
+          </div>
+          <a href="${h.official_source_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-brand-400 hover:text-brand-300 font-semibold pt-1 border-t border-slate-800/60">
+            ${gazetteLinkText}
+          </a>
+        </div>
+      `).join('');
+    }
+
+    function renderRegistries(registries) {
+      const container = document.getElementById('officialRegistriesGrid');
+      if (!container || !registries) return;
+
+      container.innerHTML = registries.map(r => `
+        <a href="${r.official_url}" target="_blank" rel="noopener noreferrer"
+           class="bg-slate-950 border border-slate-800 hover:border-brand-500/40 rounded-xl p-3 flex flex-col justify-between transition-all group">
+          <div>
+            <span class="text-[10px] font-semibold text-brand-400 uppercase tracking-wider block mb-0.5">${r.category}</span>
+            <h5 class="text-xs font-bold text-white group-hover:text-brand-300 transition-colors mb-1">${r.name}</h5>
+            <p class="text-[11px] text-slate-400 line-clamp-2">${r.purpose}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function openEscalationModal() {
+      const nameInput = document.getElementById('escProductName');
+      const prodVal = document.getElementById('clsProductName')?.value || latestClassificationResult?.product_name || '';
+      nameInput.value = prodVal;
+
+      document.getElementById('escalationForm').classList.remove('hidden');
+      document.getElementById('escalationSuccessState').classList.add('hidden');
+      document.getElementById('modalEscalation').classList.remove('hidden');
+    }
+
+    function closeEscalationModal() {
+      document.getElementById('modalEscalation').classList.add('hidden');
+    }
+
+    async function handleEscalationSubmit(e) {
+      if (e) e.preventDefault();
+      const isHi = currentLanguage === 'hi';
+      const btn = document.getElementById('btnEscSubmit');
+      btn.innerText = isHi ? "सबमिट किया जा रहा है..." : "Submitting...";
+      btn.disabled = true;
+
+      const payload = {
+        query: document.getElementById('escQuery').value,
+        jurisdiction: currentJurisdiction,
+        product_name: document.getElementById('escProductName').value,
+        classification_category: latestClassificationResult?.category || null,
+        relevant_ip_paths: latestIPRouterResult?.recommended_regimes || [],
+        contact_name: document.getElementById('escName').value || null,
+        contact_email: document.getElementById('escContact').value || null,
+        user_notes: "Submitted via SAKTI UI Facilitation Assistant"
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/api/escalate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        document.getElementById('escResultId').innerText = data.request_id;
+        document.getElementById('escalationForm').classList.add('hidden');
+        document.getElementById('escalationSuccessState').classList.remove('hidden');
+      } catch (err) {
+        console.error("Escalation error:", err);
+        const errAlert = isHi ? `सुगमीकरण अनुरोध सबमिट करने में विफल: ${err.message}` : `Failed to submit facilitation request: ${err.message}`;
+        alert(errAlert);
+      } finally {
+        btn.innerText = isHi ? "अनुरोध सबमिट करें ➔" : "Submit Request ➔";
+        btn.disabled = false;
+      }
+    }
+
+    function openPrivacyModal() {
+      document.getElementById('modalPrivacy').classList.remove('hidden');
+    }
+
+    function closePrivacyModal() {
+      document.getElementById('modalPrivacy').classList.add('hidden');
+    }
+
+    async function openDocDetailModal(docId) {
+      try {
+        const res = await fetch(`${API_BASE}/api/sources/${docId}`);
+        if (!res.ok) throw new Error(`Document ${docId} not found`);
+        const doc = await res.json();
+
+        document.getElementById('docDetailId').innerText = doc.id;
+        document.getElementById('docDetailTitle').innerText = doc.title || doc.section_rule;
+        document.getElementById('docDetailStatute').innerText = `${doc.statute} — ${doc.section_rule}`;
+        document.getElementById('docDetailContent').innerText = doc.content;
+        
+        const urlEl = document.getElementById('docDetailUrl');
+        urlEl.href = doc.official_url;
+
+        document.getElementById('modalDocDetail').classList.remove('hidden');
+      } catch (e) {
+        console.error("Error opening doc:", e);
+      }
+    }
+
+    function closeDocDetailModal() {
+      document.getElementById('modalDocDetail').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

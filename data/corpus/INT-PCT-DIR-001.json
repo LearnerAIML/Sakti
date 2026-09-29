@@ -1,0 +1,11 @@
+{
+  "id": "INT-PCT-DIR-001",
+  "jurisdiction": "International",
+  "statute": "Patent Cooperation Treaty (PCT) & Regulations",
+  "section_rule": "PCT Rule 39 & Budapest Treaty on Microorganisms",
+  "authority": "World Intellectual Property Organization (WIPO)",
+  "official_url": "https://www.wipo.int/pct/en/texts/rules/r39.html",
+  "title": "International Patent Search and Traditional Knowledge Prior Art",
+  "category": "international_treaty",
+  "content": "When filing an international patent application under the Patent Cooperation Treaty (PCT) for an Ayurvedic derivative:\n1. International Searching Authorities (ISAs) search PCT Minimum Documentation, which includes non-patent literature databases and traditional knowledge journals (such as TKDL-accessible resources).\n2. Biological Resource Considerations: Where an invention is based on biological resources obtained from India, Section 6(1) of India's Biological Diversity Act, 2002 (as amended in 2023) requires previous approval of the National Biodiversity Authority (NBA) before the grant of the patent/IPR (and prior approval before commercialization). Filing an NBA application well in advance is recommended practice. Note that foreign patent filings by Indian residents are procedurally governed by Section 39 of the Patents Act, 1970 (Foreign Filing License - FFL) from the Controller of Patents.\n3. Budapest Treaty Deposit: If the formulation utilizes novel microbial fermentations (e.g., specific Ayurvedic asava/arishta yeast strains), the biological strain must be deposited in an International Depository Authority (IDA) like MTCC Chandigarh."
+}

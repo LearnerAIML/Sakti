@@ -1,0 +1,14 @@
+{
+  "id": "IN-API-PHARMA-STD",
+  "jurisdiction": "India",
+  "statute": "The Drugs and Cosmetics Act, 1940",
+  "section_rule": "Section 3(a) & Second Schedule (Standard for ASU Drugs)",
+  "authority": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "official_url": "https://cdsco.gov.in/opencms/opencms/en/Acts-and-rules/Drugs-and-Cosmetics-Act/",
+  "title": "Ayurvedic Pharmacopoeia of India (API) - Statutory Standards of Purity and Identity",
+  "category": "standards",
+  "source_type": "standard",
+  "effective_date": "1989-01-01 (continually updated)",
+  "last_verified": "2026-09-29",
+  "content": "Under Section 3(a) and the Second Schedule of the Drugs and Cosmetics Act, 1940, the standards of identity, purity, and strength for Ayurvedic drugs are those prescribed in the Ayurvedic Pharmacopoeia of India (API) and the Ayurvedic Formulary of India (AFI), published by the Government of India.\n\nKey Legal Implications for Compliance:\n1. Statutory Benchmark: Any Ayurvedic drug manufactured or sold in India that fails to comply with the macroscopic, microscopic, chromatographic (TLC/HPTLC), or physico-chemical assay standards set out in the API monograph is legally deemed an 'adulterated' or 'not of standard quality' drug under Section 33EEA.\n2. Heavy Metal Tolerances: API establishes legal tolerance thresholds for total ash, acid-insoluble ash, alcohol-soluble extractive, microbial limits, and heavy metals.\n3. Court Admissibility: Government Analyst reports issued under Section 33F relying on API standards are conclusive statutory evidence in drug prosecution trials."
+}
