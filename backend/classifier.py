@@ -21,6 +21,7 @@ class ProcessingNature(str, Enum):
     CLASSICAL = "classical"                                     # Traditional kwath, churna, taila, asava, etc.
     EXTRACT_ADMIXTURE = "aqueous_alcoholic_extract"             # Standard botanical extract or polyherbal combination
     PURIFIED_MARKER_FRACTION = "purified_fraction_with_markers"  # Standardized fraction with >= 4 bioactive marker compounds
+    SYNTHETIC_DERIVATIVE = "synthetic_derivative"                # Synthetic derivative of a plant constituent
 
 class FormulationInput(BaseModel):
     intended_use: IntendedUse = Field(..., description="Primary commercial and therapeutic intent of the product")

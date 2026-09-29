@@ -2156,7 +2156,10 @@
         });
         if (!res.ok) {
           const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.detail || `Classification server error (HTTP ${res.status})`);
+          const detail = Array.isArray(errData.detail)
+            ? errData.detail.map(item => item.msg || JSON.stringify(item)).join('; ')
+            : errData.detail;
+          throw new Error(detail || `Classification server error (HTTP ${res.status})`);
         }
         const data = await res.json();
         latestClassificationResult = data;
