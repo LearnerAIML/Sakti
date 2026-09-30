@@ -28,3 +28,6 @@ Thumbs.db
 # Local escalation/test data
 data/escalations/*
 !data/escalations/.gitkeep
+
+#md files
+DEMO_SCRIPT.md
