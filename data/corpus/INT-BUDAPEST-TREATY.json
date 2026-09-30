@@ -1,0 +1,12 @@
+{
+  "id": "INT-BUDAPEST-TREATY",
+  "jurisdiction": "International",
+  "statute": "Budapest Treaty (1977, amended 1980), administered by WIPO",
+  "section_rule": "Budapest Treaty - microorganism deposit",
+  "authority": "WIPO",
+  "official_url": "https://www.wipo.int/treaties/en/registration/budapest/",
+  "title": "Budapest Treaty on the International Recognition of the Deposit of Microorganisms for the Purposes of Patent Procedure",
+  "category": "patents_international",
+  "content": "Where a patent application relies on a microorganism that cannot be adequately described in writing, the invention may need the microorganism to be deposited so the public can obtain samples after publication.\n\nKey points:\n1. A deposit made with any International Depositary Authority (IDA) recognised under the treaty is accepted by all member countries for patent procedure, so the applicant does not need a separate deposit in each country.\n2. The relevance for Ayurveda arises for inventions using microbial strains, for example fermented formulations (asava/arishta-type processes) where a defined strain is claimed, or probiotic and biotransformation inventions.\n3. Deposits of biological material sourced from India also interact with the disclosure and Access-and-Benefit-Sharing requirements in this corpus (source and geographical origin, and NBA approval before IPR grant).\n4. Plant material and traditional decoctions are generally handled through description and disclosure, not through microorganism deposit.\n\nThis is a short curated summary, not the treaty text.",
+  "verification_status": "pending_manual_verification"
+}

@@ -1,8 +1,8 @@
 {
-  "total_documents": 62,
+  "total_documents": 67,
   "jurisdictions": {
     "India": 55,
-    "International": 7
+    "International": 12
   },
   "documents": [
     {
@@ -686,6 +686,61 @@
       "category": "international",
       "official_url": "https://www.wipo.int/pct/en/texts/rules/r51bis.html",
       "file_name": "INT-PCT-RUL-051BIS.json"
+    },
+    {
+      "id": "INT-MADRID-PROTOCOL",
+      "jurisdiction": "International",
+      "statute": "Madrid Agreement (1891) and Madrid Protocol (1989), administered by WIPO",
+      "section_rule": "Madrid Protocol - key mechanics",
+      "title": "Madrid System for the International Registration of Marks (Madrid Agreement and Protocol)",
+      "authority": "WIPO",
+      "category": "trademarks_international",
+      "official_url": "https://www.wipo.int/madrid/en/",
+      "file_name": "INT-MADRID-PROTOCOL.json"
+    },
+    {
+      "id": "INT-HAGUE-GENEVA-ACT",
+      "jurisdiction": "International",
+      "statute": "Hague Agreement Concerning the International Registration of Industrial Designs (Geneva Act 1999), administered by WIPO",
+      "section_rule": "Hague System - key mechanics",
+      "title": "Hague System for the International Registration of Industrial Designs (Geneva Act, 1999)",
+      "authority": "WIPO",
+      "category": "designs_international",
+      "official_url": "https://www.wipo.int/hague/en/",
+      "file_name": "INT-HAGUE-GENEVA-ACT.json"
+    },
+    {
+      "id": "INT-BUDAPEST-TREATY",
+      "jurisdiction": "International",
+      "statute": "Budapest Treaty (1977, amended 1980), administered by WIPO",
+      "section_rule": "Budapest Treaty - microorganism deposit",
+      "title": "Budapest Treaty on the International Recognition of the Deposit of Microorganisms for the Purposes of Patent Procedure",
+      "authority": "WIPO",
+      "category": "patents_international",
+      "official_url": "https://www.wipo.int/treaties/en/registration/budapest/",
+      "file_name": "INT-BUDAPEST-TREATY.json"
+    },
+    {
+      "id": "INT-EXPORT-EU-THMPD",
+      "jurisdiction": "International",
+      "statute": "Directive 2001/83/EC as amended by Directive 2004/24/EC; European Medicines Agency (HMPC)",
+      "section_rule": "Traditional use registration and food route",
+      "title": "European Union: Traditional Herbal Medicinal Products Directive 2004/24/EC and food-supplement rules",
+      "authority": "European Union / EMA",
+      "category": "export_market_access",
+      "official_url": "https://eur-lex.europa.eu/eli/dir/2004/24/oj",
+      "file_name": "INT-EXPORT-EU-THMPD.json"
+    },
+    {
+      "id": "INT-EXPORT-US-DSHEA",
+      "jurisdiction": "International",
+      "statute": "Federal Food, Drug, and Cosmetic Act; Dietary Supplement Health and Education Act of 1994; US FDA",
+      "section_rule": "Dietary supplement route and drug claims",
+      "title": "United States: dietary supplement and drug pathways for herbal products (FDCA and DSHEA 1994)",
+      "authority": "US FDA",
+      "category": "export_market_access",
+      "official_url": "https://www.fda.gov/food/dietary-supplements",
+      "file_name": "INT-EXPORT-US-DSHEA.json"
     }
   ]
 }

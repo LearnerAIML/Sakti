@@ -1,0 +1,12 @@
+{
+  "id": "INT-EXPORT-US-DSHEA",
+  "jurisdiction": "International",
+  "statute": "Federal Food, Drug, and Cosmetic Act; Dietary Supplement Health and Education Act of 1994; US FDA",
+  "section_rule": "Dietary supplement route and drug claims",
+  "authority": "US FDA",
+  "official_url": "https://www.fda.gov/food/dietary-supplements",
+  "title": "United States: dietary supplement and drug pathways for herbal products (FDCA and DSHEA 1994)",
+  "category": "export_market_access",
+  "content": "Ayurvedic herbal products entering the United States are typically evaluated by how they are presented and what they claim.\n\n1. Dietary supplement route: products meeting the statutory definition may be marketed as dietary supplements without pre-market approval, but must comply with manufacturing practice, labelling and structure/function claim rules, and ingredients not marketed before 1994 may require a new dietary ingredient notification.\n2. Drug claims: claims to diagnose, treat, cure or prevent disease make a product a drug under US law, requiring drug approval pathways; there is no 'classical medicine' category equivalent to the Indian one.\n3. Contaminants: the FDA has taken enforcement action against herbal products with unsafe levels of heavy metals, so testing and documentation matter.\n4. Practical link: an Indian Ayurvedic product licensed as a medicine in India is not automatically saleable as a medicine in the US; labelling and claims usually need to be redesigned for the supplement route.\n\nThis is a short curated summary for orientation, not statutory text. Confirm current FDA requirements before export.",
+  "verification_status": "pending_manual_verification"
+}
