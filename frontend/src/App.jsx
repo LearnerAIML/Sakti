@@ -202,7 +202,7 @@ function MainApp() {
                     fontSize: '0.8125rem',
                     fontWeight: isActive ? 700 : 500,
                     color: isActive
-                      ? (highlight ? '#fbbf24' : 'var(--color-brand-emerald-light)')
+                      ? 'var(--color-text-primary)'
                       : 'var(--color-text-muted)',
                     background: 'transparent',
                     border: 'none',
@@ -338,13 +338,27 @@ function MainApp() {
       }}>
         <div className="container">
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
-            <div>
-              <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-secondary)' }}>
-                SAKTI — Ayurveda IPR &amp; Regulatory Intelligence Platform
-              </p>
-              <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem' }}>
-                Indian Patents Act 1970 · Biological Diversity Act 2002/2023 · DCA 1940 · WIPO Treaties
-              </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <img
+                src="/app/app-icon.png"
+                alt="SAKTI Icon"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  objectFit: 'contain',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-secondary)', letterSpacing: '0.02em' }}>
+                  SAKTI — Ayurveda IPR, ABS &amp; Regulatory Intelligence Platform
+                </p>
+                <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem' }}>
+                  Indian Patents Act 1970 · Biological Diversity Act 2002/2023 · DCA 1940 · WIPO Treaties
+                </p>
+              </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>

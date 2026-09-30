@@ -693,25 +693,36 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
         <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
           {/* Dossier Banner Card */}
-          <div className="card" style={{
-            background: 'linear-gradient(135deg, var(--color-bg-card), var(--color-bg-elevated))',
-            borderColor: 'rgba(5, 150, 105, 0.3)',
-          }}>
+          <div className="card">
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-              <div>
-                <p style={{ fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-brand-emerald-light)', marginBottom: '0.25rem' }}>
-                  Authoritative Statutory Blueprint
-                </p>
-                <h3 style={{ fontSize: '1.375rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
-                  {dossier.product_name}
-                </h3>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.375rem', flexWrap: 'wrap' }}>
-                  <span className="badge badge-emerald">{dossier.category}</span>
-                  <code style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>{dossier.category_code}</code>
-                  <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>·</span>
-                  <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>
-                    Generated: {dossier.generated_at} UTC
-                  </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                <img
+                  src="/app/app-icon.png"
+                  alt="SAKTI Emblem"
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '10px',
+                    objectFit: 'contain',
+                    border: '1px solid var(--color-border-default)',
+                    flexShrink: 0,
+                  }}
+                />
+                <div>
+                  <p style={{ fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-brand-emerald-light)', marginBottom: '0.25rem' }}>
+                    Authoritative Statutory Blueprint
+                  </p>
+                  <h3 style={{ fontSize: '1.375rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+                    {dossier.product_name}
+                  </h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.375rem', flexWrap: 'wrap' }}>
+                    <span className="badge badge-emerald">{dossier.category}</span>
+                    <code style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>{dossier.category_code}</code>
+                    <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>·</span>
+                    <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>
+                      Generated: {dossier.generated_at} UTC
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -723,7 +734,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
                 padding: '0.5rem 0.875rem',
                 textAlign: 'right',
               }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#34d399' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-brand-emerald-light)' }}>
                   {dossier.trust?.sources_cited || 0} Statutory Citations
                 </div>
                 <div style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem' }}>
@@ -737,7 +748,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
               marginTop: '1rem',
               padding: '0.875rem 1rem',
               borderRadius: 'var(--radius-md)',
-              background: 'rgba(5, 150, 105, 0.08)',
+              background: 'var(--color-bg-base)',
               borderLeft: '4px solid var(--color-brand-emerald)',
               fontSize: '0.8125rem',
               color: 'var(--color-text-primary)',

@@ -78,7 +78,7 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
           {t('evaluation_title')} — {result.product_name}
         </p>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <h3 style={{ fontSize: '1.1875rem', fontWeight: 800, color: '#34d399', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+          <h3 style={{ fontSize: '1.1875rem', fontWeight: 800, color: 'var(--color-text-primary)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
             {result.category}
           </h3>
           <code style={{
@@ -98,7 +98,7 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
 
       {/* Plain Language "What this means for you" summary */}
       <div style={{
-        background: 'rgba(5, 150, 105, 0.08)',
+        background: 'var(--color-bg-base)',
         borderLeft: '4px solid var(--color-brand-emerald)',
         borderRadius: 'var(--radius-md)',
         padding: '0.875rem 1rem',
@@ -113,8 +113,8 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
       {/* One-Click Product Dossier Call-to-Action Button */}
       {onOpenDossier && (
         <div style={{
-          background: 'linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(13, 148, 136, 0.15))',
-          border: '1px solid rgba(5, 150, 105, 0.35)',
+          background: 'var(--color-bg-elevated)',
+          border: '1px solid var(--color-border-default)',
           borderRadius: 'var(--radius-lg)',
           padding: '1rem',
           display: 'flex',
@@ -291,8 +291,8 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(5,150,105,0.12)',
-              border: '1px solid rgba(5,150,105,0.25)',
+              background: 'var(--color-bg-elevated)',
+              border: '1px solid var(--color-border-default)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

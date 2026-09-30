@@ -37,29 +37,37 @@ export default function Header({
 
           {/* ── Brand Logo & Title ── */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-            <div style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '10px',
-              background: 'linear-gradient(135deg, var(--color-brand-emerald), #0d9488)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(5,150,105,0.3)',
-            }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
-              </svg>
-            </div>
+            <img
+              src="/app/app-icon.png"
+              alt="SAKTI Logo"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '9px',
+                objectFit: 'contain',
+                flexShrink: 0,
+                border: '1px solid var(--color-border-default)',
+              }}
+            />
 
             <div style={{ minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <h1 style={{ fontSize: '1.125rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-text-primary)', lineHeight: 1 }}>
-                  {t('app_title')}
-                </h1>
-              </div>
-              <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem', lineHeight: 1.3 }}>
+              <h1 style={{
+                fontSize: '1.25rem',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+                color: 'var(--color-text-primary)',
+                lineHeight: 1,
+              }}>
+                {t('app_title')}
+              </h1>
+              <p style={{
+                fontSize: '0.6875rem',
+                fontWeight: 500,
+                color: 'var(--color-text-muted)',
+                marginTop: '0.15rem',
+                lineHeight: 1.3,
+                letterSpacing: '0.01em',
+              }}>
                 {t('app_subtitle')}
               </p>
             </div>
@@ -73,15 +81,6 @@ export default function Header({
               type="button"
               onClick={toggleLanguage}
               className="btn btn-secondary btn-sm"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.35rem',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                color: isHindi ? '#fbbf24' : 'var(--color-brand-emerald-light)',
-                borderColor: isHindi ? 'rgba(251, 191, 36, 0.4)' : 'rgba(5, 150, 105, 0.3)',
-              }}
               title={isHindi ? "Switch to English" : "Switch to Hindi (हिन्दी)"}
             >
               <Languages size={13} />
@@ -122,14 +121,6 @@ export default function Header({
                 type="button"
                 onClick={() => onOpenEscalation()}
                 className="btn btn-secondary btn-sm"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  fontSize: '0.6875rem',
-                  borderColor: 'rgba(5, 150, 105, 0.3)',
-                  color: 'var(--color-brand-emerald-light)',
-                }}
                 title="Request human IP facilitator or patent agent review"
               >
                 <UserCheck size={12} />

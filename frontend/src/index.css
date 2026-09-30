@@ -3,46 +3,46 @@
 
 /* ─── CSS Custom Properties ─── */
 :root {
-  /* Brand Colors */
+  /* Brand Colors — Legal Emerald & Warm Gold Accents */
   --color-brand-emerald: #059669;
   --color-brand-emerald-light: #10b981;
   --color-brand-emerald-dark: #047857;
   --color-brand-gold: #d97706;
   --color-brand-gold-light: #f59e0b;
 
-  /* Surface Colors */
-  --color-bg-base: #0c1117;
-  --color-bg-surface: #141b24;
-  --color-bg-card: #1a2332;
-  --color-bg-elevated: #1f2d3d;
-  --color-bg-subtle: #243040;
+  /* Surface Colors — Formal, Sober Neutral Dark Slate (No green tint) */
+  --color-bg-base: #0a0e17;
+  --color-bg-surface: #111827;
+  --color-bg-card: #162032;
+  --color-bg-elevated: #1e293b;
+  --color-bg-subtle: #27354a;
 
-  /* Border Colors */
-  --color-border-subtle: #1e2d3d;
-  --color-border-default: #253444;
-  --color-border-strong: #2e4057;
-  --color-border-accent: #0596691a;
+  /* Border Colors — Clean Sober Slate Borders */
+  --color-border-subtle: #1e293b;
+  --color-border-default: #28374d;
+  --color-border-strong: #374b67;
+  --color-border-accent: rgba(16, 185, 129, 0.2);
 
-  /* Text Colors */
-  --color-text-primary: #e8edf3;
+  /* Text Colors — Crisp, High-Contrast Formal Slate */
+  --color-text-primary: #f8fafc;
   --color-text-secondary: #94a3b8;
   --color-text-muted: #64748b;
   --color-text-accent: #34d399;
   --color-text-gold: #fbbf24;
 
   /* Status Colors */
-  --color-success: #059669;
-  --color-success-bg: #05966912;
-  --color-success-border: #05966930;
-  --color-warning: #d97706;
-  --color-warning-bg: #d9770612;
-  --color-warning-border: #d9770630;
-  --color-error: #dc2626;
-  --color-error-bg: #dc262612;
-  --color-error-border: #dc262630;
-  --color-info: #2563eb;
-  --color-info-bg: #2563eb12;
-  --color-info-border: #2563eb30;
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.1);
+  --color-success-border: rgba(16, 185, 129, 0.25);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.1);
+  --color-warning-border: rgba(245, 158, 11, 0.25);
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.1);
+  --color-error-border: rgba(239, 68, 68, 0.25);
+  --color-info: #3b82f6;
+  --color-info-bg: rgba(59, 130, 246, 0.1);
+  --color-info-border: rgba(59, 130, 246, 0.25);
 
   /* Spacing */
   --radius-sm: 6px;
@@ -346,9 +346,11 @@ code, pre, .mono {
 }
 
 .toggle-btn.active {
-  background: rgba(5, 150, 105, 0.12);
-  border-color: rgba(5, 150, 105, 0.5);
-  color: #34d399;
+  background: var(--color-bg-elevated);
+  border-color: var(--color-brand-emerald);
+  color: var(--color-text-primary);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Component: Section Title ─── */
@@ -699,29 +701,29 @@ body.modal-open { overflow: hidden; }
 [data-theme="light"], html.light {
   /* Brand Colors */
   --color-brand-emerald: #059669;
-  --color-brand-emerald-light: #047857;
-  --color-brand-emerald-dark: #065f46;
+  --color-brand-emerald-light: #10b981;
+  --color-brand-emerald-dark: #047857;
   --color-brand-gold: #d97706;
-  --color-brand-gold-light: #b45309;
+  --color-brand-gold-light: #f59e0b;
 
-  /* Surface Colors */
+  /* Surface Colors — Clean, Crisp Formal Light */
   --color-bg-base: #f8fafc;
   --color-bg-surface: #ffffff;
   --color-bg-card: #ffffff;
   --color-bg-elevated: #f1f5f9;
   --color-bg-subtle: #e2e8f0;
 
-  /* Border Colors */
+  /* Border Colors — Clean Formal Slate */
   --color-border-subtle: #e2e8f0;
   --color-border-default: #cbd5e1;
   --color-border-strong: #94a3b8;
   --color-border-accent: rgba(5, 150, 105, 0.2);
 
-  /* Text Colors */
+  /* Text Colors — Neutral Slate (Never green) */
   --color-text-primary: #0f172a;
   --color-text-secondary: #334155;
   --color-text-muted: #64748b;
-  --color-text-accent: #047857;
+  --color-text-accent: #059669;
   --color-text-gold: #b45309;
 
   /* Status Colors */
@@ -735,10 +737,10 @@ body.modal-open { overflow: hidden; }
   --color-info-border: #bfdbfe;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 0 0 1px var(--color-border-subtle);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--color-border-subtle);
 }
 
 [data-theme="light"] .form-input,
@@ -756,6 +758,7 @@ body.modal-open { overflow: hidden; }
 [data-theme="light"] .input:focus {
   background: #ffffff;
   border-color: var(--color-brand-emerald);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
 }
 
 [data-theme="light"] .btn-secondary {
@@ -770,10 +773,17 @@ body.modal-open { overflow: hidden; }
   border-color: #94a3b8;
 }
 
-[data-theme="light"] .badge-slate {
+[data-theme="light"] .badge-slate,
+[data-theme="light"] .badge-neutral {
   background: #f1f5f9;
   color: #475569;
   border-color: #cbd5e1;
+}
+
+[data-theme="light"] .badge-emerald {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
 }
 
 /* ─── Trust Chip & Inline Citation Badges ─── */
@@ -787,9 +797,9 @@ body.modal-open { overflow: hidden; }
   padding: 0.15rem 0.5rem;
   margin: 0 0.15rem;
   border-radius: 999px;
-  background: rgba(5, 150, 105, 0.12);
-  color: #34d399;
-  border: 1px solid rgba(5, 150, 105, 0.35);
+  background: rgba(5, 150, 105, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(5, 150, 105, 0.25);
   cursor: pointer;
   transition: all 0.15s ease;
   vertical-align: baseline;
@@ -797,9 +807,9 @@ body.modal-open { overflow: hidden; }
   line-height: 1.4;
 }
 [data-theme="light"] .trust-chip {
-  background: rgba(5, 150, 105, 0.1);
+  background: rgba(5, 150, 105, 0.08);
   color: #047857;
-  border-color: rgba(5, 150, 105, 0.3);
+  border-color: rgba(5, 150, 105, 0.25);
 }
 .trust-chip:hover {
   background: rgba(5, 150, 105, 0.22);

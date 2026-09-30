@@ -116,11 +116,28 @@ class SourcesResponse(BaseModel):
 
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse, Response
 
 STATIC_DIR = Path(__file__).resolve().parent.parent / "frontend" / "static"
 if STATIC_DIR.exists():
     app.mount("/app", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
+
+@app.get("/favicon.ico", include_in_schema=False)
+def get_root_favicon():
+    ico = STATIC_DIR / "favicon.ico"
+    if ico.exists():
+        return FileResponse(str(ico), media_type="image/x-icon")
+    png = STATIC_DIR / "favicon-32x32.png"
+    if png.exists():
+        return FileResponse(str(png), media_type="image/png")
+    return Response(status_code=404)
+
+@app.get("/favicon.png", include_in_schema=False)
+def get_root_favicon_png():
+    png = STATIC_DIR / "favicon-32x32.png"
+    if png.exists():
+        return FileResponse(str(png), media_type="image/png")
+    return Response(status_code=404)
 
 @app.get("/health", tags=["System"])
 def health_check():

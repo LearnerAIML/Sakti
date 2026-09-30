@@ -180,22 +180,42 @@ def build_dossier(x: DossierInput) -> Dict[str, Any]:
 
 
 def dossier_pdf(d: Dict[str, Any]) -> bytes:
+    import os
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
     from reportlab.lib.units import mm
-    from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+    from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle, Image
 
     ss = getSampleStyleSheet()
-    h1 = ParagraphStyle("h1", parent=ss["Title"], fontSize=18, textColor=colors.HexColor("#065f46"))
-    h2 = ParagraphStyle("h2", parent=ss["Heading2"], fontSize=12, textColor=colors.HexColor("#0f172a"), spaceBefore=10)
+    h1 = ParagraphStyle("h1", parent=ss["Title"], fontSize=18, textColor=colors.HexColor("#093824"), alignment=0)
+    h2 = ParagraphStyle("h2", parent=ss["Heading2"], fontSize=12, textColor=colors.HexColor("#093824"), spaceBefore=10)
+    tagline = ParagraphStyle("tagline", parent=ss["Normal"], fontSize=8.5, textColor=colors.HexColor("#b4860b"), fontName="Helvetica-Bold")
     body = ParagraphStyle("b", parent=ss["BodyText"], fontSize=9, leading=12)
     small = ParagraphStyle("s", parent=body, fontSize=7.5, textColor=colors.HexColor("#475569"))
     P = lambda t, st=body: Paragraph(escape(str(t)), st)
     buf = BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4, leftMargin=16 * mm, rightMargin=16 * mm, topMargin=14 * mm, bottomMargin=14 * mm, title=f"SAKTI Product Dossier - {d['product_name']}")
-    f = [P("SAKTI Product Dossier", h1), P(f"Product: {d['product_name']}  |  Category: {d['category']}"),
-         P(f"Generated {d['generated_at']} UTC  |  Sources cited: {d['trust']['sources_cited']} (manually verified: {d['trust']['verified_sources']})", small), Spacer(1, 4)]
+    
+    logo_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "public", "app-icon.png")
+    if os.path.exists(logo_path):
+        img = Image(logo_path, width=20 * mm, height=18 * mm)
+        info = [
+            P("SAKTI Statutory Product Dossier", h1),
+            P("Ayurveda IPR, ABS & Regulatory Intelligence", tagline),
+            P(f"Product: {d['product_name']}  |  Category: {d['category']}"),
+            P(f"Generated {d['generated_at']} UTC  |  Sources cited: {d['trust']['sources_cited']} (verified: {d['trust']['verified_sources']})", small),
+        ]
+        t = Table([[img, info]], colWidths=[24 * mm, 150 * mm])
+        t.setStyle(TableStyle([
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+        ]))
+        f = [t, Spacer(1, 6)]
+    else:
+        f = [P("SAKTI Product Dossier", h1), P(f"Product: {d['product_name']}  |  Category: {d['category']}"),
+             P(f"Generated {d['generated_at']} UTC  |  Sources cited: {d['trust']['sources_cited']} (manually verified: {d['trust']['verified_sources']})", small), Spacer(1, 4)]
     for s in d["sections"]:
         f += [P(s["title"], h2), P(s["summary"])]
         det = s["details"]
