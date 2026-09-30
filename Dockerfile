@@ -7,10 +7,10 @@ COPY backend ./backend
 COPY frontend/static ./frontend/static
 COPY data ./data
 COPY scripts ./scripts
-COPY tests/eval_questions.json ./tests/eval_questions.json
+COPY tests/eval_questions*.json ./tests/
 RUN useradd -m sakti && chown -R sakti /app
 USER sakti
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')" || exit 1
-# Set GEMINI_API_KEY (and ADMIN_TOKEN) as runtime environment variables on your host.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s CMD python -c "import os,urllib.request;urllib.request.urlopen('http://127.0.0.1:%s/health' % os.environ.get('PORT','8000'))" || exit 1
+# Runtime environment variables (set on your host, never bake them into the image): GEMINI_API_KEY, ADMIN_TOKEN, CORS_ORIGINS
 CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

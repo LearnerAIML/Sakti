@@ -6,7 +6,6 @@ from typing import Any, Dict, List, Optional
 from xml.sax.saxutils import escape
 from pydantic import BaseModel, Field
 
-from backend.abs_wizard import ABSInput, run_abs_wizard
 from backend.classifier import FormulationClassifier, FormulationInput, IntendedUse, ProcessingNature
 from backend.corpus_loader import corpus_store
 from backend.guardrails import MANDATORY_LEGAL_DISCLAIMER
@@ -74,25 +73,34 @@ CLS_CITE = {"CLASSICAL_ASU": "IN-DCA-SEC-003A", "PATENT_PROPRIETARY": "IN-DCA-SE
             "PHYTOPHARMACEUTICAL": "IN-DCA-RUL-122E-PHYTO", "AYURVEDA_AAHAR": "IN-FSSAI-AYU-001", "COSMETIC": "IN-COS-RUL-2020"}
 
 
-def tkdl_card() -> Dict[str, Any]:
-    return {
-        "title": "TKDL prior-art card",
-        "what_it_is": "The Traditional Knowledge Digital Library is a CSIR-run database of formulations documented in classical Indian medical texts, structured so patent examiners can search it as prior art.",
-        "how_examiners_use_it": [
-            "Under access agreements with several patent offices, examiners can search TKDL during prior-art search and cite matching entries against claims.",
-            "A match can lead to objection or refusal of claims that only restate documented traditional knowledge.",
-            "In India, prior publication of traditional knowledge is also a ground for pre-grant opposition and revocation.",
-        ],
-        "how_you_check": [
-            "1. Identify the classical text, chapter and name of your formulation (Sanskrit name and ingredients with proportions).",
-            "2. Search the classical texts and the official Ayurvedic Pharmacopoeia / formulary references for the same combination and use.",
-            "3. Ask CSIR-TKDL Unit about a prior-art check; the full database is provided to patent offices under agreements and is not openly searchable by the public.",
-            "4. Run patent searches (InPASS, WIPO PATENTSCOPE) for the same ingredients and indication.",
-            "5. If a documented match exists, avoid claiming the known composition; consider claiming a genuinely new process, standardised extract or unexpected effect with data.",
-        ],
-        "limits": "A missing TKDL match does not prove novelty. Other published literature also counts as prior art.",
-        "cites": cite_objs(["IN-TKDL-PRIA-001", "IN-TKDL-ACC-AGREE", "IN-PAT-SEC-003P", "IN-PAT-SEC-025-OPP", "IN-PAT-SEC-064-REV", "INT-PCT-DIR-001", "IN-CASE-TURMERIC-CSIR"]),
-    }
+def _tkdl():
+    """TKDL card from the ABS/TKDL improvement if installed; otherwise a short built-in pointer."""
+    try:
+        from backend.tkdl import tkdl_card
+        return tkdl_card()
+    except ImportError:
+        return {"title": "TKDL prior-art pointer",
+                "what_it_is": "The Traditional Knowledge Digital Library (CSIR) documents formulations from classical texts so patent examiners can use them as prior art.",
+                "how_examiners_use_it": ["Examiners at offices with access agreements can cite matching TKDL entries against claims."],
+                "how_you_check": ["Identify the classical text and formulation name, then ask CSIR-TKDL about a prior-art check before filing."],
+                "limits": "A missing TKDL match does not prove novelty.",
+                "cites": cite_objs(["IN-TKDL-PRIA-001", "IN-TKDL-ACC-AGREE", "IN-PAT-SEC-003P"])}
+
+
+def _abs_section(x, cls):
+    """Full ABS wizard if installed; otherwise the classifier's own ABS summary."""
+    try:
+        from backend.abs_wizard import ABSInput, run_abs_wizard
+        r = run_abs_wizard(ABSInput(applicant_type=x.applicant_type, resource_indian=x.resource_indian, resource_source=x.resource_source,
+                                    purpose=x.purpose, ipr_filing=x.ipr_filing, product_name=x.product_name))
+        return {"key": "abs", "title": "3. Access and Benefit Sharing (ABS)", "summary": r.outcome,
+                "details": {"level": r.outcome_level, "steps": [s.model_dump() for s in r.steps], "exemptions": r.exemptions_considered, "caveats": r.caveats},
+                "cites": cite_objs([c for s in r.steps for c in s.cites])}
+    except ImportError:
+        a = cls.abs_compliance or {}
+        return {"key": "abs", "title": "3. Access and Benefit Sharing (ABS)", "summary": str(a.get("summary") or a.get("guidance") or "ABS obligations under the Biological Diversity Act may apply; check with the NBA / State Biodiversity Board."),
+                "details": {"level": "conditional", "steps": [{"step": "Check ABS obligations", "detail": str(a.get("guidance") or a.get("summary") or "See the Biological Diversity Act provisions."), "authority": "NBA / State Biodiversity Board", "cites": []}], "exemptions": [], "caveats": ["Install the ABS & TKDL improvement for the full step-by-step wizard."]},
+                "cites": cite_objs(["IN-BDA-SEC-006", "IN-BDA-SEC-007", "IN-PAT-SEC-010-4D"])}
 
 
 def build_dossier(x: DossierInput) -> Dict[str, Any]:
@@ -103,8 +111,8 @@ def build_dossier(x: DossierInput) -> Dict[str, Any]:
         category=cls.category, product_name=x.product_name, has_novel_technical_feature=x.has_novel_technical_feature,
         has_brand_identity=x.has_brand_identity, has_novel_packaging=x.has_novel_packaging,
         is_geography_specific=x.is_geography_specific, involves_plant_cultivar=x.involves_plant_cultivar))
-    abs_r = run_abs_wizard(ABSInput(applicant_type=x.applicant_type, resource_indian=x.resource_indian,
-        resource_source=x.resource_source, purpose=x.purpose, ipr_filing=x.ipr_filing, product_name=x.product_name))
+    abs_section = _abs_section(x, cls)
+    tk = _tkdl()
 
     code = cls.category_code
     pat_ids = ["IN-PAT-SEC-003P", "IN-PAT-SEC-003E", "IN-PAT-SEC-003D", "IN-PAT-SEC-002-1J"]
@@ -146,11 +154,9 @@ def build_dossier(x: DossierInput) -> Dict[str, Any]:
          "details": {"recommended_regimes": ip.recommended_regimes,
                      "paths": [{"regime": p.ip_regime, "status": p.status_label, "reason": p.relevance_reason, "conditions": p.eligibility_conditions, "law": p.governing_law, "portal": p.official_portal_url} for p in ip.paths]},
          "cites": cite_objs(ip_cites)},
-        {"key": "abs", "title": "3. Access and Benefit Sharing (ABS)", "summary": abs_r.outcome,
-         "details": {"level": abs_r.outcome_level, "steps": [s.model_dump() for s in abs_r.steps], "exemptions": abs_r.exemptions_considered, "caveats": abs_r.caveats},
-         "cites": cite_objs([c for s in abs_r.steps for c in s.cites])},
+        abs_section,
         {"key": "tkdl", "title": "4. TKDL and traditional-knowledge prior art", "summary": "Check classical-text prior art before claiming any composition; Section 3(p) can bar aggregations of known properties.",
-         "details": tkdl_card(), "cites": tkdl_card()["cites"]},
+         "details": tk, "cites": tk.get("cites", [])},
         {"key": "advertising", "title": "5. Advertising and labelling", "summary": "Claims and label particulars must match the regulatory category.",
          "details": {"items": adv_items, "warnings": adv_warn}, "cites": cite_objs(adv_ids)},
         {"key": "international", "title": "6. International notes", "summary": "Keep international guidance separate from Indian law; verify each target market.",

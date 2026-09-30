@@ -6,7 +6,7 @@ from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULT_FILE = ROOT / "eval_results.json"
-QUESTIONS_FILE = ROOT / "tests" / "eval_questions.json"
+QUESTIONS_DIR = ROOT / "tests"
 
 
 def run_eval(client=None) -> Dict[str, Any]:
@@ -14,7 +14,12 @@ def run_eval(client=None) -> Dict[str, Any]:
     from backend.main import app
     from backend.corpus_loader import corpus_store
     client = client or TestClient(app)
-    qs = json.loads(QUESTIONS_FILE.read_text(encoding="utf-8"))
+    qs, seen = [], set()
+    for f in sorted(QUESTIONS_DIR.glob("eval_questions*.json")):  # base set + any extension sets (e.g. export-market questions)
+        for q in json.loads(f.read_text(encoding="utf-8")):
+            if q["id"] not in seen:
+                seen.add(q["id"])
+                qs.append(q)
     agg = {"answer": [0, 0], "abstain": [0, 0], "jurisdiction_only": [0, 0]}
     rows, leaks, invalid, modes = [], 0, 0, set()
     for q in qs:
