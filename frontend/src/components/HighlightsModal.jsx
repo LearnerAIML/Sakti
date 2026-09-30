@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, ExternalLink, Calendar, CheckCircle2 } from 'lucide-react';
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "";
 
 export default function HighlightsModal({ isOpen, onClose }) {
   const [highlights, setHighlights] = useState([]);

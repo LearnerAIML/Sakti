@@ -17,7 +17,7 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc, onOpenHighlig
     setLoading(true);
     setError(null);
     try {
-      const url = `http://127.0.0.1:8000/api/sources?jurisdiction=${jurisdiction}`;
+      const url = `/api/sources?jurisdiction=${jurisdiction}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();

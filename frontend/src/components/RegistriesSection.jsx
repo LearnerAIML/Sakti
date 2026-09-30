@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Landmark, CheckCircle2, Search } from 'lucide-react';
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "";
 
 export default function RegistriesSection({ jurisdiction = "India" }) {
   const [registries, setRegistries] = useState([]);

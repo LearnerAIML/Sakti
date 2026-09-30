@@ -1,42 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { FlaskConical, Scale, BookOpen, Shield, Sparkles, UserCheck } from 'lucide-react';
+import { FlaskConical, Scale, BookOpen, Shield, Sparkles, UserCheck, FileText, Network, AlertTriangle } from 'lucide-react';
+import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
 import Header from './components/Header.jsx';
 import ClassifierWizard from './components/ClassifierWizard.jsx';
 import RagQueryInterface from './components/RagQueryInterface.jsx';
+import ProductDossier from './components/ProductDossier.jsx';
+import KnowledgeGraph from './components/KnowledgeGraph.jsx';
 import SourcesDrawer from './components/SourcesDrawer.jsx';
 import EscalationModal from './components/EscalationModal.jsx';
 import DocumentDetailModal from './components/DocumentDetailModal.jsx';
 import PrivacyModal from './components/PrivacyModal.jsx';
 import HighlightsModal from './components/HighlightsModal.jsx';
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = ""; // relative — works via FastAPI (/app/) and Vite dev proxy
 
-const TABS = [
-  {
-    id: 'classifier',
-    label: 'Formulation Classifier & IP Router',
-    shortLabel: 'Classifier',
-    Icon: FlaskConical,
-  },
-  {
-    id: 'query',
-    label: 'IPR & Legal Assistant',
-    shortLabel: 'Legal AI',
-    Icon: Scale,
-  },
-  {
-    id: 'sources',
-    label: 'Legal Corpus & Registries',
-    shortLabel: 'Corpus & Portals',
-    Icon: BookOpen,
-    badge: true,
-  },
-];
+function MainApp() {
+  const { t, isHindi } = useLanguage();
 
-export default function App() {
   const [jurisdiction, setJurisdiction] = useState("India");
   const [activeTab, setActiveTab] = useState("classifier");
   const [systemStatus, setSystemStatus] = useState(null);
+
+  // Theme state: dark | light (Feature 6)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('sakti_theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+    localStorage.setItem('sakti_theme', theme);
+  }, [theme]);
 
   // Modals state
   const [escalationOpen, setEscalationOpen] = useState(false);
@@ -48,6 +48,9 @@ export default function App() {
   // Classifier state
   const [classifierResult, setClassifierResult] = useState(null);
   const [classifierLoading, setClassifierLoading] = useState(false);
+
+  // Dossier initial data (when transitioning from Classifier to Dossier)
+  const [dossierInitialData, setDossierInitialData] = useState(null);
 
   // RAG Query state
   const [queryResponse, setQueryResponse] = useState(null);
@@ -82,8 +85,14 @@ export default function App() {
     }
   };
 
+  // Switch to dossier tab with preloaded data
+  const handleOpenDossierFromClassifier = (formParams) => {
+    setDossierInitialData(formParams);
+    setActiveTab("dossier");
+  };
+
   // Handle RAG Query API call
-  const handleQuery = async (queryText) => {
+  const handleQuery = async (queryText, queryLanguage) => {
     setQueryLoading(true);
     try {
       const res = await fetch(`${API_BASE}/api/query`, {
@@ -92,6 +101,7 @@ export default function App() {
         body: JSON.stringify({
           query: queryText,
           jurisdiction: jurisdiction,
+          language: queryLanguage || (isHindi ? "hi" : "en"),
           top_k: 4
         })
       });
@@ -109,7 +119,42 @@ export default function App() {
     setEscalationOpen(true);
   };
 
-  const docCount = systemStatus?.corpus_documents_loaded || 55;
+  const docCount = systemStatus?.corpus_documents_loaded || 67;
+
+  const TABS = [
+    {
+      id: 'classifier',
+      label: t('tab_classifier'),
+      shortLabel: t('tab_classifier_short'),
+      Icon: FlaskConical,
+    },
+    {
+      id: 'query',
+      label: t('tab_query'),
+      shortLabel: t('tab_query_short'),
+      Icon: Scale,
+    },
+    {
+      id: 'dossier',
+      label: t('tab_dossier'),
+      shortLabel: t('tab_dossier_short'),
+      Icon: FileText,
+      highlight: true,
+    },
+    {
+      id: 'graph',
+      label: t('tab_graph'),
+      shortLabel: t('tab_graph_short'),
+      Icon: Network,
+    },
+    {
+      id: 'sources',
+      label: t('tab_sources'),
+      shortLabel: t('tab_sources_short'),
+      Icon: BookOpen,
+      badge: true,
+    },
+  ];
 
   return (
     <div style={{
@@ -118,27 +163,38 @@ export default function App() {
       color: 'var(--color-text-primary)',
       display: 'flex',
       flexDirection: 'column',
+      transition: 'background-color 0.2s ease, color 0.2s ease',
     }}>
-      {/* Header */}
+      {/* ── Top Statutory Notice Banner ── */}
+      <div className="disclaimer-banner" role="note">
+        <AlertTriangle size={13} style={{ flexShrink: 0 }} />
+        <span>{t('disclaimer_banner')}</span>
+      </div>
+
+      {/* ── Header ── */}
       <Header
         jurisdiction={jurisdiction}
         setJurisdiction={setJurisdiction}
         systemStatus={systemStatus}
         onOpenEscalation={() => handleOpenEscalation({ jurisdiction })}
         onOpenHighlights={() => setHighlightsOpen(true)}
+        theme={theme}
+        setTheme={setTheme}
       />
 
-      {/* Tab Bar */}
+      {/* ── Sticky Navigation Tab Bar ── */}
       <div style={{
         borderBottom: '1px solid var(--color-border-subtle)',
         background: 'var(--color-bg-surface)',
         position: 'sticky',
-        top: '64px',
+        top: '57px',
         zIndex: 40,
+        boxShadow: 'var(--shadow-sm)',
+        transition: 'background-color 0.2s ease',
       }}>
         <div className="container">
           <nav style={{ display: 'flex', gap: '0', overflowX: 'auto' }} aria-label="Main navigation">
-            {TABS.map(({ id, label, shortLabel, Icon, badge }) => {
+            {TABS.map(({ id, label, shortLabel, Icon, badge, highlight }) => {
               const isActive = activeTab === id;
               return (
                 <button
@@ -153,14 +209,18 @@ export default function App() {
                     gap: '0.5rem',
                     padding: '0.75rem 1rem',
                     fontSize: '0.8125rem',
-                    fontWeight: isActive ? 600 : 500,
-                    color: isActive ? 'var(--color-brand-emerald-light)' : 'var(--color-text-muted)',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive
+                      ? (highlight ? '#fbbf24' : 'var(--color-brand-emerald-light)')
+                      : 'var(--color-text-muted)',
                     background: 'transparent',
                     border: 'none',
-                    borderBottom: isActive ? '2px solid var(--color-brand-emerald)' : '2px solid transparent',
+                    borderBottom: isActive
+                      ? (highlight ? '2px solid #fbbf24' : '2px solid var(--color-brand-emerald)')
+                      : '2px solid transparent',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
-                    transition: 'color 0.15s ease, border-color 0.15s ease',
+                    transition: 'all 0.15s ease',
                     fontFamily: 'inherit',
                     flexShrink: 0,
                     marginBottom: '-1px',
@@ -175,6 +235,21 @@ export default function App() {
                   <Icon size={15} strokeWidth={isActive ? 2.5 : 2} />
                   <span className="hidden sm:inline">{label}</span>
                   <span className="sm:hidden">{shortLabel}</span>
+
+                  {highlight && !isActive && (
+                    <span style={{
+                      fontSize: '0.625rem',
+                      fontWeight: 700,
+                      padding: '0.05rem 0.35rem',
+                      borderRadius: '999px',
+                      background: 'rgba(217, 119, 6, 0.15)',
+                      color: '#fbbf24',
+                      border: '1px solid rgba(217, 119, 6, 0.3)',
+                    }}>
+                      New
+                    </span>
+                  )}
+
                   {badge && (
                     <span style={{
                       fontSize: '0.625rem',
@@ -196,9 +271,11 @@ export default function App() {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* ── Main Tab Content ── */}
       <main style={{ flex: 1, paddingTop: '1.75rem', paddingBottom: '2.5rem' }}>
         <div className="container">
+
+          {/* Tab 1: Classifier & IP Router */}
           {activeTab === 'classifier' && (
             <div className="animate-fade-in">
               <ClassifierWizard
@@ -206,9 +283,12 @@ export default function App() {
                 result={classifierResult}
                 loading={classifierLoading}
                 onOpenEscalation={handleOpenEscalation}
+                onOpenDossier={handleOpenDossierFromClassifier}
               />
             </div>
           )}
+
+          {/* Tab 2: RAG Query Legal Assistant */}
           {activeTab === 'query' && (
             <div className="animate-fade-in">
               <RagQueryInterface
@@ -221,6 +301,32 @@ export default function App() {
               />
             </div>
           )}
+
+          {/* Tab 3: One-Click Product Dossier (Feature 1) */}
+          {activeTab === 'dossier' && (
+            <div className="animate-fade-in">
+              <ProductDossier
+                initialData={dossierInitialData}
+                onSelectDoc={(docId) => setSelectedDocId(docId)}
+                onOpenEscalation={handleOpenEscalation}
+              />
+            </div>
+          )}
+
+          {/* Tab 4: Knowledge Graph (Feature 5) */}
+          {activeTab === 'graph' && (
+            <div className="animate-fade-in">
+              <KnowledgeGraph
+                onSelectDoc={(docId) => setSelectedDocId(docId)}
+                onSelectProductClass={(className) => {
+                  setDossierInitialData({ product_name: className });
+                  setActiveTab('dossier');
+                }}
+              />
+            </div>
+          )}
+
+          {/* Tab 5: Legal Sources & Registries */}
           {activeTab === 'sources' && (
             <div className="animate-fade-in">
               <SourcesDrawer
@@ -230,10 +336,11 @@ export default function App() {
               />
             </div>
           )}
+
         </div>
       </main>
 
-      {/* Footer */}
+      {/* ── Footer ── */}
       <footer style={{
         borderTop: '1px solid var(--color-border-subtle)',
         background: 'var(--color-bg-surface)',
@@ -250,79 +357,61 @@ export default function App() {
               </p>
             </div>
 
-            {/* Footer Navigation Links */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.75rem' }}>
-              <button
-                type="button"
-                onClick={() => setHighlightsOpen(true)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  cursor: 'pointer',
-                  padding: 0,
-                  fontSize: 'inherit',
-                  fontFamily: 'inherit',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.25rem',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = '#fbbf24'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-secondary)'}
-              >
-                <Sparkles size={12} color="#fbbf24" />
-                <span>2024 Legal Reforms</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleOpenEscalation()}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  cursor: 'pointer',
-                  padding: 0,
-                  fontSize: 'inherit',
-                  fontFamily: 'inherit',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.25rem',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--color-brand-emerald-light)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-secondary)'}
-              >
-                <UserCheck size={12} color="var(--color-brand-emerald-light)" />
-                <span>Expert Facilitation</span>
-              </button>
-
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
               <button
                 type="button"
                 onClick={() => setPrivacyOpen(true)}
                 style={{
-                  background: 'transparent',
+                  fontSize: '0.6875rem',
+                  color: 'var(--color-text-muted)',
+                  background: 'none',
                   border: 'none',
-                  color: 'var(--color-text-secondary)',
                   cursor: 'pointer',
+                  textDecoration: 'underline',
                   padding: 0,
-                  fontSize: 'inherit',
                   fontFamily: 'inherit',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.25rem',
                 }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--color-brand-emerald-light)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-secondary)'}
               >
-                <Shield size={12} color="var(--color-brand-emerald-light)" />
-                <span>DPDP Act Privacy Notice</span>
+                Privacy &amp; DPDP Notice
+              </button>
+              <button
+                type="button"
+                onClick={() => setHighlightsOpen(true)}
+                style={{
+                  fontSize: '0.6875rem',
+                  color: 'var(--color-text-muted)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  padding: 0,
+                  fontFamily: 'inherit',
+                }}
+              >
+                2024 Reforms Summary
+              </button>
+              <button
+                type="button"
+                onClick={() => handleOpenEscalation()}
+                style={{
+                  fontSize: '0.6875rem',
+                  color: 'var(--color-brand-emerald-light)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  padding: 0,
+                  fontFamily: 'inherit',
+                }}
+              >
+                Expert Escalation
               </button>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Global Modals */}
+      {/* ── Modals ── */}
       <EscalationModal
         isOpen={escalationOpen}
         onClose={() => setEscalationOpen(false)}
@@ -331,7 +420,6 @@ export default function App() {
 
       <DocumentDetailModal
         docId={selectedDocId}
-        isOpen={Boolean(selectedDocId)}
         onClose={() => setSelectedDocId(null)}
       />
 
@@ -345,5 +433,13 @@ export default function App() {
         onClose={() => setHighlightsOpen(false)}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainApp />
+    </LanguageProvider>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ExternalLink, BookOpen, ShieldCheck, Copy, Check, Scale } from 'lucide-react';
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "";
 
 export default function DocumentDetailModal({ docId, isOpen, onClose }) {
   const [doc, setDoc] = useState(null);

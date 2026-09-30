@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, CheckCircle2, ShieldCheck, UserCheck, AlertCircle } from 'lucide-react';
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "";
 
 export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
   const [formData, setFormData] = useState({

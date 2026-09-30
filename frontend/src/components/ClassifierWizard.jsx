@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { FlaskConical, Zap, CheckCircle2, XCircle, AlertTriangle, ChevronRight, Beaker } from 'lucide-react';
+import { FlaskConical, Zap, CheckCircle2, XCircle, AlertTriangle, ChevronRight, Beaker, FileText, Sparkles } from 'lucide-react';
+import IPRouterSection from './IPRouterSection.jsx';
+import { useLanguage } from '../context/LanguageContext.jsx';
 
 const PRESETS = [
   {
@@ -59,9 +61,9 @@ const PRESETS = [
   }
 ];
 
-import IPRouterSection from './IPRouterSection.jsx';
+function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
+  const { t } = useLanguage();
 
-function ResultCard({ result, onOpenEscalation }) {
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
@@ -73,7 +75,7 @@ function ResultCard({ result, onOpenEscalation }) {
         padding: '1.125rem 1.25rem',
       }}>
         <p style={{ fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
-          Evaluation — {result.product_name}
+          {t('evaluation_title')} — {result.product_name}
         </p>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
           <h3 style={{ fontSize: '1.1875rem', fontWeight: 800, color: '#34d399', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
@@ -94,10 +96,73 @@ function ResultCard({ result, onOpenEscalation }) {
         </div>
       </div>
 
+      {/* Plain Language "What this means for you" summary */}
+      <div style={{
+        background: 'rgba(5, 150, 105, 0.08)',
+        borderLeft: '4px solid var(--color-brand-emerald)',
+        borderRadius: 'var(--radius-md)',
+        padding: '0.875rem 1rem',
+        fontSize: '0.8125rem',
+        color: 'var(--color-text-primary)',
+        lineHeight: 1.55,
+      }}>
+        <b style={{ color: 'var(--color-brand-emerald-light)' }}>{t('what_this_means')} </b>
+        <span>{t(`plain_${result.category_code}`) || result.regulatory_classification_summary}</span>
+      </div>
+
+      {/* One-Click Product Dossier Call-to-Action Button */}
+      {onOpenDossier && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(13, 148, 136, 0.15))',
+          border: '1px solid rgba(5, 150, 105, 0.35)',
+          borderRadius: 'var(--radius-lg)',
+          padding: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
+              <Sparkles size={14} color="var(--color-brand-emerald-light)" />
+              <b style={{ fontSize: '0.875rem', color: 'var(--color-text-primary)' }}>
+                {t('tab_dossier')}
+              </b>
+            </div>
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+              Generate complete IP strategy, ABS pathway, TKDL prior-art review &amp; export compliance PDF.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onOpenDossier({
+              product_name: result.product_name,
+              intended_use: formData?.intended_use || "therapeutic",
+              is_in_authoritative_texts: formData?.is_in_authoritative_texts || false,
+              processing_nature: formData?.processing_nature || "classical",
+              has_synthetic_additives: formData?.has_synthetic_additives || false,
+            })}
+            className="btn btn-primary"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontWeight: 700,
+              fontSize: '0.8125rem',
+              boxShadow: '0 0 12px rgba(5, 150, 105, 0.3)',
+            }}
+          >
+            <FileText size={15} />
+            <span>{t('generate_dossier_btn')}</span>
+          </button>
+        </div>
+      )}
+
       {/* 3 High-Level Regulatory Summary Columns */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.625rem' }}>
         <div className="info-row">
-          <div className="info-row-label">Statute &amp; Licensing</div>
+          <div className="info-row-label">{t('licensing_path')}</div>
           <div className="info-row-value" style={{ fontSize: '0.75rem', lineHeight: 1.4 }}>
             {result.governing_law}
           </div>
@@ -106,7 +171,7 @@ function ResultCard({ result, onOpenEscalation }) {
           </div>
         </div>
         <div className="info-row">
-          <div className="info-row-label">Patentability Posture</div>
+          <div className="info-row-label">{t('patentability')}</div>
           <div className="info-row-value">
             <span className="badge badge-amber">{result.patentability?.status}</span>
           </div>
@@ -115,7 +180,7 @@ function ResultCard({ result, onOpenEscalation }) {
           </p>
         </div>
         <div className="info-row">
-          <div className="info-row-label">ABS Biodiversity Form</div>
+          <div className="info-row-label">{t('abs_requirement')}</div>
           <div className="info-row-value">
             <span className="badge" style={{ background: 'rgba(45,212,191,0.1)', color: '#2dd4bf', border: '1px solid rgba(45,212,191,0.3)', fontSize: '0.6875rem' }}>
               {result.abs_compliance?.form_type}
@@ -193,7 +258,9 @@ function ResultCard({ result, onOpenEscalation }) {
   );
 }
 
-export default function ClassifierWizard({ onClassify, result, loading, onOpenEscalation }) {
+export default function ClassifierWizard({ onClassify, result, loading, onOpenEscalation, onOpenDossier }) {
+  const { t } = useLanguage();
+
   const [formData, setFormData] = useState({
     product_name: "Novel Herbal Formulation",
     intended_use: "therapeutic",
@@ -234,7 +301,7 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
             </div>
             <div>
               <h2 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
-                Formulation Classifier
+                {t('classifier_title')}
               </h2>
               <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '1px' }}>Rule-Based Engine</p>
             </div>
@@ -243,12 +310,12 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
         </div>
 
         <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-          Determines regulatory classification and statutory IPR &amp; ABS posture under Indian law.
+          {t('classifier_desc')}
         </p>
 
         {/* Presets */}
         <div style={{ marginBottom: '1.25rem' }}>
-          <p className="section-eyebrow">Quick Demo Presets</p>
+          <p className="section-eyebrow">{t('presets_title')}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
             {PRESETS.map((p, idx) => (
               <button
@@ -291,7 +358,7 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
 
           {/* Product Name */}
           <div>
-            <label className="form-label" htmlFor="product-name">Product / Formulation Name</label>
+            <label className="form-label" htmlFor="product-name">{t('product_name_label')}</label>
             <input
               id="product-name"
               type="text"
@@ -304,52 +371,52 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
 
           {/* Intended Use */}
           <div>
-            <label className="form-label" htmlFor="intended-use">1. Intended Commercial &amp; Health Use</label>
+            <label className="form-label" htmlFor="intended-use">1. {t('intended_use_label')}</label>
             <select
               id="intended-use"
               className="form-select"
               value={formData.intended_use}
               onChange={(e) => setFormData({ ...formData, intended_use: e.target.value })}
             >
-              <option value="therapeutic">Therapeutic — Treating, curing, or preventing disease</option>
-              <option value="dietary">Dietary Wellness / Nutrition — Food supplement / Ayurveda Aahar</option>
-              <option value="cosmetic">Cosmetic — Cleansing, beautifying, external skin/hair care</option>
+              <option value="therapeutic">{t('use_therapeutic')}</option>
+              <option value="dietary">{t('use_dietary')}</option>
+              <option value="cosmetic">{t('use_cosmetic')}</option>
             </select>
           </div>
 
           {/* Classical Texts Toggle */}
           <div>
-            <label className="form-label">2. Documented in First Schedule Classical Texts?</label>
+            <label className="form-label">2. {t('classical_texts_label')}</label>
             <div className="toggle-group" style={{ gridTemplateColumns: '1fr 1fr' }}>
               <button
                 type="button"
                 className={`toggle-btn ${formData.is_in_authoritative_texts ? 'active' : ''}`}
                 onClick={() => setFormData({ ...formData, is_in_authoritative_texts: true })}
               >
-                Yes — Charaka, Sushruta, etc.
+                {t('classical_yes')}
               </button>
               <button
                 type="button"
                 className={`toggle-btn ${!formData.is_in_authoritative_texts ? 'active' : ''}`}
                 onClick={() => setFormData({ ...formData, is_in_authoritative_texts: false })}
               >
-                No / Modified / Proprietary
+                {t('classical_no')}
               </button>
             </div>
           </div>
 
           {/* Processing Nature */}
           <div>
-            <label className="form-label" htmlFor="processing-nature">3. Processing / Extraction Method</label>
+            <label className="form-label" htmlFor="processing-nature">3. {t('processing_nature_label')}</label>
             <select
               id="processing-nature"
               className="form-select"
               value={formData.processing_nature}
               onChange={(e) => setFormData({ ...formData, processing_nature: e.target.value })}
             >
-              <option value="classical">Traditional Classical — Kwath, Churna, Taila, Asava, Bhasma</option>
-              <option value="aqueous_alcoholic_extract">Standard Extract / Admixture — Aqueous/Alcoholic extract</option>
-              <option value="purified_fraction_with_markers">Purified Fraction with ≥ 4 Bioactive Markers (Phyto)</option>
+              <option value="classical">{t('proc_classical')}</option>
+              <option value="aqueous_alcoholic_extract">{t('proc_extract')}</option>
+              <option value="purified_fraction_with_markers">{t('proc_purified')}</option>
             </select>
           </div>
 
@@ -372,7 +439,7 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
               style={{ width: '15px', height: '15px', marginTop: '1px', accentColor: 'var(--color-brand-emerald)', flexShrink: 0, cursor: 'pointer' }}
             />
             <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, fontWeight: 500 }}>
-              Contains synthetic vitamins, minerals, or modern chemical APIs
+              {t('synthetic_additives_label')}
             </span>
           </label>
 
@@ -386,12 +453,12 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
             {loading ? (
               <>
                 <span className="spinner" />
-                <span>Classifying...</span>
+                <span>{t('classifying')}</span>
               </>
             ) : (
               <>
                 <Beaker size={16} strokeWidth={2} />
-                <span>Evaluate Formulation &amp; IPR Posture</span>
+                <span>{t('classify_btn')}</span>
                 <ChevronRight size={15} strokeWidth={2.5} />
               </>
             )}
@@ -413,15 +480,20 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
                 animation: 'spin 0.7s linear infinite',
               }} />
               <p style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>
-                Analysing formulation...
+                {t('classifying')}
               </p>
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                Applying regulatory classification rules
+                Applying statutory classification rules under DCA 1940
               </p>
             </div>
           </div>
         ) : result ? (
-          <ResultCard result={result} onOpenEscalation={onOpenEscalation} />
+          <ResultCard
+            result={result}
+            onOpenEscalation={onOpenEscalation}
+            onOpenDossier={onOpenDossier}
+            formData={formData}
+          />
         ) : (
           <div className="empty-state">
             <div className="empty-state-icon">
