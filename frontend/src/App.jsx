@@ -10,7 +10,6 @@ import SourcesDrawer from './components/SourcesDrawer.jsx';
 import EscalationModal from './components/EscalationModal.jsx';
 import DocumentDetailModal from './components/DocumentDetailModal.jsx';
 import PrivacyModal from './components/PrivacyModal.jsx';
-import HighlightsModal from './components/HighlightsModal.jsx';
 
 const API_BASE = ""; // relative — works via FastAPI (/app/) and Vite dev proxy
 
@@ -42,7 +41,6 @@ function MainApp() {
   const [escalationOpen, setEscalationOpen] = useState(false);
   const [escalationData, setEscalationData] = useState({});
   const [privacyOpen, setPrivacyOpen] = useState(false);
-  const [highlightsOpen, setHighlightsOpen] = useState(false);
   const [selectedDocId, setSelectedDocId] = useState(null);
 
   // Classifier state
@@ -165,19 +163,12 @@ function MainApp() {
       flexDirection: 'column',
       transition: 'background-color 0.2s ease, color 0.2s ease',
     }}>
-      {/* ── Top Statutory Notice Banner ── */}
-      <div className="disclaimer-banner" role="note">
-        <AlertTriangle size={13} style={{ flexShrink: 0 }} />
-        <span>{t('disclaimer_banner')}</span>
-      </div>
-
       {/* ── Header ── */}
       <Header
         jurisdiction={jurisdiction}
         setJurisdiction={setJurisdiction}
         systemStatus={systemStatus}
         onOpenEscalation={() => handleOpenEscalation({ jurisdiction })}
-        onOpenHighlights={() => setHighlightsOpen(true)}
         theme={theme}
         setTheme={setTheme}
       />
@@ -332,7 +323,6 @@ function MainApp() {
               <SourcesDrawer
                 jurisdiction={jurisdiction}
                 onSelectDoc={(docId) => setSelectedDocId(docId)}
-                onOpenHighlights={() => setHighlightsOpen(true)}
               />
             </div>
           )}
@@ -350,10 +340,10 @@ function MainApp() {
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
             <div>
               <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-secondary)' }}>
-                SAKTI — Smart India Hackathon (SIH) Prototype
+                SAKTI — Ayurveda IPR &amp; Regulatory Intelligence Platform
               </p>
               <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem' }}>
-                Indian Patents Act 1970 · Biological Diversity Act 2002/2024 · DCA 1940 · WIPO GRATK 2024
+                Indian Patents Act 1970 · Biological Diversity Act 2002/2023 · DCA 1940 · WIPO Treaties
               </p>
             </div>
 
@@ -376,22 +366,6 @@ function MainApp() {
               </button>
               <button
                 type="button"
-                onClick={() => setHighlightsOpen(true)}
-                style={{
-                  fontSize: '0.6875rem',
-                  color: 'var(--color-text-muted)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  textDecoration: 'underline',
-                  padding: 0,
-                  fontFamily: 'inherit',
-                }}
-              >
-                2024 Reforms Summary
-              </button>
-              <button
-                type="button"
                 onClick={() => handleOpenEscalation()}
                 style={{
                   fontSize: '0.6875rem',
@@ -407,6 +381,24 @@ function MainApp() {
                 Expert Escalation
               </button>
             </div>
+          </div>
+
+          {/* Statutory Intelligence Notice (Subtle, trusted footer placement) */}
+          <div style={{
+            borderTop: '1px solid var(--color-border-subtle)',
+            marginTop: '0.875rem',
+            paddingTop: '0.875rem',
+            fontSize: '0.6875rem',
+            color: 'var(--color-text-muted)',
+            lineHeight: 1.5,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            justifyContent: 'center',
+            textAlign: 'center',
+          }}>
+            <Shield size={13} style={{ flexShrink: 0, opacity: 0.7 }} />
+            <span>{t('disclaimer_banner')}</span>
           </div>
         </div>
       </footer>
@@ -426,11 +418,6 @@ function MainApp() {
       <PrivacyModal
         isOpen={privacyOpen}
         onClose={() => setPrivacyOpen(false)}
-      />
-
-      <HighlightsModal
-        isOpen={highlightsOpen}
-        onClose={() => setHighlightsOpen(false)}
       />
     </div>
   );

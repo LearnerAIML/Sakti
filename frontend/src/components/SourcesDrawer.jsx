@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Library, ExternalLink, RefreshCw, Tag, Search, Sparkles, FileText, ChevronRight } from 'lucide-react';
 import RegistriesSection from './RegistriesSection.jsx';
 
-export default function SourcesDrawer({ jurisdiction, onSelectDoc, onOpenHighlights }) {
+export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -74,25 +74,6 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc, onOpenHighlig
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {/* 2024 Reforms Button */}
-            {onOpenHighlights && (
-              <button
-                type="button"
-                onClick={onOpenHighlights}
-                className="btn btn-secondary btn-sm"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  borderColor: 'rgba(251, 191, 36, 0.4)',
-                  color: '#fbbf24',
-                }}
-              >
-                <Sparkles size={12} />
-                <span>2024 Reforms</span>
-              </button>
-            )}
-
             {/* Doc Count */}
             <span className="badge badge-amber">{sources.length} Documents</span>
 

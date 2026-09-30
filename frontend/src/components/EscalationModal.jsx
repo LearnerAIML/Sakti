@@ -79,7 +79,7 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
                 Human Expert Review Escalation
               </h3>
               <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)' }}>
-                SIH Problem Statement Facilitator Referral (AYUSH / Patent Agents)
+                AYUSH &amp; Patent Facilitator Referral (Registered Patent Agents)
               </p>
             </div>
           </div>

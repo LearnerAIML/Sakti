@@ -4,11 +4,9 @@ export const translations = {
     // Brand & Header
     app_title: "SAKTI",
     app_subtitle: "Ayurveda IPR, ABS & Regulatory Intelligence",
-    sih_badge: "SIH 2024",
     statutes_count: "Statutes Indexed",
     api_active: "API Active",
     disclaimer_banner: "SAKTI provides statutory information and intelligence, not legal advice. Citations are grounded in official Indian and international corpora. Confirm with a registered patent agent or IP facilitator before filing.",
-    reforms_2024: "2024 Reforms",
     expert_review: "Expert Review",
     jurisdiction: "Jurisdiction",
     india: "India",
@@ -151,11 +149,9 @@ export const translations = {
     // Brand & Header
     app_title: "शक्ति (SAKTI)",
     app_subtitle: "आयुर्वेद बौद्धिक संपदा, एबीएस और विनियामक आसूचना प्रणाली",
-    sih_badge: "एसआईएच 2024",
     statutes_count: "अधिनियम अनुक्रमित",
     api_active: "एपीआई सक्रिय",
     disclaimer_banner: "शक्ति केवल वैधानिक जानकारी प्रदान करती है, कानूनी सलाह नहीं। सभी उद्धरण आधिकारिक भारतीय और अंतर्राष्ट्रीय विधिक कॉर्पस पर आधारित हैं। कोई भी कदम उठाने से पहले पंजीकृत पेटेंट एजेंट या आईपी विशेषज्ञ से परामर्श लें।",
-    reforms_2024: "2024 सुधार",
     expert_review: "विशेषज्ञ समीक्षा",
     jurisdiction: "अधिकार क्षेत्र (Jurisdiction)",
     india: "भारत (India)",

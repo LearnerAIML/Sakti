@@ -7,7 +7,6 @@ export default function Header({
   setJurisdiction,
   systemStatus,
   onOpenEscalation,
-  onOpenHighlights,
   theme,
   setTheme,
 }) {
@@ -59,9 +58,6 @@ export default function Header({
                 <h1 style={{ fontSize: '1.125rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-text-primary)', lineHeight: 1 }}>
                   {t('app_title')}
                 </h1>
-                <span className="badge badge-emerald" style={{ flexShrink: 0 }}>
-                  {t('sih_badge')}
-                </span>
               </div>
               <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '0.125rem', lineHeight: 1.3 }}>
                 {t('app_subtitle')}
@@ -119,27 +115,6 @@ export default function Header({
                 </>
               )}
             </button>
-
-            {/* 2024 Reforms Button */}
-            {onOpenHighlights && (
-              <button
-                type="button"
-                onClick={onOpenHighlights}
-                className="btn btn-secondary btn-sm"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  fontSize: '0.6875rem',
-                  borderColor: 'rgba(251, 191, 36, 0.3)',
-                  color: '#fbbf24',
-                }}
-                title="View 2024 statutory amendments and WIPO GRATK Treaty"
-              >
-                <Sparkles size={12} />
-                <span className="hidden sm:inline">{t('reforms_2024')}</span>
-              </button>
-            )}
 
             {/* Expert Escalation Button */}
             {onOpenEscalation && (
