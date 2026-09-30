@@ -194,7 +194,7 @@ class FormulationClassifier:
                 governing_law="Drugs and Cosmetics Act, 1940 (Section 3(a)) & Drugs and Cosmetics Rules, 1945 (Rule 154)",
                 licensing_authority="State Licensing Authority (AYUSH Department)",
                 patentability={
-                    "status": "Completely Barred",
+                    "status": "Severely Restricted (Section 3(p) objection expected)",
                     "relevant_sections": ["Patents Act Section 3(p)", "Patents Act Section 25(1)(k)", "Section 64(1)(p)"],
                     "assessment": (
                         "Would face severe statutory patentability objections under Section 3(p) and Section 3(e) of the Patents Act, 1970. "
@@ -218,6 +218,47 @@ class FormulationClassifier:
                     "license_type": "Ayurvedic Drug Manufacturing License (Form 25D)",
                     "clinical_trials_required": False,
                     "evidentiary_standard": "Citation of authoritative recipe from First Schedule texts (e.g. Charaka Samhita, API); no safety/efficacy trial data required under Rule 158B."
+                },
+                warnings=warnings
+            )
+
+        # -------------------------------------------------------------
+        # 4b. NEW / NON-CLASSICAL DRUG (synthetic derivative of plant constituent)
+        # -------------------------------------------------------------
+        if (
+            item.intended_use == IntendedUse.THERAPEUTIC
+            and item.is_in_authoritative_texts is False
+            and item.processing_nature == ProcessingNature.SYNTHETIC_DERIVATIVE
+        ):
+            warnings.append(
+                "Verify the applicable New Drugs and Clinical Trials Rules and current CDSCO requirements before relying on this classification."
+            )
+            return ClassificationResult(
+                product_name=name,
+                category="New / Non-Classical Drug",
+                category_code="NEW_DRUG",
+                governing_law="Drugs and Cosmetics Act, 1940 & New Drugs and Clinical Trials Rules, 2019",
+                licensing_authority="Central Drugs Standard Control Organisation (CDSCO)",
+                patentability={
+                    "status": "Conditional (novelty, inventive step and Section 3(d) to be assessed)",
+                    "relevant_sections": ["Patents Act Section 3(d)", "Patents Act Section 3(e)", "Patents Act Section 3(p)"],
+                    "assessment": (
+                        "A synthetic derivative may be patentable if it is novel, non-obvious and shows enhanced efficacy where "
+                        "Section 3(d) applies. A claim that in effect reproduces traditional knowledge could still face Section 3(p) objections."
+                    ),
+                    "recommended_ip_strategy": "Prior-art search (including TKDL), then consider a compound/process patent alongside trade marks."
+                },
+                abs_compliance={
+                    "nba_form_required": True,
+                    "form_type": "NBA approval before IPR grant where Indian biological resources are used",
+                    "statutory_provisions": ["Biological Diversity Act Section 6"],
+                    "exemption_eligible": False,
+                    "guidance": "If the derivative was developed using Indian biological resources, check NBA approval requirements before patent grant."
+                },
+                regulatory_requirements={
+                    "license_type": "New drug permission / marketing authorisation via CDSCO",
+                    "clinical_trials_required": True,
+                    "evidentiary_standard": "Evidence of safety and efficacy through non-clinical and clinical studies as required by the applicable rules."
                 },
                 warnings=warnings
             )

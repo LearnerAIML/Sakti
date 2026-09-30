@@ -21,6 +21,7 @@ class CorpusDocument(BaseModel):
     source_type: Optional[str] = None
     effective_date: Optional[str] = None
     last_verified: Optional[str] = None
+    verification_status: Optional[str] = None
 
 class CorpusStore:
     def __init__(self, corpus_dir: Optional[Path] = None):

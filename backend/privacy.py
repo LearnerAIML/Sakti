@@ -32,14 +32,14 @@ PRIVACY_SAFEGUARD_NOTICE: Dict[str, Any] = {
             "when requesting expert review."
         ),
         "telemetry_and_health": (
-            "System performance metrics, request execution times, and retrieval diagnostic logs stored transiently."
+            "Audit log (data/audit/audit.jsonl): timestamp, PII-redacted query, jurisdiction, retrieved source IDs and scores, model used, abstention flag. Stored locally on the server."
         )
     },
     "data_handling_and_storage": (
-        "All data processed by this prototype is stored exclusively on local runtime storage. No user inquiries, "
+        "All data processed by this prototype is stored on local server storage (except query text sent to Gemini, see below). No user inquiries, "
         "formulation recipes, or contact data are harvested, monetized, sold, or shared with third-party advertising networks. "
-        "Synthesis queries are transmitted to Google Gemini API using enterprise API endpoints configured server-side, "
-        "with zero exposure of authentication keys to client browsers."
+        "Query text is sent to the Google Gemini API from the server for retrieval embeddings and answer generation, so it leaves this server; "
+        "API keys are never exposed to browsers."
     ),
     "user_guidance": (
         "Users are advised not to submit proprietary unpatented chemical formulas, undisclosed industrial trade secrets, "

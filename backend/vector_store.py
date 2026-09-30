@@ -56,6 +56,7 @@ class DenseVectorStore:
         self.metadata: List[Dict[str, Any]] = []
         self.vectors: Optional[np.ndarray] = None
         self.dimension = 3072
+        self.last_mode = "dense"
 
         # Auto-load existing index if available
         self.load()
@@ -157,32 +158,72 @@ class DenseVectorStore:
         Searches the index for query text with optional jurisdiction filtering.
         jurisdiction: 'India', 'International', or None (searches both).
         """
+        self.last_mode = "dense"
         if self.index is None or not self.metadata:
-            # Try loading or building
             if not self.load():
-                self.build_from_corpus()
+                try:
+                    self.build_from_corpus()
+                except Exception:
+                    return self._keyword_search(query, top_k, jurisdiction)
 
-        query_vec = self.get_embedding(query).reshape(1, -1)
-        
-        # Retrieve more candidates if filtering is applied
-        k_search = min(len(self.metadata), top_k * 3 if jurisdiction else top_k)
-        scores, indices = self.index.search(query_vec, k_search)
+        # Stale-index guard: corpus files added after the index was built must be embedded first.
+        import time as _t
+        if _t.time() - getattr(self, "_rebuild_failed_at", 0) < 120:
+            return self._keyword_search(query, top_k, jurisdiction)
+        try:
+            indexed = {m.get("id") for m in self.metadata}
+            if indexed != {d.id for d in corpus_store.get_all()}:
+                print("[*] Corpus changed since index was built; rebuilding embeddings...")
+                self.build_from_corpus(force_rebuild=True)
+        except Exception as e:
+            self._rebuild_failed_at = _t.time()
+            print(f"[Warning] Index rebuild unavailable ({type(e).__name__}); using keyword retrieval.")
+            return self._keyword_search(query, top_k, jurisdiction)
+
+        try:
+            query_vec = self.get_embedding(query).reshape(1, -1)
+        except Exception as e:
+            print(f"[Warning] Embedding unavailable ({type(e).__name__}); using keyword retrieval.")
+            return self._keyword_search(query, top_k, jurisdiction)
+
+        # Corpus is small: score every document, then filter (never returns fewer than available)
+        scores, indices = self.index.search(query_vec, len(self.metadata))
 
         results: List[RetrievalResult] = []
         for idx, score in zip(indices[0], scores[0]):
             if idx == -1:
                 continue
             doc = self.metadata[idx]
-            
-            # Apply jurisdiction filter if specified
             if jurisdiction:
                 if doc["jurisdiction"].strip().lower() != jurisdiction.strip().lower():
                     continue
-
             results.append(RetrievalResult(doc, float(score)))
             if len(results) >= top_k:
                 break
 
         return results
+
+    _STOP = {"the","a","an","of","to","in","for","and","or","is","are","can","i","my","do","does","what","how","under","on","be","it","with","this","that","as","at","by","from","me","if","which","need","required","require"}
+
+    def _keyword_search(self, query: str, top_k: int, jurisdiction: Optional[str]) -> List[RetrievalResult]:
+        """Offline fallback: fraction of query terms found in a provision. Deliberately conservative."""
+        import re
+        self.last_mode = "keyword"
+        # Always score the live corpus (works without an index and includes newly added files).
+        docs = [d.model_dump() for d in corpus_store.get_all()] or self.metadata
+        qtok = {t for t in re.findall(r"\w+", query.lower()) if t not in self._STOP and len(t) > 2}
+        if not qtok:
+            return []
+        scored = []
+        for doc in docs:
+            if jurisdiction and doc["jurisdiction"].strip().lower() != jurisdiction.strip().lower():
+                continue
+            text = (doc["statute"] + " " + doc["section_rule"] + " " + (doc.get("title") or "") + " " + doc["content"]).lower()
+            dtok = set(re.findall(r"\w+", text))
+            hit = len(qtok & dtok) / len(qtok)
+            scored.append((hit * 0.8, doc))
+        scored.sort(key=lambda x: x[0], reverse=True)
+        return [RetrievalResult(d, sc) for sc, d in scored[:top_k] if sc > 0]
+
 
 vector_store = DenseVectorStore()

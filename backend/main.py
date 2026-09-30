@@ -8,7 +8,8 @@ Provides REST endpoints for:
 """
 
 from typing import List, Optional, Dict, Any
-from fastapi import FastAPI, HTTPException, Query, status
+import logging
+from fastapi import FastAPI, HTTPException, Query, status, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -38,7 +39,10 @@ from backend.escalation import (
     EscalationRequest,
     EscalationRecord
 )
+from backend.audit import log_event
 from backend.privacy import get_privacy_notice, PrivacyNoticeResponse
+
+logger = logging.getLogger("sakti")
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -49,6 +53,9 @@ app = FastAPI(
         "in official statutes with zero fabricated citations."
     )
 )
+
+from backend.extras_api import router as extras_router
+app.include_router(extras_router)
 
 # Enable CORS for frontend clients (React / Vite / Streamlit)
 app.add_middleware(
@@ -84,7 +91,7 @@ class QueryRequest(BaseModel):
     )
     language: Optional[str] = Field(
         "en",
-        description="Language preference: 'en' (English) or 'hi' (Hindi). Also auto-detected from Hindi text."
+        description="Language: en, hi, or gu/mr/ta/te/bn/kn/ml/pa. Hindi is also auto-detected from Devanagari text."
     )
 
 class CorpusSummary(BaseModel):
@@ -126,7 +133,8 @@ def health_check():
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
         "gemini_api_configured": bool(settings.GEMINI_API_KEY),
-        "corpus_documents_loaded": len(corpus_store.get_all())
+        "corpus_documents_loaded": len(corpus_store.get_all()),
+        "unverified_corpus_documents": sum(1 for d in corpus_store.get_all() if not d.last_verified)
     }
 
 @app.get("/", tags=["System"])
@@ -160,11 +168,13 @@ def classify_formulation(payload: FormulationInput):
     """
     try:
         result = FormulationClassifier.classify(payload)
+        log_event("classify", category_code=result.category_code, intended_use=payload.intended_use.value)
         return result
     except Exception as e:
+        logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Formulation classification error: {str(e)}"
+            detail="Formulation classification failed. Please check the inputs and try again."
         )
 
 # =====================================================================
@@ -200,9 +210,10 @@ def query_legal_assistant(payload: QueryRequest):
         )
         return response
     except Exception as e:
+        logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Synthesis engine failure: {str(e)}"
+            detail="The assistant is temporarily unavailable. Please try again."
         )
 
 # =====================================================================
@@ -287,9 +298,10 @@ def route_ip_paths(payload: IPPathRouterInput):
     try:
         return IPPathRouter.evaluate(payload)
     except Exception as e:
+        logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"IP Path Router evaluation failed: {str(e)}"
+            detail="IP path evaluation failed. Please check the inputs and try again."
         )
 
 # =====================================================================
@@ -353,23 +365,27 @@ def create_expert_escalation(payload: EscalationRequest):
     Facilitates human expert review when automated guidance requires legal representation.
     """
     try:
-        return ExpertEscalationManager.create_request(payload)
+        rec = ExpertEscalationManager.create_request(payload)
+        log_event("escalation", request_id=rec.request_id, jurisdiction=rec.jurisdiction, category=rec.classification_category)
+        return rec
     except Exception as e:
+        logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Escalation request failed: {str(e)}"
+            detail="Escalation request could not be saved."
         )
 
 @app.get(
     "/api/escalations",
     tags=["Expert Escalation"],
-    summary="List recent expert escalation requests (Metadata only, privacy-safe)"
+    summary="Admin only: list recent escalation requests (no contact details)"
 )
-def list_expert_escalations(limit: int = Query(20, ge=1, le=100)):
-    """
-    Returns metadata of recently submitted escalation requests for administrative review.
-    """
-    return ExpertEscalationManager.list_recent(limit=limit)
+def list_expert_escalations(limit: int = Query(20, ge=1, le=100), x_admin_token: Optional[str] = Header(None)):
+    """Requires the X-Admin-Token header to match ADMIN_TOKEN. Contact details are never returned."""
+    if not settings.ADMIN_TOKEN or x_admin_token != settings.ADMIN_TOKEN:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required.")
+    safe_keys = ("request_id", "created_at", "status", "jurisdiction", "classification_category")
+    return [{k: r.get(k) for k in safe_keys} for r in ExpertEscalationManager.list_recent(limit=limit)]
 
 # =====================================================================
 # PRIVACY & DATA GOVERNANCE ENDPOINT (DPDP-ALIGNED PROTOTYPE)
