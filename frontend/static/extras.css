@@ -1,0 +1,19 @@
+.sk-chip{display:inline-block;font:600 10px/1 ui-monospace,monospace;padding:3px 6px;margin:0 2px;border-radius:999px;border:1px solid rgba(16,185,129,.4);background:rgba(16,185,129,.1);color:#34d399;cursor:pointer;vertical-align:baseline}
+.sk-chip.unv{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.1);color:#fbbf24}
+.sk-card{background:rgba(15,23,42,.6);border:1px solid rgb(30,41,59);border-radius:1rem;padding:1rem 1.25rem}
+.sk-h{font-weight:700;color:#fff}.sk-muted{color:#94a3b8;font-size:12px}
+.sk-btn{font-size:12px;font-weight:600;padding:.5rem 1rem;border-radius:.75rem;background:#10b981;color:#020617;cursor:pointer}
+.sk-btn.alt{background:transparent;color:#cbd5e1;border:1px solid #334155}
+.sk-in{width:100%;background:#020617;border:1px solid #1e293b;border-radius:.6rem;padding:.45rem .6rem;font-size:12px;color:#e2e8f0}
+.sk-lbl{display:block;font-size:11px;color:#94a3b8;margin:.5rem 0 .2rem}
+.sk-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.75rem}
+.sk-plain{border-left:3px solid #10b981;background:rgba(16,185,129,.08);padding:.6rem .8rem;border-radius:.5rem;font-size:12px;color:#d1fae5}
+.sk-banner{background:#451a03;color:#fde68a;font-size:11px;text-align:center;padding:.3rem .75rem;border-bottom:1px solid #78350f}
+.sk-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:60;display:flex;align-items:center;justify-content:center;padding:1rem}
+.sk-modal>div{max-width:640px;width:100%;max-height:85vh;overflow:auto}
+.sk-node{cursor:pointer}.sk-node rect{fill:#0f172a;stroke:#334155}.sk-node text{fill:#e2e8f0;font-size:10px}
+.sk-node.on rect{stroke:#10b981;fill:#022c22}.sk-edge{stroke:#334155;stroke-width:1;fill:none;opacity:.35}.sk-edge.on{stroke:#10b981;opacity:1;stroke-width:1.6}
+.sk-dim{opacity:.25}
+nav .flex{overflow-x:auto;flex-wrap:nowrap!important;white-space:nowrap}
+.sk-bar{height:8px;background:#1e293b;border-radius:99px;overflow:hidden}.sk-bar>i{display:block;height:100%;background:#10b981}
+@media (max-width:640px){.sk-card{padding:.8rem}}

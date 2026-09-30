@@ -445,6 +445,7 @@
 
   <!-- Dynamic Custom Theme Color Stylesheet -->
   <style id="sakti-custom-theme-style"></style>
+  <link rel="stylesheet" href="extras.css">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white antialiased transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100">
 
@@ -1193,7 +1194,7 @@
   <!-- 9. JAVASCRIPT LOGIC ENGINE -->
   <!-- ============================================================== -->
   <script>
-    const API_BASE = window.location.port === "8000" ? "" : "http://127.0.0.1:8000";
+    const API_BASE = (window.location.protocol === "file:" || window.location.port === "5173") ? "http://127.0.0.1:8000" : "";
     let currentJurisdiction = "India";
     let currentLanguage = "en";
     let currentTheme = localStorage.theme === 'dark' ? 'dark' : 'light';
@@ -2093,7 +2094,7 @@
     }
 
     function switchTab(tabId) {
-      const tabs = ['classifier', 'query', 'sources'];
+      const tabs = window.SAKTI_TABS || ['classifier', 'query', 'sources'];
       tabs.forEach(t => {
         document.getElementById(`section${t.charAt(0).toUpperCase() + t.slice(1)}`).classList.add('hidden');
         const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
@@ -2691,5 +2692,6 @@
       document.getElementById('modalDocDetail').classList.add('hidden');
     }
   </script>
+  <script src="extras.js"></script>
 </body>
 </html>

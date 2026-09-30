@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Library, ExternalLink, RefreshCw, Tag, Search, Sparkles, FileText, ChevronRight } from 'lucide-react';
+import RegistriesSection from './RegistriesSection.jsx';
 
-export default function SourcesDrawer({ jurisdiction }) {
+export default function SourcesDrawer({ jurisdiction, onSelectDoc, onOpenHighlights }) {
   const [sources, setSources] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchSources();
@@ -11,103 +15,320 @@ export default function SourcesDrawer({ jurisdiction }) {
 
   const fetchSources = async () => {
     setLoading(true);
+    setError(null);
     try {
       const url = `http://127.0.0.1:8000/api/sources?jurisdiction=${jurisdiction}`;
       const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setSources(data.documents || []);
     } catch (e) {
       console.error("Failed to load sources:", e);
+      setError("Could not load legal corpus. Ensure the API server is running.");
     } finally {
       setLoading(false);
     }
   };
 
-  const filtered = selectedCategory === "all"
-    ? sources
-    : sources.filter(s => s.category?.toLowerCase() === selectedCategory.toLowerCase());
-
   const categories = ["all", ...new Set(sources.map(s => s.category).filter(Boolean))];
 
+  const filtered = sources.filter(s => {
+    const matchesCategory = selectedCategory === "all" || s.category?.toLowerCase() === selectedCategory.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
+    const matchesSearch = !query ||
+      s.id?.toLowerCase().includes(query) ||
+      s.statute?.toLowerCase().includes(query) ||
+      s.section_rule?.toLowerCase().includes(query) ||
+      s.title?.toLowerCase().includes(query) ||
+      s.authority?.toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
+
   return (
-    <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-xl space-y-5">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-slate-700 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>🏛️</span> Authoritative Legal Knowledge Base
-          </h2>
-          <p className="text-xs text-slate-400">
-            Curated, version-tracked provisions under {jurisdiction} Jurisdiction.
-          </p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+      {/* ── Panel Header ── */}
+      <div className="card" style={{ padding: '1.125rem 1.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '8px',
+              background: 'rgba(217,119,6,0.12)',
+              border: '1px solid rgba(217,119,6,0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <Library size={16} color="#fbbf24" strokeWidth={2} />
+            </div>
+            <div>
+              <h2 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
+                Authoritative Legal Knowledge Base
+              </h2>
+              <p style={{ fontSize: '0.6875rem', color: 'var(--color-text-muted)', marginTop: '1px' }}>
+                Curated, version-tracked statutory provisions — {jurisdiction} Jurisdiction
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+            {/* 2024 Reforms Button */}
+            {onOpenHighlights && (
+              <button
+                type="button"
+                onClick={onOpenHighlights}
+                className="btn btn-secondary btn-sm"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.35rem',
+                  borderColor: 'rgba(251, 191, 36, 0.4)',
+                  color: '#fbbf24',
+                }}
+              >
+                <Sparkles size={12} />
+                <span>2024 Reforms</span>
+              </button>
+            )}
+
+            {/* Doc Count */}
+            <span className="badge badge-amber">{sources.length} Documents</span>
+
+            {/* Refresh */}
+            <button
+              onClick={fetchSources}
+              disabled={loading}
+              className="btn btn-secondary btn-sm"
+              title="Refresh corpus"
+            >
+              <RefreshCw size={13} strokeWidth={2.5} className={loading ? 'animate-spin' : ''} />
+              <span>Refresh</span>
+            </button>
+          </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          {categories.map((cat, idx) => (
-            <button
-              key={idx}
-              onClick={() => setSelectedCategory(cat)}
-              className={`text-xs px-2.5 py-1 rounded-lg capitalize font-medium transition-all ${
-                selectedCategory === cat
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-slate-900 border border-slate-700 text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        {/* Search and Filters Bar */}
+        <div style={{
+          marginTop: '1rem',
+          paddingTop: '0.875rem',
+          borderTop: '1px solid var(--color-border-subtle)',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '0.75rem',
+        }}>
+          {/* Search Box */}
+          <div style={{ position: 'relative', flex: '1 1 240px', maxWidth: '340px' }}>
+            <Search size={14} color="var(--color-text-muted)" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
+            <input
+              type="text"
+              className="input"
+              placeholder="Search statutes, sections (e.g. 3(p), Form I, DCA)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ paddingLeft: '32px', height: '34px', fontSize: '0.75rem' }}
+            />
+          </div>
+
+          {/* Category Filters */}
+          {categories.length > 1 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexWrap: 'wrap' }}>
+              <Tag size={12} color="var(--color-text-muted)" strokeWidth={2} style={{ flexShrink: 0 }} />
+              {categories.map((cat, idx) => (
+                <button
+                  key={idx}
+                  id={`filter-${cat}`}
+                  onClick={() => setSelectedCategory(cat)}
+                  className="btn btn-sm"
+                  style={{
+                    background: selectedCategory === cat ? 'var(--color-brand-emerald)' : 'var(--color-bg-elevated)',
+                    color: selectedCategory === cat ? 'white' : 'var(--color-text-muted)',
+                    border: `1px solid ${selectedCategory === cat ? 'var(--color-brand-emerald-dark)' : 'var(--color-border-default)'}`,
+                    textTransform: 'capitalize',
+                    fontWeight: selectedCategory === cat ? 700 : 500,
+                    fontSize: '0.6875rem',
+                    padding: '0.2rem 0.5rem',
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
+      {/* ── Content ── */}
       {loading ? (
-        <div className="py-12 text-center text-slate-400 text-xs">
-          Loading curated provisions...
+        <div className="card">
+          <div className="empty-state" style={{ padding: '3rem 1.5rem' }}>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              border: '3px solid var(--color-border-strong)',
+              borderTopColor: '#fbbf24',
+              borderRadius: '50%',
+              animation: 'spin 0.7s linear infinite',
+            }} />
+            <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
+              Loading authoritative legal provisions...
+            </p>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="card" style={{
+          background: 'var(--color-error-bg)',
+          borderColor: 'var(--color-error-border)',
+        }}>
+          <div className="empty-state" style={{ padding: '2rem 1.5rem' }}>
+            <p style={{ fontSize: '0.875rem', color: '#fca5a5', fontWeight: 500 }}>{error}</p>
+            <button onClick={fetchSources} className="btn btn-secondary btn-sm" style={{ marginTop: '0.5rem' }}>
+              Try Again
+            </button>
+          </div>
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="card">
+          <div className="empty-state">
+            <div className="empty-state-icon">
+              <Library size={22} color="var(--color-text-muted)" strokeWidth={1.5} />
+            </div>
+            <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', fontWeight: 500 }}>
+              No documents match your filter
+            </p>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+              Try clearing your search query or selecting "all" categories.
+            </p>
+          </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: '0.875rem',
+        }}>
           {filtered.map((doc) => (
-            <div
-              key={doc.id}
-              className="bg-slate-900/90 border border-slate-700/80 rounded-xl p-4 flex flex-col justify-between hover:border-slate-500 transition-colors"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-[11px] font-mono font-bold text-emerald-400">
-                    {doc.id}
-                  </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-semibold uppercase">
-                    {doc.category || doc.jurisdiction}
-                  </span>
-                </div>
-                <h4 className="text-xs font-bold text-white mb-1">
-                  {doc.statute}
-                </h4>
-                <p className="text-xs text-amber-300 font-medium mb-1">
-                  {doc.section_rule}
-                </p>
-                <p className="text-[11px] text-slate-400 mb-3">
-                  {doc.title}
-                </p>
-              </div>
-
-              <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-                <span className="text-[10px] text-slate-500 truncate max-w-[150px]">
-                  {doc.authority}
-                </span>
-                <a
-                  href={doc.official_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-emerald-400 hover:text-emerald-300 font-medium inline-flex items-center gap-1"
-                >
-                  <span>Official Text</span>
-                  <span>↗</span>
-                </a>
-              </div>
-            </div>
+            <SourceCard key={doc.id} doc={doc} onSelectDoc={onSelectDoc} />
           ))}
         </div>
       )}
+
+      {/* ── Official Government Registries & Search Portals ── */}
+      <RegistriesSection jurisdiction={jurisdiction} />
+    </div>
+  );
+}
+
+function SourceCard({ doc, onSelectDoc }) {
+  return (
+    <div
+      style={{
+        background: 'var(--color-bg-card)',
+        border: '1px solid var(--color-border-default)',
+        borderRadius: 'var(--radius-lg)',
+        padding: '1rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.625rem',
+        transition: 'border-color 0.15s ease, transform 0.1s ease',
+        height: '100%',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = 'var(--color-border-strong)';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'var(--color-border-default)';
+      }}
+    >
+      {/* Top row: ID + Category */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+        <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#34d399', lineHeight: 1 }}>
+          {doc.id}
+        </code>
+        {(doc.category || doc.jurisdiction) && (
+          <span style={{
+            fontSize: '0.625rem',
+            padding: '0.125rem 0.5rem',
+            borderRadius: '999px',
+            background: 'var(--color-bg-elevated)',
+            border: '1px solid var(--color-border-strong)',
+            color: 'var(--color-text-muted)',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
+            flexShrink: 0,
+          }}>
+            {doc.category || doc.jurisdiction}
+          </span>
+        )}
+      </div>
+
+      {/* Statute + Section */}
+      <div style={{ flex: 1 }}>
+        <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.4, marginBottom: '0.25rem' }}>
+          {doc.statute}
+        </p>
+        <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#fbbf24', lineHeight: 1.4, marginBottom: '0.375rem' }}>
+          {doc.section_rule}
+        </p>
+        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          {doc.title}
+        </p>
+      </div>
+
+      {/* Footer: Authority + Buttons */}
+      <div style={{
+        paddingTop: '0.625rem',
+        borderTop: '1px solid var(--color-border-subtle)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '0.5rem',
+      }}>
+        <button
+          type="button"
+          onClick={() => onSelectDoc && onSelectDoc(doc.id)}
+          className="btn btn-secondary btn-sm"
+          style={{
+            fontSize: '0.6875rem',
+            padding: '0.2rem 0.5rem',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.25rem',
+            color: '#34d399',
+            borderColor: 'rgba(5, 150, 105, 0.3)',
+          }}
+          title="Open full statutory provision and legal implications"
+        >
+          <FileText size={11} />
+          <span>Full Statute</span>
+          <ChevronRight size={10} />
+        </button>
+
+        <a
+          href={doc.official_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.25rem',
+            fontSize: '0.6875rem',
+            fontWeight: 600,
+            color: 'var(--color-text-muted)',
+            textDecoration: 'none',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-muted)'}
+        >
+          <span>Official Portal</span>
+          <ExternalLink size={10} strokeWidth={2} />
+        </a>
+      </div>
     </div>
   );
 }
