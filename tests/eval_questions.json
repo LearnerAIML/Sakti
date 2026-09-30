@@ -1,0 +1,260 @@
+[
+ {
+  "id": "E01",
+  "q": "Can I patent a ginger and honey cough syrup in India?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-PAT-SEC-003P",
+   "IN-PAT-SEC-003E"
+  ]
+ },
+ {
+  "id": "E02",
+  "q": "How does Section 3(d) of the Patents Act affect new forms of known herbal compounds?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-PAT-SEC-003D"
+  ]
+ },
+ {
+  "id": "E03",
+  "q": "Is NBA approval needed before a patent is granted for an invention using Indian biological resources?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-BDA-SEC-006"
+  ]
+ },
+ {
+  "id": "E04",
+  "q": "How can patent examiners access TKDL for prior art?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-TKDL-ACC-AGREE",
+   "IN-TKDL-PRIA-001"
+  ]
+ },
+ {
+  "id": "E05",
+  "q": "Can an Ayurvedic product name be protected as a geographical indication?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-GI-ACT-1999",
+   "IN-GI-ACT-SEC-020",
+   "IN-GI-ACT-SEC-022"
+  ]
+ },
+ {
+  "id": "E06",
+  "q": "Can I register a trade mark implying a cure for diabetes?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-TM-ACT-SEC-009",
+   "IN-DCA-RUL-170-ADV"
+  ]
+ },
+ {
+  "id": "E07",
+  "q": "What are the rules on misleading advertisements for Ayurvedic drugs?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-DCA-RUL-170-ADV"
+  ]
+ },
+ {
+  "id": "E08",
+  "q": "What FSSAI regulations apply to Ayurveda Aahar products?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-FSSAI-AYU-001",
+   "IN-FSSAI-AYU-002"
+  ]
+ },
+ {
+  "id": "E09",
+  "q": "What is a phytopharmaceutical drug and what rule governs it?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-DCA-RUL-122E-PHYTO"
+  ]
+ },
+ {
+  "id": "E10",
+  "q": "Can a new medicinal plant variety be protected in India?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-PPVFR-ACT-2001",
+   "IN-PPVFR-ACT-SEC-015"
+  ]
+ },
+ {
+  "id": "E11",
+  "q": "Does copyright protect a book describing Ayurvedic formulations?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-COP-ACT-SEC-013"
+  ]
+ },
+ {
+  "id": "E12",
+  "q": "Do I need a foreign filing permission before filing a patent abroad?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-PAT-SEC-039"
+  ]
+ },
+ {
+  "id": "E13",
+  "q": "Can a third party oppose a patent application before grant on traditional knowledge grounds?",
+  "j": "India",
+  "type": "answer",
+  "expect": [
+   "IN-PAT-SEC-025-OPP"
+  ]
+ },
+ {
+  "id": "E14",
+  "q": "What does the WIPO GRATK treaty require for patent applications?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-WIPO-GRATK-2024",
+   "INT-WIPO-GRATK-ART-004"
+  ]
+ },
+ {
+  "id": "E15",
+  "q": "What is the Nagoya Protocol on access and benefit sharing?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-CBD-NAGOYA-2010"
+  ]
+ },
+ {
+  "id": "E16",
+  "q": "What does Article 15 of the Convention on Biological Diversity say about access to genetic resources?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-CBD-ART-015"
+  ]
+ },
+ {
+  "id": "E17",
+  "q": "How do I file an international patent application under the PCT?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-PCT-DIR-001",
+   "INT-PCT-RUL-051BIS"
+  ]
+ },
+ {
+  "id": "E18",
+  "q": "What does TRIPS Article 27 say about patentable subject matter?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-TRIPS-ART-027"
+  ]
+ },
+ {
+  "id": "E19",
+  "q": "Explain Section 3(p) of the Indian Patents Act for Ayurveda",
+  "j": "International",
+  "type": "jurisdiction_only"
+ },
+ {
+  "id": "E20",
+  "q": "What does the WIPO GRATK treaty require for genetic resources patents?",
+  "j": "India",
+  "type": "jurisdiction_only"
+ },
+ {
+  "id": "E21",
+  "q": "Write a Python script to sort a list of numbers",
+  "j": "India",
+  "type": "abstain"
+ },
+ {
+  "id": "E22",
+  "q": "What is the bitcoin price today?",
+  "j": "India",
+  "type": "abstain"
+ },
+ {
+  "id": "E23",
+  "q": "What does Section 47Z of the Patents Act say about Ayurvedic exports?",
+  "j": "India",
+  "type": "abstain"
+ },
+ {
+  "id": "E24",
+  "q": "Summarise the Supreme Court judgment Ayush Herbal v. Union of India 2031 on neem patents",
+  "j": "India",
+  "type": "abstain"
+ },
+ {
+  "id": "E25",
+  "q": "What is the best pizza recipe in Indore?",
+  "j": "India",
+  "type": "abstain"
+ },
+ {
+  "id": "E26",
+  "q": "How does the Madrid System let me protect my Ayurvedic brand in several countries?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-MADRID-PROTOCOL"
+  ]
+ },
+ {
+  "id": "E27",
+  "q": "Can I register my bottle design internationally through the Hague System?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-HAGUE-GENEVA-ACT"
+  ]
+ },
+ {
+  "id": "E28",
+  "q": "When is a deposit under the Budapest Treaty needed for a microorganism in a patent?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-BUDAPEST-TREATY"
+  ]
+ },
+ {
+  "id": "E29",
+  "q": "How can I export an Ayurvedic herbal product to the European Union as a traditional herbal medicinal product?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-EXPORT-EU-THMPD"
+  ]
+ },
+ {
+  "id": "E30",
+  "q": "Can I sell an Ayurvedic herbal supplement in the United States and what claims are allowed?",
+  "j": "International",
+  "type": "answer",
+  "expect": [
+   "INT-EXPORT-US-DSHEA"
+  ]
+ }
+]

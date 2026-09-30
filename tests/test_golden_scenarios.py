@@ -48,7 +48,7 @@ def verify_ui_availability(client: httpx.Client):
     assert res_health.status_code == 200
     h_data = res_health.json()
     assert h_data["status"] == "healthy"
-    assert h_data["corpus_documents_loaded"] == 62
+    assert h_data["corpus_documents_loaded"] == 67
     print(f"  [PASS] System Health: {h_data['corpus_documents_loaded']} Curated Statutes Active\n")
 
 
@@ -84,7 +84,7 @@ def verify_scenario_1_classical_turmeric_pepper(client: httpx.Client):
         assert d_cls["category_code"] == "CLASSICAL_ASU", f"Wrong category code: {d_cls['category_code']}"
         assert "Classical" in d_cls["category"]
         assert "Section 3(a)" in d_cls["governing_law"]
-        assert d_cls["patentability"]["status"] == "Completely Barred"
+        assert d_cls["patentability"]["status"] .startswith("Severely Restricted")
         assert "traditional knowledge" in d_cls["patentability"]["assessment"].lower()
         assert "Section 3(p)" in d_cls["patentability"]["assessment"]
         assert "Exempted" in d_cls["abs_compliance"]["form_type"]

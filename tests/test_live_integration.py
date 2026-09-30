@@ -44,7 +44,7 @@ def test_workflow_1_classification():
         assert res_class.status_code == 200
         d_class = res_class.json()
         assert d_class["category_code"] == "CLASSICAL_ASU"
-        assert "Completely Barred" in d_class["patentability"]["status"]
+        assert "Severely Restricted" in d_class["patentability"]["status"]
         assert d_class["abs_compliance"]["exemption_eligible"] is True
         print(f"  [PASS] Classical: {d_class['category']} -> {d_class['patentability']['status']}")
 

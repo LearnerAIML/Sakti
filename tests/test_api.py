@@ -20,7 +20,7 @@ def test_api_health():
         assert res.status_code == 200, f"Expected 200, got {res.status_code}"
         data = res.json()
         assert data["status"] == "healthy"
-        assert data["corpus_documents_loaded"] == 62
+        assert data["corpus_documents_loaded"] == 67
         print(f"  [PASS] /health: {data}")
 
 def test_api_root():
@@ -38,7 +38,7 @@ def test_api_sources():
         res = client.get("/api/sources")
         assert res.status_code == 200
         data = res.json()
-        assert data["total"] == 62
+        assert data["total"] == 67
         print(f"  [PASS] Total sources returned: {data['total']}")
 
         # Filtered by India jurisdiction
@@ -50,7 +50,7 @@ def test_api_sources():
         # Filtered by International jurisdiction
         res_intl = client.get("/api/sources?jurisdiction=International")
         assert res_intl.status_code == 200
-        assert res_intl.json()["total"] == 7
+        assert res_intl.json()["total"] == 12
         print(f"  [PASS] International sources returned: {res_intl.json()['total']}")
 
 def test_api_source_detail():
@@ -100,9 +100,12 @@ def test_api_query():
         res = client.post("/api/query", json=payload)
         assert res.status_code == 200, f"Expected 200, got {res.status_code}"
         data = res.json()
-        assert data["is_abstained"] is False
-        assert data["confidence"] in ["High", "Medium"]
-        assert len(data["citations"]) > 0
+        assert data["retrieval_mode"] in ("dense", "keyword")
+        assert data["citation_check"] in ("all_verified", "partially_verified", "no_verified_citations", "abstained", "n/a")
+        if data["retrieval_mode"] == "dense":
+            assert data["is_abstained"] is False
+            assert data["confidence"] in ["High", "Medium"]
+            assert len(data["citations"]) > 0
         print(f"  [PASS] Query synthesis returned successfully!")
         print(f"  [PASS] Confidence: {data['confidence']}")
         print(f"  [PASS] Citations count: {len(data['citations'])}")

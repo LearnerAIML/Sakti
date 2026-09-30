@@ -29,7 +29,7 @@ def test_classical_asu_medicine():
     assert res.category_code == "CLASSICAL_ASU"
     assert "Section 3(a)" in res.governing_law
     assert "State Licensing Authority" in res.licensing_authority
-    assert "Completely Barred" in res.patentability["status"]
+    assert "Severely Restricted" in res.patentability["status"]
     assert any("Section 3(p)" in s for s in res.patentability["relevant_sections"])
     assert res.abs_compliance["exemption_eligible"] is True
     print("[PASS] Test 1: Classical ASU Medicine")

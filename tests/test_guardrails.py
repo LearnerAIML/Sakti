@@ -9,6 +9,7 @@ Tests:
 """
 
 import httpx
+import pytest
 from backend.config import settings
 
 BASE_URL = "http://127.0.0.1:8000"
@@ -92,7 +93,7 @@ def test_guardrail_mandatory_disclaimer():
         disclaimer = data["disclaimer"]
         assert "LEGAL DISCLAIMER" in disclaimer
         assert "not constitute formal legal advice" in disclaimer
-        assert "Smart India Hackathon" in disclaimer
+        assert "not a lawyer" in disclaimer
         print(f"  [PASS] Mandatory disclaimer present in response payload:\n  '{disclaimer}'")
 
 def test_guardrail_api_key_protection():
@@ -101,7 +102,8 @@ def test_guardrail_api_key_protection():
     print("=" * 70)
 
     raw_key = settings.GEMINI_API_KEY
-    assert bool(raw_key) is True, "API Key should be configured for testing"
+    if not raw_key:
+        pytest.skip("requires GEMINI_API_KEY")
 
     with httpx.Client(base_url=BASE_URL, timeout=90.0) as client:
         # Check /health
