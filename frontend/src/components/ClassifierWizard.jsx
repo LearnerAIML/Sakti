@@ -150,7 +150,7 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
               gap: '0.5rem',
               fontWeight: 700,
               fontSize: '0.8125rem',
-              boxShadow: '0 0 12px rgba(5, 150, 105, 0.3)',
+              boxShadow: '0 0 12px rgba(31, 95, 75, 0.3)',
             }}
           >
             <FileText size={15} />
@@ -166,7 +166,7 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
           <div className="info-row-value" style={{ fontSize: '0.75rem', lineHeight: 1.4 }}>
             {result.governing_law}
           </div>
-          <div style={{ fontSize: '0.6875rem', color: '#34d399', fontWeight: 600, marginTop: '0.25rem' }}>
+          <div style={{ fontSize: '0.6875rem', color: 'var(--color-text-accent)', fontWeight: 600, marginTop: '0.25rem' }}>
             Auth: {result.licensing_authority}
           </div>
         </div>
@@ -245,8 +245,8 @@ function ResultCard({ result, onOpenEscalation, onOpenDossier, formData }) {
         }}>
           {result.warnings.map((w, idx) => (
             <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-              <AlertTriangle size={14} color="#f87171" strokeWidth={2} style={{ flexShrink: 0, marginTop: '2px' }} />
-              <span style={{ fontSize: '0.8125rem', color: '#fca5a5', lineHeight: 1.5 }}>{w}</span>
+              <AlertTriangle size={14} color="var(--color-error-text)" strokeWidth={2} style={{ flexShrink: 0, marginTop: '2px' }} />
+              <span style={{ fontSize: '0.8125rem', color: 'var(--color-error-text)', lineHeight: 1.5 }}>{w}</span>
             </div>
           ))}
         </div>
@@ -337,7 +337,7 @@ export default function ClassifierWizard({ onClassify, result, loading, onOpenEs
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.borderColor = 'var(--color-brand-emerald)';
-                  e.currentTarget.style.background = 'rgba(5,150,105,0.08)';
+                  e.currentTarget.style.background = 'rgba(31, 95, 75,0.08)';
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.borderColor = 'var(--color-border-default)';

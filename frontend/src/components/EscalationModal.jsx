@@ -66,11 +66,11 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(217, 119, 6, 0.15)',
+              background: 'rgba(154, 106, 18, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fbbf24',
+              color: 'var(--color-text-gold)',
             }}>
               <UserCheck size={18} strokeWidth={2} />
             </div>
@@ -100,13 +100,13 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
                 width: '56px',
                 height: '56px',
                 borderRadius: '50%',
-                background: 'rgba(5, 150, 105, 0.15)',
-                border: '1px solid rgba(5, 150, 105, 0.3)',
+                background: 'rgba(31, 95, 75, 0.15)',
+                border: '1px solid rgba(31, 95, 75, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto',
-                color: '#34d399',
+                color: 'var(--color-text-accent)',
               }}>
                 <CheckCircle2 size={28} strokeWidth={2.5} />
               </div>
@@ -128,7 +128,7 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Tracking ID:</span>
-                  <code style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#fbbf24' }}>{result.request_id}</code>
+                  <code style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-text-gold)' }}>{result.request_id}</code>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Status:</span>
@@ -161,7 +161,7 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  color: '#fca5a5',
+                  color: 'var(--color-error-text)',
                   fontSize: '0.8125rem',
                 }}>
                   <AlertCircle size={15} style={{ flexShrink: 0 }} />
@@ -218,7 +218,7 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
 
               <div>
                 <label className="input-label">
-                  Legal / Patent Inquiry Details <span style={{ color: '#f87171' }}>*</span>
+                  Legal / Patent Inquiry Details <span style={{ color: 'var(--color-error-text)' }}>*</span>
                 </label>
                 <textarea
                   className="input"
@@ -254,7 +254,7 @@ export default function EscalationModal({ isOpen, onClose, initialData = {} }) {
                 fontSize: '0.6875rem',
                 color: 'var(--color-text-muted)',
               }}>
-                <ShieldCheck size={14} color="#34d399" style={{ flexShrink: 0 }} />
+                <ShieldCheck size={14} color="var(--color-text-accent)" style={{ flexShrink: 0 }} />
                 <span>
                   Privacy protected under DPDP Act 2023. Requests are stored locally and routed only to designated patent facilitators.
                 </span>

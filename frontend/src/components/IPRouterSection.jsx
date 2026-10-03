@@ -62,7 +62,7 @@ export default function IPRouterSection({ result, onOpenEscalation }) {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
         <div>
           <h4 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Shield size={16} color="#34d399" />
+            <Shield size={16} color="var(--color-text-accent)" />
             <span>Recommended Multi-Regime IP Protection</span>
           </h4>
           <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
@@ -104,7 +104,7 @@ export default function IPRouterSection({ result, onOpenEscalation }) {
           const isRec = path.is_recommended;
           const isCond = path.status_label.toLowerCase().includes('cond');
 
-          const borderColor = isRec ? 'rgba(5, 150, 105, 0.35)' : isCond ? 'rgba(217, 119, 6, 0.35)' : 'var(--color-border-default)';
+          const borderColor = isRec ? 'rgba(31, 95, 75, 0.35)' : isCond ? 'rgba(154, 106, 18, 0.35)' : 'var(--color-border-default)';
           const badgeClass = isRec ? 'badge-emerald' : isCond ? 'badge-amber' : 'badge-slate';
 
           return (
@@ -177,8 +177,8 @@ export default function IPRouterSection({ result, onOpenEscalation }) {
       {/* Escalation Prompt */}
       {onOpenEscalation && (
         <div style={{
-          background: 'rgba(217, 119, 6, 0.08)',
-          border: '1px solid rgba(217, 119, 6, 0.25)',
+          background: 'rgba(154, 106, 18, 0.08)',
+          border: '1px solid rgba(154, 106, 18, 0.25)',
           borderRadius: 'var(--radius-md)',
           padding: '0.75rem 1rem',
           display: 'flex',

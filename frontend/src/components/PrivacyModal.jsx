@@ -29,11 +29,11 @@ export default function PrivacyModal({ isOpen, onClose }) {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(5, 150, 105, 0.15)',
+              background: 'rgba(31, 95, 75, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#34d399',
+              color: 'var(--color-text-accent)',
             }}>
               <ShieldCheck size={18} strokeWidth={2} />
             </div>
@@ -67,17 +67,17 @@ export default function PrivacyModal({ isOpen, onClose }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{
-                background: 'rgba(5, 150, 105, 0.08)',
-                border: '1px solid rgba(5, 150, 105, 0.25)',
+                background: 'rgba(31, 95, 75, 0.08)',
+                border: '1px solid rgba(31, 95, 75, 0.25)',
                 borderRadius: 'var(--radius-lg)',
                 padding: '0.875rem 1rem',
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: '0.625rem',
               }}>
-                <Award size={18} color="#34d399" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <Award size={18} color="var(--color-text-accent)" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: '#34d399' }}>
+                  <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-text-accent)' }}>
                     Zero-Data-Retention for Innovation Trade Secrets
                   </h4>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '0.25rem', lineHeight: 1.5 }}>

@@ -58,9 +58,9 @@ function ConfidenceBadge({ confidence, isAbstained }) {
     );
   }
   const styles = {
-    High: { bg: 'rgba(5,150,105,0.12)', color: '#34d399', border: 'rgba(5,150,105,0.35)' },
-    Medium: { bg: 'rgba(37,99,235,0.12)', color: '#60a5fa', border: 'rgba(37,99,235,0.35)' },
-    Low: { bg: 'rgba(217,119,6,0.12)', color: '#fbbf24', border: 'rgba(217,119,6,0.35)' },
+    High: { bg: 'rgba(31, 95, 75,0.12)', color: 'var(--color-text-accent)', border: 'rgba(31, 95, 75,0.35)' },
+    Medium: { bg: 'rgba(37,99,235,0.12)', color: 'var(--color-info-text)', border: 'rgba(37,99,235,0.35)' },
+    Low: { bg: 'rgba(154, 106, 18,0.12)', color: 'var(--color-text-gold)', border: 'rgba(154, 106, 18,0.35)' },
   };
   const s = styles[confidence] || styles.Low;
   return (
@@ -87,7 +87,7 @@ function CitationCard({ citation, onSelectDoc }) {
         gap: '0.5rem',
         transition: 'border-color 0.15s ease',
       }}
-      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(5,150,105,0.4)'}
+      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(31, 95, 75,0.4)'}
       onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-border-default)'}
     >
       <div>
@@ -127,7 +127,7 @@ function CitationCard({ citation, onSelectDoc }) {
         <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.4, marginBottom: '0.125rem' }}>
           {citation.statute}
         </p>
-        <p style={{ fontSize: '0.75rem', color: '#fbbf24', fontWeight: 600, lineHeight: 1.4, marginBottom: '0.25rem' }}>
+        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-gold)', fontWeight: 600, lineHeight: 1.4, marginBottom: '0.25rem' }}>
           {citation.section_rule}
         </p>
 
@@ -154,7 +154,7 @@ function CitationCard({ citation, onSelectDoc }) {
             fontSize: '0.6875rem',
             padding: '0.2rem 0.5rem',
             color: 'var(--color-brand-emerald-light)',
-            borderColor: 'rgba(5, 150, 105, 0.3)',
+            borderColor: 'rgba(31, 95, 75, 0.3)',
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.25rem',
@@ -217,7 +217,7 @@ function TrustPanel({ response, onSelectDoc }) {
   const vBadge = response.is_abstained ? (
     <span className="badge badge-amber">{t('safe_abstention')}</span>
   ) : !cites.length ? (
-    <span className="badge" style={{ background: 'rgba(220, 38, 38, 0.12)', color: '#f87171', border: '1px solid rgba(220, 38, 38, 0.3)' }}>
+    <span className="badge" style={{ background: 'rgba(220, 38, 38, 0.12)', color: 'var(--color-error-text)', border: '1px solid rgba(220, 38, 38, 0.3)' }}>
       Unverified: No Citations
     </span>
   ) : response.citation_check === 'all_verified' ? (
@@ -548,7 +548,7 @@ export default function RagQueryInterface({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Scale size={16} color="#60a5fa" strokeWidth={2} />
+              <Scale size={16} color="var(--color-info-text)" strokeWidth={2} />
             </div>
             <div>
               <h2 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
@@ -668,7 +668,7 @@ export default function RagQueryInterface({
           </div>
 
           {speechError && (
-            <div style={{ fontSize: '0.6875rem', color: '#f87171' }}>
+            <div style={{ fontSize: '0.6875rem', color: 'var(--color-error-text)' }}>
               {speechError}
             </div>
           )}
@@ -753,7 +753,7 @@ export default function RagQueryInterface({
                   onMouseEnter={e => {
                     e.currentTarget.style.borderColor = 'var(--color-brand-emerald)';
                     e.currentTarget.style.color = 'var(--color-text-primary)';
-                    e.currentTarget.style.background = 'rgba(5,150,105,0.06)';
+                    e.currentTarget.style.background = 'rgba(31, 95, 75,0.06)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.borderColor = 'var(--color-border-default)';
@@ -777,7 +777,7 @@ export default function RagQueryInterface({
               width: '40px',
               height: '40px',
               border: '3px solid var(--color-border-strong)',
-              borderTopColor: '#60a5fa',
+              borderTopColor: 'var(--color-info-text)',
               borderRadius: '50%',
               animation: 'spin 0.7s linear infinite',
             }} />
@@ -825,7 +825,7 @@ export default function RagQueryInterface({
                 style={{ fontSize: '0.6875rem', padding: '0.25rem 0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                 title="Copy answer"
               >
-                {copied ? <Check size={12} color="#34d399" /> : <Copy size={12} />}
+                {copied ? <Check size={12} color="var(--color-text-accent)" /> : <Copy size={12} />}
                 <span>{copied ? t('copied') : t('copy')}</span>
               </button>
 
@@ -904,8 +904,8 @@ export default function RagQueryInterface({
           {/* Human Escalation Option */}
           {onOpenEscalation && (
             <div style={{
-              background: 'rgba(217, 119, 6, 0.08)',
-              border: '1px solid rgba(217, 119, 6, 0.25)',
+              background: 'rgba(154, 106, 18, 0.08)',
+              border: '1px solid rgba(154, 106, 18, 0.25)',
               borderRadius: 'var(--radius-md)',
               padding: '0.75rem 1rem',
               display: 'flex',
@@ -1025,7 +1025,7 @@ export default function RagQueryInterface({
             <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderTop: '3px solid #2563eb' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Globe size={15} color="#60a5fa" />
+                  <Globe size={15} color="var(--color-info-text)" />
                   <h4 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                     {t('international_column')}
                   </h4>

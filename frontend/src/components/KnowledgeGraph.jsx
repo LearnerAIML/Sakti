@@ -141,8 +141,8 @@ export default function KnowledgeGraph({ onSelectDoc, onSelectProductClass }) {
                 width: '34px',
                 height: '34px',
                 borderRadius: '8px',
-                background: 'rgba(5, 150, 105, 0.12)',
-                border: '1px solid rgba(5, 150, 105, 0.25)',
+                background: 'rgba(31, 95, 75, 0.12)',
+                border: '1px solid rgba(31, 95, 75, 0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -198,13 +198,13 @@ export default function KnowledgeGraph({ onSelectDoc, onSelectProductClass }) {
           <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-brand-emerald-light)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             1. {t('graph_col_product')}
           </div>
-          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#fbbf24', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-text-gold)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             2. {t('graph_col_iptype')}
           </div>
-          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#60a5fa', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-info-text)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             3. {t('graph_col_law')}
           </div>
-          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#c084fc', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#7c5cb8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             4. {t('graph_col_jurisdiction')}
           </div>
         </div>

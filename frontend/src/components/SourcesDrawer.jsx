@@ -55,13 +55,13 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(217,119,6,0.12)',
-              border: '1px solid rgba(217,119,6,0.25)',
+              background: 'rgba(154, 106, 18,0.12)',
+              border: '1px solid rgba(154, 106, 18,0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Library size={16} color="#fbbf24" strokeWidth={2} />
+              <Library size={16} color="var(--color-text-gold)" strokeWidth={2} />
             </div>
             <div>
               <h2 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.2 }}>
@@ -150,7 +150,7 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
               width: '36px',
               height: '36px',
               border: '3px solid var(--color-border-strong)',
-              borderTopColor: '#fbbf24',
+              borderTopColor: 'var(--color-text-gold)',
               borderRadius: '50%',
               animation: 'spin 0.7s linear infinite',
             }} />
@@ -165,7 +165,7 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
           borderColor: 'var(--color-error-border)',
         }}>
           <div className="empty-state" style={{ padding: '2rem 1.5rem' }}>
-            <p style={{ fontSize: '0.875rem', color: '#fca5a5', fontWeight: 500 }}>{error}</p>
+            <p style={{ fontSize: '0.875rem', color: 'var(--color-error-text)', fontWeight: 500 }}>{error}</p>
             <button onClick={fetchSources} className="btn btn-secondary btn-sm" style={{ marginTop: '0.5rem' }}>
               Try Again
             </button>
@@ -226,7 +226,7 @@ function SourceCard({ doc, onSelectDoc }) {
     >
       {/* Top row: ID + Category */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
-        <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#34d399', lineHeight: 1 }}>
+        <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-text-accent)', lineHeight: 1 }}>
           {doc.id}
         </code>
         {(doc.category || doc.jurisdiction) && (
@@ -252,7 +252,7 @@ function SourceCard({ doc, onSelectDoc }) {
         <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.4, marginBottom: '0.25rem' }}>
           {doc.statute}
         </p>
-        <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#fbbf24', lineHeight: 1.4, marginBottom: '0.375rem' }}>
+        <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-gold)', lineHeight: 1.4, marginBottom: '0.375rem' }}>
           {doc.section_rule}
         </p>
         <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
@@ -279,8 +279,8 @@ function SourceCard({ doc, onSelectDoc }) {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.25rem',
-            color: '#34d399',
-            borderColor: 'rgba(5, 150, 105, 0.3)',
+            color: 'var(--color-text-accent)',
+            borderColor: 'rgba(31, 95, 75, 0.3)',
           }}
           title="Open full statutory provision and legal implications"
         >

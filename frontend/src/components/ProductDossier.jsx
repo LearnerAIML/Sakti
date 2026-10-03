@@ -191,7 +191,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
               alignItems: 'center',
               gap: '0.375rem',
               fontSize: '0.75rem',
-              color: '#f87171',
+              color: 'var(--color-error-text)',
               background: 'rgba(220, 38, 38, 0.08)',
               padding: '0.375rem 0.625rem',
               borderRadius: 'var(--radius-sm)',
@@ -255,11 +255,11 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
           {d.exemptions?.map((e, idx) => (
             <div key={idx} style={{
               fontSize: '0.75rem',
-              color: '#34d399',
-              background: 'rgba(5, 150, 105, 0.08)',
+              color: 'var(--color-text-accent)',
+              background: 'rgba(31, 95, 75, 0.08)',
               padding: '0.375rem 0.625rem',
               borderRadius: 'var(--radius-sm)',
-              border: '1px solid rgba(5, 150, 105, 0.2)'
+              border: '1px solid rgba(31, 95, 75, 0.2)'
             }}>
               <b>Exemption Evaluated:</b> {e}
             </div>
@@ -275,7 +275,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
             {d.what_it_is}
           </p>
           <div style={{ background: 'var(--color-bg-base)', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-default)' }}>
-            <p style={{ fontSize: '0.75rem', fontWeight: 600, color: '#fbbf24', marginBottom: '0.25rem' }}>
+            <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-text-gold)', marginBottom: '0.25rem' }}>
               How Patent Examiners Use TKDL Against Claims:
             </p>
             <ul style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', paddingLeft: '1.25rem', margin: 0, lineHeight: 1.5 }}>
@@ -314,11 +314,11 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
           {d.warnings?.map((w, idx) => (
             <div key={idx} style={{
               fontSize: '0.75rem',
-              color: '#fbbf24',
-              background: 'rgba(217, 119, 6, 0.08)',
+              color: 'var(--color-text-gold)',
+              background: 'rgba(154, 106, 18, 0.08)',
               padding: '0.375rem 0.625rem',
               borderRadius: 'var(--radius-sm)',
-              border: '1px solid rgba(217, 119, 6, 0.2)'
+              border: '1px solid rgba(154, 106, 18, 0.2)'
             }}>
               ⚠ {w}
             </div>
@@ -352,8 +352,8 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
                 width: '34px',
                 height: '34px',
                 borderRadius: '8px',
-                background: 'rgba(5, 150, 105, 0.12)',
-                border: '1px solid rgba(5, 150, 105, 0.25)',
+                background: 'rgba(31, 95, 75, 0.12)',
+                border: '1px solid rgba(31, 95, 75, 0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -476,7 +476,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
 
           {/* Column 2: IP Features & Export */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-            <h4 style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#fbbf24', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <h4 style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-text-gold)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               2. Intellectual Property Attributes
             </h4>
 
@@ -552,7 +552,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
 
           {/* Column 3: Biodiversity & ABS Profile */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-            <h4 style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#60a5fa', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <h4 style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--color-info-text)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               3. Biological Diversity &amp; ABS Setup
             </h4>
 
@@ -651,7 +651,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
               disabled={pdfLoading}
               className="btn btn-secondary btn-lg"
               style={{
-                borderColor: 'rgba(5, 150, 105, 0.4)',
+                borderColor: 'rgba(31, 95, 75, 0.4)',
                 color: 'var(--color-brand-emerald-light)',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -815,7 +815,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
           {/* Recommended Next Steps */}
           {dossier.next_steps?.length > 0 && (
             <div className="card">
-              <h4 style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.75rem' }}>
+              <h4 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-text-gold)', marginBottom: '0.75rem' }}>
                 {t('next_steps')}
               </h4>
               <ol style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', paddingLeft: '1.25rem', margin: 0, lineHeight: 1.6 }}>
@@ -840,8 +840,8 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
                     })}
                     className="btn btn-secondary btn-sm"
                     style={{
-                      borderColor: 'rgba(217, 119, 6, 0.4)',
-                      color: '#fbbf24',
+                      borderColor: 'rgba(154, 106, 18, 0.4)',
+                      color: 'var(--color-text-gold)',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.375rem',

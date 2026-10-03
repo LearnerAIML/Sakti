@@ -29,11 +29,11 @@ export default function HighlightsModal({ isOpen, onClose }) {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(217, 119, 6, 0.15)',
+              background: 'rgba(154, 106, 18, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#fbbf24',
+              color: 'var(--color-text-gold)',
             }}>
               <Sparkles size={18} strokeWidth={2} />
             </div>
@@ -82,7 +82,7 @@ export default function HighlightsModal({ isOpen, onClose }) {
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                        <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#34d399' }}>{hl.id}</code>
+                        <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-text-accent)' }}>{hl.id}</code>
                         <span className="badge badge-amber">{hl.domain}</span>
                         <span className="badge badge-emerald">{hl.jurisdiction}</span>
                       </div>
@@ -96,9 +96,9 @@ export default function HighlightsModal({ isOpen, onClose }) {
                         fontWeight: 600,
                         padding: '0.2rem 0.5rem',
                         borderRadius: '999px',
-                        background: 'rgba(5, 150, 105, 0.12)',
-                        color: '#34d399',
-                        border: '1px solid rgba(5, 150, 105, 0.25)',
+                        background: 'rgba(31, 95, 75, 0.12)',
+                        color: 'var(--color-text-accent)',
+                        border: '1px solid rgba(31, 95, 75, 0.25)',
                         whiteSpace: 'nowrap',
                       }}>
                         {hl.applicability_status}

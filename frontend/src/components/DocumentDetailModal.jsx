@@ -44,18 +44,18 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              background: 'rgba(5, 150, 105, 0.15)',
+              background: 'rgba(31, 95, 75, 0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#34d399',
+              color: 'var(--color-text-accent)',
               flexShrink: 0,
             }}>
               <Scale size={18} strokeWidth={2} />
             </div>
             <div style={{ minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <code style={{ fontSize: '0.75rem', fontWeight: 700, color: '#34d399' }}>{docId}</code>
+                <code style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-text-accent)' }}>{docId}</code>
                 {doc?.category && (
                   <span className="badge" style={{ textTransform: 'uppercase', fontSize: '0.625rem' }}>
                     {doc.category}
@@ -96,7 +96,7 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
               }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
                   <div>
-                    <span style={{ fontSize: '0.6875rem', fontWeight: 700, textTransform: 'uppercase', color: '#fbbf24', letterSpacing: '0.05em' }}>
+                    <span style={{ fontSize: '0.6875rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--color-text-gold)', letterSpacing: '0.05em' }}>
                       {doc.section_rule}
                     </span>
                     <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-text-primary)', marginTop: '0.25rem' }}>
@@ -146,7 +146,7 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
             </div>
           ) : (
             <div className="empty-state">
-              <p style={{ color: '#f87171', fontSize: '0.875rem' }}>Could not load statutory text for {docId}.</p>
+              <p style={{ color: 'var(--color-error-text)', fontSize: '0.875rem' }}>Could not load statutory text for {docId}.</p>
             </div>
           )}
         </div>
@@ -160,7 +160,7 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
           >
             {copied ? (
               <>
-                <Check size={13} color="#34d399" />
+                <Check size={13} color="var(--color-text-accent)" />
                 <span>Citation Copied!</span>
               </>
             ) : (

@@ -32,7 +32,7 @@ export default function RegistriesSection({ jurisdiction = "India" }) {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
         <div>
           <h3 style={{ fontSize: '1.0625rem', fontWeight: 700, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Landmark size={18} color="#fbbf24" />
+            <Landmark size={18} color="var(--color-text-gold)" />
             <span>Official Government Registries &amp; Filing Portals</span>
           </h3>
           <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
@@ -84,7 +84,7 @@ export default function RegistriesSection({ jurisdiction = "India" }) {
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.375rem', gap: '0.5rem' }}>
-                  <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#fbbf24' }}>{reg.id}</code>
+                  <code style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--color-text-gold)' }}>{reg.id}</code>
                   <span className="badge badge-emerald" style={{ fontSize: '0.625rem', textTransform: 'uppercase' }}>
                     {reg.jurisdiction}
                   </span>
@@ -124,7 +124,7 @@ export default function RegistriesSection({ jurisdiction = "India" }) {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-                <span style={{ fontSize: '0.6875rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                <span style={{ fontSize: '0.6875rem', color: 'var(--color-text-accent)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                   <CheckCircle2 size={12} />
                   <span>Official Gateway</span>
                 </span>
@@ -134,9 +134,9 @@ export default function RegistriesSection({ jurisdiction = "India" }) {
                   rel="noopener noreferrer"
                   className="btn btn-sm"
                   style={{
-                    background: 'rgba(5, 150, 105, 0.12)',
+                    background: 'rgba(31, 95, 75, 0.12)',
                     color: 'var(--color-brand-emerald-light)',
-                    border: '1px solid rgba(5, 150, 105, 0.25)',
+                    border: '1px solid rgba(31, 95, 75, 0.25)',
                     fontSize: '0.6875rem',
                     padding: '0.25rem 0.625rem',
                     display: 'inline-flex',
