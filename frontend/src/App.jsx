@@ -10,8 +10,7 @@ import SourcesDrawer from './components/SourcesDrawer.jsx';
 import EscalationModal from './components/EscalationModal.jsx';
 import DocumentDetailModal from './components/DocumentDetailModal.jsx';
 import PrivacyModal from './components/PrivacyModal.jsx';
-
-const API_BASE = ""; // relative — works via FastAPI (/app/) and Vite dev proxy
+import { API_BASE } from './config.js';
 
 function MainApp() {
   const { t, isHindi } = useLanguage();

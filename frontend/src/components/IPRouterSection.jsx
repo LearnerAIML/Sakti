@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Sparkles, ExternalLink, ArrowRight, CheckCircle2, AlertTriangle, XCircle, Info } from 'lucide-react';
-
-const API_BASE = "";
+import { API_BASE } from '../config.js';
 
 export default function IPRouterSection({ result, onOpenEscalation }) {
   const [ipData, setIpData] = useState(null);

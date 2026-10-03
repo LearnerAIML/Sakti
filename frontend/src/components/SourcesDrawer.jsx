@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Library, ExternalLink, RefreshCw, Tag, Search, Sparkles, FileText, ChevronRight } from 'lucide-react';
 import RegistriesSection from './RegistriesSection.jsx';
+import { API_BASE } from '../config.js';
 
 export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
   const [sources, setSources] = useState([]);
@@ -17,7 +18,7 @@ export default function SourcesDrawer({ jurisdiction, onSelectDoc }) {
     setLoading(true);
     setError(null);
     try {
-      const url = `/api/sources?jurisdiction=${jurisdiction}`;
+      const url = `${API_BASE}/api/sources?jurisdiction=${encodeURIComponent(jurisdiction)}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();

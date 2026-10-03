@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Landmark, CheckCircle2, Search } from 'lucide-react';
-
-const API_BASE = "";
+import { API_BASE } from '../config.js';
 
 export default function RegistriesSection({ jurisdiction = "India" }) {
   const [registries, setRegistries] = useState([]);

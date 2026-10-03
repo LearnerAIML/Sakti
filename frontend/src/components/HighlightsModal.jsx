@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, ExternalLink, Calendar, CheckCircle2 } from 'lucide-react';
-
-const API_BASE = "";
+import { API_BASE } from '../config.js';
 
 export default function HighlightsModal({ isOpen, onClose }) {
   const [highlights, setHighlights] = useState([]);

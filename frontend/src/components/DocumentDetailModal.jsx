@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ExternalLink, BookOpen, ShieldCheck, Copy, Check, Scale } from 'lucide-react';
-
-const API_BASE = "";
+import { API_BASE } from '../config.js';
 
 export default function DocumentDetailModal({ docId, isOpen, onClose }) {
   const [doc, setDoc] = useState(null);

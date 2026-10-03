@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Network, Search, RotateCcw, BookOpen, ExternalLink, Info, CheckCircle2, ChevronRight, FileText } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import { API_BASE } from '../config.js';
 
 export default function KnowledgeGraph({ onSelectDoc, onSelectProductClass }) {
   const { t } = useLanguage();
@@ -13,7 +14,7 @@ export default function KnowledgeGraph({ onSelectDoc, onSelectProductClass }) {
   const svgRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/graph')
+    fetch(`${API_BASE}/api/graph`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch knowledge graph');
         return res.json();

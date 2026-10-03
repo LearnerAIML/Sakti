@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ShieldCheck, Lock, Database, Award } from 'lucide-react';
-
-const API_BASE = "";
+import { API_BASE } from '../config.js';
 
 export default function PrivacyModal({ isOpen, onClose }) {
   const [data, setData] = useState(null);

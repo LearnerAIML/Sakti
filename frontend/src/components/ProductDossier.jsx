@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Download, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, ChevronRight, UserCheck, BookOpen, ExternalLink, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import { API_BASE } from '../config.js';
 
 const PRESETS = {
   classical: {
@@ -128,7 +129,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/dossier", {
+      const res = await fetch(`${API_BASE}/api/dossier`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -149,7 +150,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
   const downloadPdf = async () => {
     setPdfLoading(true);
     try {
-      const res = await fetch("/api/dossier/pdf", {
+      const res = await fetch(`${API_BASE}/api/dossier/pdf`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
