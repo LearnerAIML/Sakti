@@ -14,6 +14,7 @@ class Settings:
     PORT: int = int(os.getenv("PORT", "8000"))
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     GROQ_MODEL: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+    GROQ_FALLBACK_MODELS: str = os.getenv("GROQ_FALLBACK_MODELS", "openai/gpt-oss-20b,qwen/qwen3.8-27b")
     CORPUS_DIR: Path = BASE_DIR / os.getenv("CORPUS_DIR", "data/corpus")
 
     ABSTENTION_THRESHOLD: float = float(os.getenv("ABSTENTION_THRESHOLD", "0.52"))

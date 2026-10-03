@@ -21,6 +21,7 @@ from backend.corpus_loader import corpus_store
 from backend.audit import log_event
 from backend.guardrails import guardrails, MANDATORY_LEGAL_DISCLAIMER, MANDATORY_LEGAL_DISCLAIMER_HI
 
+logger = logging.getLogger("sakti.synthesizer")
 GROQ_MODEL = settings.GROQ_MODEL  # e.g. "openai/gpt-oss-120b"
 
 ABSTENTION_THRESHOLD = settings.ABSTENTION_THRESHOLD  # Score below which SAKTI safely abstains (calibrate via scripts/run_eval.py)
@@ -77,21 +78,47 @@ class GroundedSynthesizer:
         self.last_model = None
 
     def _call_groq(self, prompt: str) -> str:
-        """Invokes the Groq LLM with a single user message."""
+        """
+        Invokes the Groq LLM with a single user message.
+        Automatically falls back to secondary Groq models if the primary model
+        hits daily/minute rate limits (HTTP 429 / TPD limit reached) or transient errors.
+        """
         if not self.client:
             raise ValueError("GROQ_API_KEY is not configured in environment or .env file.")
 
-        try:
-            response = self.client.chat.completions.create(
-                model=GROQ_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=4096,
-            )
-            self.last_model = GROQ_MODEL
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            raise RuntimeError(f"Groq API call failed: {e}") from e
+        models_to_try = [settings.GROQ_MODEL]
+        for m in [x.strip() for x in settings.GROQ_FALLBACK_MODELS.split(",") if x.strip()]:
+            if m not in models_to_try:
+                models_to_try.append(m)
+
+        last_error = None
+        for model_name in models_to_try:
+            try:
+                response = self.client.chat.completions.create(
+                    model=model_name,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.2,
+                    max_tokens=4096,
+                )
+                self.last_model = model_name
+                content = response.choices[0].message.content
+                if content:
+                    return content.strip()
+            except Exception as e:
+                last_error = e
+                err_str = str(e)
+                if "429" in err_str or "rate_limit" in err_str or "quota" in err_str or "503" in err_str:
+                    logger.warning(
+                        "Groq model '%s' rate-limited or quota reached. Attempting fallback model...",
+                        model_name
+                    )
+                else:
+                    logger.warning("Groq model '%s' failed: %s. Attempting fallback...", model_name, err_str)
+                continue
+
+        raise RuntimeError(
+            f"Groq API call failed across all attempted models ({models_to_try}): {last_error}"
+        ) from last_error
 
     def _synthesize(
         self,
