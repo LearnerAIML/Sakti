@@ -1,5 +1,5 @@
 """
-Automated Evaluation Tests for Gemini Grounded Synthesis & Citation Formatter.
+Automated Evaluation Tests for Groq Grounded Synthesis & Citation Formatter.
 Tests 3 representative legal scenarios:
 1. Domestic Patentability (Section 3(p) & 3(e) - Ginger & Honey cough syrup)
 2. International Jurisdiction (WIPO GRATK Treaty 2024 & Mandatory Origin Disclosure)

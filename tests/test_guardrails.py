@@ -101,16 +101,16 @@ def test_guardrail_api_key_protection():
     print("GUARDRAIL TEST 4: API-Key Protection & Non-Leakage")
     print("=" * 70)
 
-    raw_key = settings.GEMINI_API_KEY
+    raw_key = settings.GROQ_API_KEY
     if not raw_key:
-        pytest.skip("requires GEMINI_API_KEY")
+        pytest.skip("requires GROQ_API_KEY")
 
     with httpx.Client(base_url=BASE_URL, timeout=90.0) as client:
         # Check /health
         res_health = client.get("/health")
         text_health = res_health.text
         assert raw_key not in text_health, "CRITICAL LEAK: API key leaked in /health!"
-        assert "gemini_api_configured" in res_health.json()
+        assert "groq_api_configured" in res_health.json()
         print("  [PASS] /health protects API key (only boolean flag exposed)")
 
         # Check /api/sources

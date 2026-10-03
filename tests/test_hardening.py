@@ -26,7 +26,7 @@ def test_offline_query_never_500_and_cites_only_retrieved():
 
 
 def test_fake_citation_ids_are_stripped(monkeypatch):
-    monkeypatch.setattr(synthesizer, "_call_gemini_with_fallback",
+    monkeypatch.setattr(synthesizer, "_call_groq",
                         lambda p: "Answer [IN-PAT-SEC-003P] and also [IN-FAKE-999].")
     monkeypatch.setattr(vector_store, "search", lambda **kw: _fake_results())
     resp = synthesizer.synthesize("patent traditional knowledge ayurveda", "India")

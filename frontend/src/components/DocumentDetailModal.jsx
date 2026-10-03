@@ -8,10 +8,13 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // If isOpen is provided, use it; otherwise modal is open whenever docId is set
+  const open = isOpen !== undefined ? Boolean(isOpen) : Boolean(docId);
+
   useEffect(() => {
-    if (isOpen && docId) {
+    if (open && docId) {
       setLoading(true);
-      fetch(`${API_BASE}/api/sources/${docId}`)
+      fetch(`${API_BASE}/api/sources/${encodeURIComponent(docId)}`)
         .then((res) => {
           if (!res.ok) throw new Error("Document not found");
           return res.json();
@@ -22,10 +25,28 @@ export default function DocumentDetailModal({ docId, isOpen, onClose }) {
           setDoc(null);
         })
         .finally(() => setLoading(false));
+    } else if (!open) {
+      setDoc(null);
     }
-  }, [isOpen, docId]);
+  }, [open, docId]);
 
-  if (!isOpen) return null;
+  // Handle ESC key to close modal & lock body scroll
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.classList.add('modal-open');
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.classList.remove('modal-open');
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
 
   const handleCopyCitation = () => {
     if (!doc) return;

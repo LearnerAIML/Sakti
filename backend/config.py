@@ -12,11 +12,11 @@ class Settings:
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     HOST: str = os.getenv("HOST", "127.0.0.1")
     PORT: int = int(os.getenv("PORT", "8000"))
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
     CORPUS_DIR: Path = BASE_DIR / os.getenv("CORPUS_DIR", "data/corpus")
 
     ABSTENTION_THRESHOLD: float = float(os.getenv("ABSTENTION_THRESHOLD", "0.52"))
-    GEMINI_MODELS: str = os.getenv("GEMINI_MODELS", "")
     CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://127.0.0.1:8000,http://localhost:8000,http://localhost:5173")
     ADMIN_TOKEN: str = os.getenv("ADMIN_TOKEN", "")
     AUDIT_DIR: Path = BASE_DIR / os.getenv("AUDIT_DIR", "data/audit")

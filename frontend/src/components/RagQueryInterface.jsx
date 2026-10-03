@@ -22,6 +22,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import LegalAnswerRenderer from './LegalAnswerRenderer.jsx';
 
 const SAMPLE_QUERIES = {
   India: [
@@ -833,21 +834,12 @@ export default function RagQueryInterface({
             </div>
           </div>
 
-          {/* Answer Text with Clickable Inline Citations */}
-          <div style={{
-            background: 'var(--color-bg-elevated)',
-            border: '1px solid var(--color-border-default)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '1.125rem 1.25rem',
-            fontSize: '0.875rem',
-            color: 'var(--color-text-secondary)',
-          }}>
-            <TextWithInlineCitations
-              text={response.answer}
-              citations={response.citations}
-              onSelectDoc={onSelectDoc}
-            />
-          </div>
+          {/* Professional Structured Legal Answer */}
+          <LegalAnswerRenderer
+            text={response.answer}
+            citations={response.citations}
+            onSelectDoc={onSelectDoc}
+          />
 
           {/* Feature 2: Dedicated Trust Panel */}
           <TrustPanel response={response} onSelectDoc={onSelectDoc} />
@@ -990,20 +982,11 @@ export default function RagQueryInterface({
                 <ConfidenceBadge confidence={compareData.india?.confidence} isAbstained={compareData.india?.is_abstained} />
               </div>
 
-              <div style={{
-                background: 'var(--color-bg-elevated)',
-                border: '1px solid var(--color-border-default)',
-                borderRadius: 'var(--radius-md)',
-                padding: '1rem',
-                fontSize: '0.8125rem',
-                color: 'var(--color-text-secondary)',
-              }}>
-                <TextWithInlineCitations
-                  text={compareData.india?.answer}
-                  citations={compareData.india?.citations}
-                  onSelectDoc={onSelectDoc}
-                />
-              </div>
+              <LegalAnswerRenderer
+                text={compareData.india?.answer}
+                citations={compareData.india?.citations}
+                onSelectDoc={onSelectDoc}
+              />
 
               <TrustPanel response={compareData.india} onSelectDoc={onSelectDoc} />
 
@@ -1033,20 +1016,11 @@ export default function RagQueryInterface({
                 <ConfidenceBadge confidence={compareData.international?.confidence} isAbstained={compareData.international?.is_abstained} />
               </div>
 
-              <div style={{
-                background: 'var(--color-bg-elevated)',
-                border: '1px solid var(--color-border-default)',
-                borderRadius: 'var(--radius-md)',
-                padding: '1rem',
-                fontSize: '0.8125rem',
-                color: 'var(--color-text-secondary)',
-              }}>
-                <TextWithInlineCitations
-                  text={compareData.international?.answer}
-                  citations={compareData.international?.citations}
-                  onSelectDoc={onSelectDoc}
-                />
-              </div>
+              <LegalAnswerRenderer
+                text={compareData.international?.answer}
+                citations={compareData.international?.citations}
+                onSelectDoc={onSelectDoc}
+              />
 
               <TrustPanel response={compareData.international} onSelectDoc={onSelectDoc} />
 

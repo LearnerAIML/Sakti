@@ -149,7 +149,7 @@ def health_check():
         "service": settings.PROJECT_NAME,
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
-        "gemini_api_configured": bool(settings.GEMINI_API_KEY),
+        "groq_api_configured": bool(settings.GROQ_API_KEY),
         "corpus_documents_loaded": len(corpus_store.get_all()),
         "unverified_corpus_documents": sum(1 for d in corpus_store.get_all() if not d.last_verified)
     }
@@ -210,7 +210,7 @@ def query_legal_assistant(payload: QueryRequest):
     - Filters vector retrieval by jurisdiction ('India' vs 'International')
     - Retrieves top-k matching authoritative provisions
     - Enforces safe abstention if relevance falls below legal threshold (0.52)
-    - Invokes Gemini for grounded legal analysis with strict citations
+    - Invokes Groq LLM for grounded legal analysis with strict citations
     - Validates cited IDs against curated official corpus
     - Returns structured answer, verified citations with URLs, and confidence indicator
     """

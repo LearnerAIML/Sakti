@@ -425,6 +425,7 @@ function MainApp() {
       />
 
       <DocumentDetailModal
+        isOpen={Boolean(selectedDocId)}
         docId={selectedDocId}
         onClose={() => setSelectedDocId(null)}
       />

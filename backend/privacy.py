@@ -36,9 +36,9 @@ PRIVACY_SAFEGUARD_NOTICE: Dict[str, Any] = {
         )
     },
     "data_handling_and_storage": (
-        "All data processed by this prototype is stored on local server storage (except query text sent to Gemini, see below). No user inquiries, "
+        "All data processed by this prototype is stored on local server storage (except query text sent to Groq, see below). No user inquiries, "
         "formulation recipes, or contact data are harvested, monetized, sold, or shared with third-party advertising networks. "
-        "Query text is sent to the Google Gemini API from the server for retrieval embeddings and answer generation, so it leaves this server; "
+        "Query text is sent to the Groq API from the server for answer generation, so it leaves this server; "
         "API keys are never exposed to browsers."
     ),
     "user_guidance": (
