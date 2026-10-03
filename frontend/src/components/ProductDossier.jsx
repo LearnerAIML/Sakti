@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Download, Sparkles, AlertTriangle, ShieldCheck, CheckCircle2, ChevronRight, UserCheck, BookOpen, ExternalLink, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import { API_BASE } from '../config.js';
+import saktiLogo from '../assets/app-icon.png';
 
 const PRESETS = {
   classical: {
@@ -698,7 +699,7 @@ export default function ProductDossier({ initialData, onSelectDoc, onOpenEscalat
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
                 <img
-                  src="/app/app-icon.png"
+                  src={saktiLogo}
                   alt="SAKTI Emblem"
                   style={{
                     width: '44px',

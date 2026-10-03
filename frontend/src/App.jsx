@@ -11,6 +11,7 @@ import EscalationModal from './components/EscalationModal.jsx';
 import DocumentDetailModal from './components/DocumentDetailModal.jsx';
 import PrivacyModal from './components/PrivacyModal.jsx';
 import { API_BASE } from './config.js';
+import saktiLogo from './assets/app-icon.png';
 
 function MainApp() {
   const { t, isHindi } = useLanguage();
@@ -339,7 +340,7 @@ function MainApp() {
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <img
-                src="/app/app-icon.png"
+                src={saktiLogo}
                 alt="SAKTI Icon"
                 style={{
                   width: '32px',

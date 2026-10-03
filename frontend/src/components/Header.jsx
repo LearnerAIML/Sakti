@@ -1,6 +1,7 @@
 import React from 'react';
 import { Activity, Globe, MapPin, UserCheck, Sparkles, Sun, Moon, Languages } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
+import saktiLogo from '../assets/app-icon.png';
 
 export default function Header({
   jurisdiction,
@@ -38,7 +39,7 @@ export default function Header({
           {/* ── Brand Logo & Title ── */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
             <img
-              src="/app/app-icon.png"
+              src={saktiLogo}
               alt="SAKTI Logo"
               style={{
                 width: '38px',
