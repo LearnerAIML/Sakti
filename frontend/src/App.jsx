@@ -22,7 +22,7 @@ function MainApp() {
 
   // Theme state: dark | light (Feature 6)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('sakti_theme') || 'dark';
+    return localStorage.getItem('sakti_theme') || 'light';
   });
 
   useEffect(() => {
@@ -207,7 +207,7 @@ function MainApp() {
                     background: 'transparent',
                     border: 'none',
                     borderBottom: isActive
-                      ? (highlight ? '2px solid #fbbf24' : '2px solid var(--color-brand-emerald)')
+                      ? (highlight ? '2px solid var(--color-brand-gold-light)' : '2px solid var(--color-brand-emerald)')
                       : '2px solid transparent',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
@@ -233,9 +233,9 @@ function MainApp() {
                       fontWeight: 700,
                       padding: '0.05rem 0.35rem',
                       borderRadius: '999px',
-                      background: 'rgba(217, 119, 6, 0.15)',
-                      color: '#fbbf24',
-                      border: '1px solid rgba(217, 119, 6, 0.3)',
+                      background: 'rgba(154, 106, 18, 0.15)',
+                      color: 'var(--color-text-gold)',
+                      border: '1px solid rgba(154, 106, 18, 0.3)',
                     }}>
                       New
                     </span>
@@ -248,7 +248,7 @@ function MainApp() {
                       padding: '0.1rem 0.375rem',
                       borderRadius: '999px',
                       background: isActive ? 'var(--color-success-bg)' : 'var(--color-bg-elevated)',
-                      color: isActive ? '#34d399' : 'var(--color-text-muted)',
+                      color: isActive ? 'var(--color-text-accent)' : 'var(--color-text-muted)',
                       border: `1px solid ${isActive ? 'var(--color-success-border)' : 'var(--color-border-strong)'}`,
                       lineHeight: 1.4,
                     }}>
