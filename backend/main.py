@@ -57,13 +57,17 @@ app = FastAPI(
 from backend.extras_api import router as extras_router
 app.include_router(extras_router)
 
-# Enable CORS for frontend clients (React / Vite / Streamlit)
+# CORS: the UI is served by this same app (/app/), so production needs no cross-origin access.
+# Only the origins listed in CORS_ORIGINS are allowed; localhost dev servers are allowed outside production.
+_cors_origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+_is_production = settings.ENVIRONMENT.lower() == "production"
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_cors_origins,
+    allow_origin_regex=None if _is_production else r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
+    allow_headers=["Content-Type", "X-Admin-Token"],
 )
 
 # =====================================================================
@@ -139,7 +143,13 @@ def get_root_favicon_png():
         return FileResponse(str(png), media_type="image/png")
     return Response(status_code=404)
 
-@app.get("/health", tags=["System"])
+@app.api_route("/ping", methods=["GET", "HEAD"], tags=["System"], include_in_schema=False)
+def ping():
+    """Tiny, fast keep-alive endpoint for cron / uptime monitors (supports HEAD)."""
+    return {"ok": True}
+
+
+@app.api_route("/health", methods=["GET", "HEAD"], tags=["System"])
 def health_check():
     """
     Health check endpoint returning system status, version, and API readiness.
@@ -154,7 +164,7 @@ def health_check():
         "unverified_corpus_documents": sum(1 for d in corpus_store.get_all() if not d.last_verified)
     }
 
-@app.get("/", tags=["System"])
+@app.api_route("/", methods=["GET", "HEAD"], tags=["System"], include_in_schema=False)
 def root():
     return RedirectResponse(url="/app/")
 
@@ -187,7 +197,7 @@ def classify_formulation(payload: FormulationInput):
         result = FormulationClassifier.classify(payload)
         log_event("classify", category_code=result.category_code, intended_use=payload.intended_use.value)
         return result
-    except Exception as e:
+    except Exception:
         logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -226,7 +236,7 @@ def query_legal_assistant(payload: QueryRequest):
             language=payload.language or "en"
         )
         return response
-    except Exception as e:
+    except Exception:
         logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -314,7 +324,7 @@ def route_ip_paths(payload: IPPathRouterInput):
     """
     try:
         return IPPathRouter.evaluate(payload)
-    except Exception as e:
+    except Exception:
         logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -385,7 +395,7 @@ def create_expert_escalation(payload: EscalationRequest):
         rec = ExpertEscalationManager.create_request(payload)
         log_event("escalation", request_id=rec.request_id, jurisdiction=rec.jurisdiction, category=rec.classification_category)
         return rec
-    except Exception as e:
+    except Exception:
         logger.exception("endpoint failure")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -426,4 +436,4 @@ def get_privacy_governance():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.main:app", host=settings.HOST, port=settings.PORT, reload=True)
+    uvicorn.run("backend.main:app", host=settings.HOST, port=settings.PORT, reload=not _is_production)
