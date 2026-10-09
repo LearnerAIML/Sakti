@@ -66,8 +66,8 @@ app.add_middleware(
     allow_origins=_cors_origins,
     allow_origin_regex=None if _is_production else r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=False,
-    allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
-    allow_headers=["Content-Type", "X-Admin-Token"],
+    allow_methods=["GET", "POST", "HEAD", "OPTIONS","*"],
+    allow_headers=["Content-Type", "X-Admin-Token","*"],
 )
 
 # =====================================================================
