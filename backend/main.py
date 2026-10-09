@@ -59,15 +59,20 @@ app.include_router(extras_router)
 
 # CORS: the UI is served by this same app (/app/), so production needs no cross-origin access.
 # Only the origins listed in CORS_ORIGINS are allowed; localhost dev servers are allowed outside production.
-_cors_origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+import os
+_cors_origins = [o.strip().rstrip("/") for o in settings.CORS_ORIGINS.split(",") if o.strip()]
+# Separately hosted frontend (Render static site). Override with the FRONTEND_URL env var if the URL changes.
+_frontend_url = os.getenv("FRONTEND_URL", "https://sakti-sahayak.onrender.com").strip().rstrip("/")
+if _frontend_url and _frontend_url not in _cors_origins:
+    _cors_origins.append(_frontend_url)
 _is_production = settings.ENVIRONMENT.lower() == "production"
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
     allow_origin_regex=None if _is_production else r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=False,
-    allow_methods=["GET", "POST", "HEAD", "OPTIONS","*"],
-    allow_headers=["Content-Type", "X-Admin-Token","*"],
+    allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
+    allow_headers=["Content-Type", "X-Admin-Token"],
 )
 
 # =====================================================================
